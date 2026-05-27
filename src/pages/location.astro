@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SmartImage from '../components/SmartImage.astro';
+import site from '../data/site.json';
+
+const description = `Find La Esquina Guatemalteca at 200 Hibiscus St, Jupiter, FL 33458. Hours, directions, parking info. Authentic Guatemalan food just off Indiantown Road.`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  '@id': site.domain + '/#restaurant',
+  name: site.name,
+  url: site.domain + '/location',
+  telephone: site.phoneTel,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.address.lat,
+    longitude: site.address.lng,
+  },
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: site.hours.schemaOpens,
+    closes: site.hours.schemaCloses,
+  }],
+  priceRange: '$$',
+  image: site.domain + '/LAEG/hero-mural.jpeg',
+  sameAs: [site.social.instagram, site.social.facebook],
+};
+---
+
+<BaseLayout
+  title="Visit Us — 200 Hibiscus St, Jupiter, FL"
+  description={description}
+  path="/location"
+  image="/LAEG/hero-mural.jpeg"
+  schema={schema}
+>
+  <!-- HERO -->
+  <section class="relative isolate overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <SmartImage
+        src="/LAEG/restaurant-exterior.jpeg"
+        alt="La Esquina Guatemalteca restaurant exterior in Jupiter Florida"
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-navy/55 via-navy/45 to-navy/85"></div>
+    </div>
+    <div class="container-x relative py-24 text-center text-cream lg:py-32">
+      <p class="eyebrow text-marigold">Find us in Jupiter</p>
+      <h1 class="mx-auto mt-4 max-w-3xl text-balance font-display text-5xl font-bold leading-tight md:text-7xl">
+        Your welcoming corner, <span class="italic text-marigold">right off Indiantown Road.</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="container-x py-16 lg:py-20">
+    <div class="overflow-hidden rounded-3xl shadow-card">
+      <iframe
+        src={site.mapEmbed}
+        width="100%"
+        height="500"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Map to La Esquina Guatemalteca"
+        class="block"
+      ></iframe>
+    </div>
+    <div class="mt-8 text-center">
+      <a href={site.directionsUrl} target="_blank" rel="noopener" class="btn-primary">
+        Get directions
+      </a>
+    </div>
+  </section>
+
+  <!-- ADDRESS & HOURS -->
+  <section class="container-x grid gap-10 pb-16 lg:grid-cols-2 lg:gap-16 lg:pb-20">
+    <div class="rounded-3xl border border-navy-100 bg-white p-8 shadow-soft lg:p-10">
+      <p class="eyebrow">Address &amp; contact</p>
+      <h2 class="mt-2 font-display text-3xl font-bold text-navy md:text-4xl">{site.name}</h2>
+      <address class="mt-5 not-italic font-body text-lg leading-relaxed text-ink/80">
+        {site.address.street}<br />
+        {site.address.city}, {site.address.region} {site.address.postalCode}
+      </address>
+      <a href={`tel:${site.phoneTel}`} class="mt-5 inline-block font-display text-2xl font-bold text-navy hover:text-spice">
+        {site.phone}
+      </a>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={`tel:${site.phoneTel}`} class="btn-primary">Call now</a>
+        <a href={site.orderUrl} target="_blank" rel="noopener" class="btn-secondary">Order online</a>
+      </div>
+    </div>
+
+    <div class="rounded-3xl border border-navy-100 bg-white p-8 shadow-soft lg:p-10">
+      <p class="eyebrow">Hours</p>
+      <h2 class="mt-2 font-display text-3xl font-bold text-navy md:text-4xl">When we're open</h2>
+      <div class="mt-6 flex items-baseline justify-between border-b border-navy-100 pb-4">
+        <span class="font-display text-lg font-semibold text-navy">Monday – Sunday</span>
+        <span class="font-body text-lg text-ink/80">11:00 AM – 9:00 PM</span>
+      </div>
+      <ul class="mt-4 space-y-3">
+        {site.hours.notes.map((note) => (
+          <li class="flex items-baseline justify-between border-b border-navy-50 pb-2">
+            <span class="font-body text-base font-medium text-ink/80">{note.label}</span>
+            <span class="text-right font-body text-sm italic text-ink/60">{note.value}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- PARKING + ACCESS -->
+  <section class="container-x py-16 text-center lg:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="eyebrow">Easy to find &amp; park</p>
+      <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">
+        Pull up &amp; pull in.
+      </h2>
+      <p class="mt-6 text-pretty font-body text-lg leading-relaxed text-ink/80">
+        We're in a prime spot just off Indiantown Road with plenty of free parking right in front and
+        around the building. Family-friendly entrance, wheelchair accessible, and lots of space for
+        groups. Come hungry — we'll take care of the rest.
+      </p>
+    </div>
+  </section>
+
+  <!-- AREA SERVED FOOTER -->
+  <section class="container-x border-t border-navy-100 pt-10 pb-16 text-center">
+    <p class="font-body text-base text-ink/70">
+      Proudly serving families from
+      <strong class="font-semibold text-navy">{site.areaServed.join(', ')}</strong>.
+    </p>
+    <p class="mt-3 font-body text-sm text-ink/60">
+      Follow us on
+      <a href={site.social.instagram} target="_blank" rel="noopener" class="font-semibold text-spice hover:underline">Instagram</a> and
+      <a href={site.social.facebook} target="_blank" rel="noopener" class="font-semibold text-spice hover:underline">Facebook</a> for daily specials &amp; events.
+    </p>
+  </section>
+</BaseLayout>

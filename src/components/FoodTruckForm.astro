@@ -1,0 +1,67 @@
+---
+import site from '../data/site.json';
+---
+
+<form
+  class="form-wrap mx-auto max-w-2xl space-y-5"
+  action={site.formspree.foodTruck}
+  method="POST"
+  data-form-name="food-truck"
+>
+  <input type="hidden" name="_subject" value="New GUATAMIGOS food truck booking — laesquinaguatemalteca.com" />
+  <input type="hidden" name="form_type" value="food-truck" />
+
+  <div class="grid gap-5 md:grid-cols-2">
+    <div>
+      <label for="ft-name" class="label-field">Your name *</label>
+      <input id="ft-name" name="name" type="text" required class="input-field" autocomplete="name" />
+    </div>
+    <div>
+      <label for="ft-email" class="label-field">Email *</label>
+      <input id="ft-email" name="email" type="email" required class="input-field" autocomplete="email" />
+    </div>
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2">
+    <div>
+      <label for="ft-phone" class="label-field">Phone *</label>
+      <input id="ft-phone" name="phone" type="tel" required class="input-field" autocomplete="tel" />
+    </div>
+    <div>
+      <label for="ft-guests" class="label-field">Expected guests</label>
+      <input id="ft-guests" name="guests" type="number" min="20" placeholder="e.g., 50" class="input-field" />
+    </div>
+  </div>
+
+  <div>
+    <label for="ft-date" class="label-field">Event date &amp; time</label>
+    <input id="ft-date" name="event_date" type="text" placeholder="e.g., June 15, 2026 at 6:00 PM" class="input-field" />
+  </div>
+
+  <div>
+    <label for="ft-location" class="label-field">Event location</label>
+    <input id="ft-location" name="location" type="text" placeholder="Address or venue" class="input-field" />
+  </div>
+
+  <div>
+    <label for="ft-message" class="label-field">Tell us about your event *</label>
+    <textarea id="ft-message" name="message" rows="5" required class="input-field resize-y" placeholder="Wedding reception, corporate lunch, block party… what are we celebrating?"></textarea>
+  </div>
+
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="absolute left-[-9999px]" aria-hidden="true" />
+
+  <div class="text-center">
+    <button type="submit" class="btn-primary text-base">
+      <span class="btn-label">Send booking request</span>
+    </button>
+    <p class="mt-3 text-sm text-navy/60">We reply within 24 hours</p>
+  </div>
+
+  <div class="form-success hidden rounded-2xl bg-marigold/15 p-6 text-center" role="status" aria-live="polite">
+    <p class="font-display text-2xl font-bold text-navy">¡Gracias!</p>
+    <p class="mt-2 font-body text-navy-700/80">We received your booking request. Our team will reach out within 24 hours.</p>
+  </div>
+  <div class="form-error hidden rounded-2xl bg-spice/15 p-4 text-center text-spice-dark" role="alert">
+    Something went wrong. Please call <a href={`tel:${site.phoneTel}`} class="font-semibold underline">{site.phone}</a>.
+  </div>
+</form>

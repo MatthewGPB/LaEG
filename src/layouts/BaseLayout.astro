@@ -1,0 +1,123 @@
+---
+import '../styles/global.css';
+import site from '../data/site.json';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+import WeeklySpecialPopup from '../components/WeeklySpecialPopup.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  schema?: object;
+  showPopup?: boolean;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  image,
+  schema,
+  showPopup = false,
+  noindex = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/LAEG/favicon.png" />
+    <link rel="apple-touch-icon" href="/LAEG/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- DNS prefetch for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <meta name="generator" content={Astro.generator} />
+
+    <SEO
+      title={title}
+      description={description}
+      path={path}
+      image={image}
+      schema={schema}
+      noindex={noindex}
+    />
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-cream">
+      Skip to content
+    </a>
+
+    <Header />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    {showPopup && <WeeklySpecialPopup />}
+
+    <!-- Shared form submission handler -->
+    <script>
+      (function () {
+        const forms = document.querySelectorAll<HTMLFormElement>('form.form-wrap');
+        forms.forEach((form) => {
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+            const label = button?.querySelector<HTMLElement>('.btn-label');
+            const successEl = form.querySelector<HTMLElement>('.form-success');
+            const errorEl = form.querySelector<HTMLElement>('.form-error');
+            const originalLabel = label?.textContent || 'Send';
+
+            // Block spam via honeypot
+            const honeypot = form.querySelector<HTMLInputElement>('input[name="_gotcha"]');
+            if (honeypot && honeypot.value) return;
+
+            if (button) button.disabled = true;
+            if (label) label.textContent = 'Sending…';
+
+            const fd = new FormData(form);
+            fetch(form.action, {
+              method: 'POST',
+              body: fd,
+              headers: { Accept: 'application/json' },
+            })
+              .then((res) => {
+                if (res.ok) {
+                  form.querySelectorAll<HTMLElement>(':scope > *:not(.form-success):not(.form-error)').forEach((el) => {
+                    if (!el.classList.contains('form-success') && !el.classList.contains('form-error')) {
+                      el.style.display = 'none';
+                    }
+                  });
+                  successEl?.classList.remove('hidden');
+                  if (typeof window.gtag === 'function') {
+                    const formName = form.dataset.formName || 'unknown';
+                    window.gtag('event', 'form_submit', { form_name: formName });
+                  }
+                  // Smooth scroll to success
+                  successEl?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                  throw new Error('Form submission failed');
+                }
+              })
+              .catch(() => {
+                errorEl?.classList.remove('hidden');
+                if (button) button.disabled = false;
+                if (label) label.textContent = originalLabel;
+              });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

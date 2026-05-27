@@ -1,0 +1,198 @@
+---
+import special from '../data/weekly-special.json';
+import site from '../data/site.json';
+import SmartImage from './SmartImage.astro';
+
+const { enabled, title, name, description, price, dates, image, ctaText, ctaSubtext, delaySeconds } = special;
+---
+
+{enabled && (
+  <div
+    id="weekly-special-popup"
+    class="fixed inset-0 z-[99999] hidden items-center justify-center bg-navy/70 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="weekly-special-title"
+    aria-hidden="true"
+  >
+    <div class="relative max-h-[95vh] w-full max-w-4xl overflow-y-auto rounded-3xl bg-cream shadow-2xl">
+      <button
+        type="button"
+        id="weekly-special-close"
+        aria-label="Close special offer"
+        class="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-2xl leading-none text-navy shadow-soft transition-colors hover:bg-spice hover:text-cream"
+      >
+        ×
+      </button>
+
+      <div class="grid md:grid-cols-2">
+        <!-- Image side -->
+        <div class="relative h-64 md:h-full md:min-h-[500px]">
+          <SmartImage
+            src={image}
+            alt={`${name} weekly special at La Esquina Guatemalteca`}
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Content side -->
+        <div class="flex flex-col p-7 md:p-10">
+          <div class="mb-3 flex items-center gap-2">
+            <span class="h-2.5 w-2.5 animate-pulse rounded-full bg-spice"></span>
+            <span class="eyebrow">{title}</span>
+          </div>
+
+          <h2 id="weekly-special-title" class="text-balance font-display text-3xl font-bold leading-tight text-ink md:text-4xl">
+            {name}
+          </h2>
+
+          <p class="mt-3 font-body text-base leading-relaxed text-navy-700/85 md:text-lg">
+            {description}
+          </p>
+
+          <div class="mt-5 flex items-baseline gap-4">
+            <span class="font-display text-5xl font-bold text-navy">{price}</span>
+            <span class="rounded-full bg-marigold/20 px-4 py-1.5 text-sm font-semibold text-marigold-dark">
+              {dates}
+            </span>
+          </div>
+
+          <a
+            href={`tel:${site.phoneTel}`}
+            class="mt-6 block rounded-full bg-navy px-6 py-4 text-center font-body font-semibold text-cream shadow-deep transition-transform hover:scale-[1.01]"
+          >
+            <span class="block text-sm opacity-90">📞 {ctaText}</span>
+            <span class="block text-xl">{ctaSubtext}</span>
+          </a>
+
+          <div class="mt-8 border-t border-navy-100 pt-6">
+            <p class="font-body text-base font-semibold text-navy">Join the La Esquina family</p>
+            <p class="mt-1 font-body text-sm text-navy-700/70">
+              Next week's special, exclusive offers, and catering news — straight to your inbox.
+            </p>
+
+            <form
+              id="popup-newsletter-form"
+              action={site.formspree.newsletter}
+              method="POST"
+              class="mt-4 flex flex-col gap-3"
+            >
+              <input type="hidden" name="_subject" value="New newsletter signup — Weekly Special popup" />
+              <input type="hidden" name="source" value="weekly-special-popup" />
+              <div class="flex flex-wrap gap-2">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="your@email.com"
+                  required
+                  class="input-field min-w-[200px] flex-1"
+                />
+                <button
+                  type="submit"
+                  class="rounded-xl bg-navy px-6 py-3.5 font-body font-semibold text-cream shadow-soft transition-colors hover:bg-navy-600"
+                >
+                  Subscribe
+                </button>
+              </div>
+              <p class="text-center text-xs text-navy-700/50">We respect your inbox · Unsubscribe anytime</p>
+            </form>
+
+            <div id="popup-newsletter-success" class="hidden py-5 text-center">
+              <p class="text-lg font-semibold text-spice">🎉 Thank you — you're part of the family.</p>
+              <p class="mt-1 text-sm text-navy-700/70">Next special drops straight to your inbox.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ delaySeconds }}>
+    (function () {
+      const popup = document.getElementById('weekly-special-popup');
+      const closeBtn = document.getElementById('weekly-special-close');
+      const form = document.getElementById('popup-newsletter-form');
+      const success = document.getElementById('popup-newsletter-success');
+      if (!popup || !closeBtn) return;
+
+      const DISMISS_KEY = 'laEsquinaWeeklyPopupDismissed';
+      const TTL_HOURS = 72; // re-show after 3 days if user didn't subscribe
+
+      function show() {
+        popup.classList.remove('hidden');
+        popup.classList.add('flex');
+        popup.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(() => (popup.style.opacity = '1'));
+        document.body.style.overflow = 'hidden';
+      }
+
+      function hide() {
+        popup.style.opacity = '0';
+        popup.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          popup.classList.add('hidden');
+          popup.classList.remove('flex');
+        }, 300);
+        localStorage.setItem(
+          DISMISS_KEY,
+          JSON.stringify({ at: Date.now() })
+        );
+      }
+
+      function shouldShow() {
+        const raw = localStorage.getItem(DISMISS_KEY);
+        if (!raw) return true;
+        try {
+          const data = JSON.parse(raw);
+          const ageHours = (Date.now() - data.at) / 1000 / 60 / 60;
+          return ageHours > TTL_HOURS;
+        } catch {
+          return true;
+        }
+      }
+
+      closeBtn.addEventListener('click', hide);
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) hide();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !popup.classList.contains('hidden')) hide();
+      });
+
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const fd = new FormData(form);
+          fetch(form.action, {
+            method: 'POST',
+            body: fd,
+            headers: { Accept: 'application/json' },
+          })
+            .then((res) => {
+              if (res.ok) {
+                form.classList.add('hidden');
+                success?.classList.remove('hidden');
+                if (typeof window.gtag === 'function') {
+                  window.gtag('event', 'newsletter_signup', { source: 'weekly_special_popup' });
+                }
+                setTimeout(hide, 2800);
+              } else {
+                alert("Thanks! You're on the list.");
+                hide();
+              }
+            })
+            .catch(() => {
+              alert("Thanks! You're on the list.");
+              hide();
+            });
+        });
+      }
+
+      if (shouldShow()) {
+        setTimeout(show, (delaySeconds || 3) * 1000);
+      }
+    })();
+  </script>
+)}

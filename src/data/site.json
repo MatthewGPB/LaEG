@@ -1,0 +1,63 @@
+{
+  "name": "La Esquina Guatemalteca",
+  "tagline": "Authentic Guatemalan flavors made with family love — Jupiter, FL",
+  "domain": "https://laesquinaguatemalteca.com",
+  "phone": "561-768-9137",
+  "phoneTel": "+15617689137",
+  "email": "hola@laesquinaguatemalteca.com",
+  "address": {
+    "street": "200 Hibiscus St",
+    "city": "Jupiter",
+    "region": "FL",
+    "postalCode": "33458",
+    "country": "US",
+    "lat": 26.9335,
+    "lng": -80.1284
+  },
+  "hours": {
+    "regular": "11:00 AM – 9:00 PM, Monday through Sunday",
+    "notes": [
+      { "label": "Mother's Day", "value": "Special hours — please call ahead" },
+      { "label": "4th of July", "value": "Extended hours" },
+      { "label": "Christmas Eve", "value": "Shortened hours" }
+    ],
+    "schemaOpens": "11:00",
+    "schemaCloses": "21:00"
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/laesquinaguatemalteca",
+    "instagramHandle": "@laesquinaguatemalteca",
+    "facebook": "https://www.facebook.com/laesquina208",
+    "guatamigosInstagram": "https://www.instagram.com/guatamigos/",
+    "guatamigosHandle": "@guatamigos"
+  },
+  "orderUrl": "https://online.skytab.com/f9922b7e286149ff56493e39b66fc6cb?referralGuid=&referralSource=skytabwebsite",
+  "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2931.752986424579!2d-80.09881272555803!3d26.934949359136375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88df2927bf704ccf%3A0x75f4a306cb1fbb78!2sLa%20Esquina%20Guatemalteca!5e1!3m2!1sen!2sus!4v1774118542657!5m2!1sen!2sus",
+  "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=200+Hibiscus+St,+Jupiter,+FL+33458",
+  "founded": "2018-12",
+  "founder": "Silvia Cano",
+  "analytics": {
+    "gaId": "G-4D9S6PF7M4"
+  },
+  "formspree": {
+    "contact": "https://formspree.io/f/REPLACE_CONTACT_ID",
+    "catering": "https://formspree.io/f/REPLACE_CATERING_ID",
+    "foodTruck": "https://formspree.io/f/REPLACE_FOODTRUCK_ID",
+    "newsletter": "https://formspree.io/f/REPLACE_NEWSLETTER_ID"
+  },
+  "trustedBy": [
+    { "name": "Frenchman's Reserve Country Club", "logo": "/LAEG/frenchmans-reserve.png" },
+    { "name": "Jupiter Hills Club", "logo": "/LAEG/jupiter-hills.png" },
+    { "name": "Avenir Palm Beach Gardens", "logo": "/LAEG/avenir.png" },
+    { "name": "The Country Club at Mirasol", "logo": "/LAEG/mirasol.png" },
+    { "name": "Breakers West Country Club", "logo": "/LAEG/breakers-west.png" }
+  ],
+  "areaServed": [
+    "Jupiter",
+    "Tequesta",
+    "Palm Beach Gardens",
+    "Juno Beach",
+    "North Palm Beach",
+    "Palm Beach County"
+  ]
+}

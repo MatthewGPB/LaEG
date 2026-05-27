@@ -1,0 +1,111 @@
+---
+import site from '../data/site.json';
+
+const nav = [
+  { href: '/menu', label: 'Menu' },
+  { href: '/about', label: 'Our Story' },
+  { href: '/catering', label: 'Catering' },
+  { href: '/food-truck', label: 'Food Truck' },
+  { href: '/location', label: 'Visit' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const pathname = new URL(Astro.request.url).pathname;
+const isActive = (href: string) => pathname === href || (href !== '/' && pathname.startsWith(href));
+---
+
+<header class="sticky top-0 z-40 border-b border-navy-100 bg-cream/90 backdrop-blur-md">
+  <div class="container-x flex h-16 items-center justify-between lg:h-20">
+    <!-- Logo / Wordmark -->
+    <a href="/" class="group flex items-center gap-3" aria-label="La Esquina Guatemalteca home">
+      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-navy text-cream shadow-soft lg:h-12 lg:w-12">
+        <span class="font-display text-lg font-bold lg:text-xl">LE</span>
+      </div>
+      <div class="hidden flex-col leading-none sm:flex">
+        <span class="font-display text-lg font-semibold text-navy lg:text-xl">La Esquina</span>
+        <span class="font-body text-[0.7rem] uppercase tracking-[0.25em] text-spice lg:text-xs">Guatemalteca</span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex lg:items-center lg:gap-8" aria-label="Primary">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class={`relative font-body text-sm font-medium transition-colors hover:text-spice ${
+            isActive(item.href) ? 'text-spice' : 'text-navy'
+          }`}
+        >
+          {item.label}
+          {isActive(item.href) && (
+            <span class="absolute -bottom-1 left-0 right-0 h-0.5 bg-spice" />
+          )}
+        </a>
+      ))}
+    </nav>
+
+    <!-- CTA + Mobile Toggle -->
+    <div class="flex items-center gap-3">
+      <a
+        href={site.orderUrl}
+        target="_blank"
+        rel="noopener"
+        class="hidden rounded-full bg-navy px-5 py-2.5 font-body text-sm font-semibold text-cream shadow-soft transition-all hover:bg-navy-600 md:inline-flex"
+      >
+        Order Online
+      </a>
+      <button
+        type="button"
+        id="mobile-menu-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        class="rounded-lg p-2 text-navy lg:hidden"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Drawer -->
+  <div id="mobile-menu" class="hidden border-t border-navy-100 bg-cream lg:hidden">
+    <nav class="container-x flex flex-col py-4" aria-label="Mobile">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class={`border-b border-navy-50 py-3 font-body text-base font-medium ${
+            isActive(item.href) ? 'text-spice' : 'text-navy'
+          }`}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href={site.orderUrl}
+        target="_blank"
+        rel="noopener"
+        class="mt-4 inline-flex items-center justify-center rounded-full bg-navy px-6 py-3 font-body text-sm font-semibold text-cream shadow-soft"
+      >
+        Order Online
+      </a>
+    </nav>
+  </div>
+</header>
+
+<div class="textile-divider" aria-hidden="true"></div>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const isOpen = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+    });
+  }
+</script>

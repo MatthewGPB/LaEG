@@ -1,0 +1,43 @@
+---
+import site from '../data/site.json';
+
+interface Props {
+  source?: string;
+  variant?: 'card' | 'inline';
+}
+
+const { source = 'inline', variant = 'card' } = Astro.props;
+---
+
+<form
+  class="form-wrap"
+  action={site.formspree.newsletter}
+  method="POST"
+  data-form-name="newsletter"
+>
+  <input type="hidden" name="_subject" value="New newsletter signup" />
+  <input type="hidden" name="source" value={source} />
+
+  <div class={variant === 'card' ? 'flex flex-col gap-3' : 'flex flex-col gap-2 sm:flex-row'}>
+    <input
+      type="email"
+      name="email"
+      placeholder="your@email.com"
+      required
+      class="input-field flex-1"
+      autocomplete="email"
+    />
+    <button type="submit" class="btn-primary justify-center whitespace-nowrap text-sm">
+      <span class="btn-label">Sign up free</span>
+    </button>
+  </div>
+
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="absolute left-[-9999px]" aria-hidden="true" />
+
+  <div class="form-success hidden pt-3 text-sm font-semibold text-spice" role="status" aria-live="polite">
+    🎉 You're in! Watch your inbox for next week's special.
+  </div>
+  <div class="form-error hidden pt-3 text-sm text-spice-dark" role="alert">
+    Couldn't sign you up — please try again or message us.
+  </div>
+</form>

@@ -1,0 +1,63 @@
+---
+import site from '../data/site.json';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  schema?: object;
+  noindex?: boolean;
+}
+
+const { title, description, path, image, schema, noindex = false } = Astro.props;
+
+const canonical = new URL(path, site.domain).toString();
+const ogImage = image
+  ? new URL(image, site.domain).toString()
+  : new URL('/LAEG/og-default.jpeg', site.domain).toString();
+
+const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+---
+
+<!-- Primary Meta -->
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content="restaurant.restaurant" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Theme -->
+<meta name="theme-color" content="#1e3a5f" />
+
+<!-- Schema.org -->
+{schema && (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}
+
+<!-- Google Analytics -->
+{site.analytics?.gaId && (
+  <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.analytics.gaId}`}></script>
+    <script is:inline define:vars={{ gaId: site.analytics.gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gaId);
+    </script>
+  </>
+)}

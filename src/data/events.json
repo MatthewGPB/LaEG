@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "title": "Jupiter Spring Fest",
+      "date": "March 2026",
+      "type": "Public event",
+      "menu": "Tacos & empanadas"
+    },
+    {
+      "title": "4th of July Block Party",
+      "date": "July 2026",
+      "type": "Community event",
+      "menu": "Full menu"
+    }
+  ]
+}

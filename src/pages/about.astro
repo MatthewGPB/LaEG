@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SmartImage from '../components/SmartImage.astro';
+import site from '../data/site.json';
+
+const description = "Meet the Cano family behind La Esquina Guatemalteca. From Huehuetenango, Guatemala to Jupiter, FL — Silvia, Santos, William and the family share their story of authentic homemade Guatemalan cooking since 2018.";
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  '@id': site.domain + '/#restaurant',
+  name: site.name,
+  description: description,
+  url: site.domain + '/about',
+  telephone: site.phoneTel,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  founder: { '@type': 'Person', name: site.founder },
+  foundingDate: site.founded,
+  image: site.domain + '/LAEG/family.jpeg',
+  sameAs: [site.social.instagram, site.social.facebook],
+};
+---
+
+<BaseLayout
+  title="Our Story — From Huehuetenango to Jupiter"
+  description={description}
+  path="/about"
+  image="/LAEG/family.jpeg"
+  schema={schema}
+>
+  <!-- HERO -->
+  <section class="relative isolate overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <SmartImage
+        src="/LAEG/hero-mural.jpeg"
+        alt="La Esquina Guatemalteca heritage mural in Jupiter FL"
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-navy/60 via-navy/40 to-navy/85"></div>
+    </div>
+    <div class="container-x relative py-28 text-center text-cream lg:py-36">
+      <p class="eyebrow text-marigold">Our Story</p>
+      <h1 class="mx-auto mt-4 max-w-3xl text-balance font-display text-5xl font-bold leading-tight md:text-7xl">
+        A family dream, brought from <span class="italic text-marigold">Guatemala</span> to Jupiter.
+      </h1>
+    </div>
+  </section>
+
+  <!-- WELCOME -->
+  <section class="container-x py-20 text-center lg:py-24">
+    <h2 class="mx-auto max-w-3xl text-balance font-display text-4xl font-bold text-navy md:text-5xl">
+      Welcome to La Esquina Guatemalteca
+    </h2>
+    <p class="mx-auto mt-6 max-w-3xl text-pretty font-body text-lg leading-relaxed text-ink/80 md:text-xl">
+      La Esquina Guatemalteca — "The Guatemalan Corner" — is more than a restaurant. It's our family's way
+      of sharing the authentic tastes, traditions, and warmth of Guatemala right here in Jupiter. We opened
+      in December 2018, fulfilling a lifelong dream: to bring homemade Guatemalan flavors to our community
+      and create a place that feels like home for everyone who walks through the door.
+    </p>
+  </section>
+
+  <!-- FAMILY STORY -->
+  <section class="bg-cream-200/50 py-20 lg:py-24">
+    <div class="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div class="overflow-hidden rounded-3xl shadow-deep">
+        <SmartImage
+          src="/LAEG/family.jpeg"
+          alt="The Cano family at La Esquina Guatemalteca Jupiter"
+          class="aspect-[4/5] w-full object-cover"
+        />
+      </div>
+      <div>
+        <p class="eyebrow">Huehuetenango → Jupiter</p>
+        <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">
+          A dream rooted in Huehuetenango
+        </h2>
+        <div class="mt-6 space-y-5 font-body text-base leading-relaxed text-ink/80 md:text-lg">
+          <p>
+            I'm Silvia Cano, originally from Huehuetenango, Guatemala. I learned to cook in the family
+            restaurant of my husband Santos' mother — every dish made with love and intuition, no written
+            recipes, just the perfect touch. When we moved to Jupiter with our young sons, Santos Cano
+            Vasquez and William Cano, Guatemala came with us through the kitchen.
+          </p>
+          <p>
+            As the Palm Beach Post shared in 2019, our boys may not remember much of the homeland — they
+            were kids when we arrived — but they've always tasted it in the food I make. "It's literally
+            all about her touch," William says. And Santos adds, "This really brings me happiness to see
+            my worlds come together."
+          </p>
+          <p>
+            Opening La Esquina Guatemalteca was my way of sharing that joy: authentic dishes like our
+            famous churrasco, unique Guatemalan enchiladas, hearty soups, and sweet rellenitos — all
+            tweaked fresh each day with the same family love.
+          </p>
+        </div>
+
+        <blockquote class="mt-8 border-l-4 border-marigold pl-6 font-display text-2xl italic text-navy">
+          "Muy feliz" — very happy — that's how I feel every day in this kitchen.
+          <footer class="mt-3 font-body text-sm not-italic text-ink/65">— Silvia Cano</footer>
+        </blockquote>
+
+        <p class="mt-7 font-body text-base leading-relaxed text-ink/80 md:text-lg">
+          Today, our whole family runs this place: Santos and I in the heart of it, with our sons helping
+          front-of-house. We're proud to serve neighbors, families, vacationers, and college students alike —
+          creating a welcoming corner where everyone feels at home.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES US SPECIAL -->
+  <section class="container-x py-20 text-center lg:py-24">
+    <div class="mx-auto max-w-3xl">
+      <p class="eyebrow">What makes us special</p>
+      <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">
+        Real Guatemalan, not "Mexican adjacent."
+      </h2>
+      <p class="mt-6 text-pretty font-body text-lg leading-relaxed text-ink/80">
+        We celebrate the real differences in Guatemalan cuisine — thicker tortillas, black beans,
+        fresh hibiscus waters, clay-mug atole, and our signature La Parrillada platter. Everything is
+        homemade, rooted in tradition, and served with the warmth of family.
+      </p>
+      <p class="mt-4 text-pretty font-body text-lg leading-relaxed text-ink/80">
+        We're growing to bring more of it to you: expanded dine-in with our new cocktail bar,
+        high-end catering, and our Guatamigos food truck ready for any gathering.
+      </p>
+    </div>
+
+    <div class="mt-12 flex flex-wrap justify-center gap-4">
+      <a href={site.directionsUrl} target="_blank" rel="noopener" class="btn-primary">Dine in with us</a>
+      <a href="/catering" class="btn-secondary">Explore catering</a>
+    </div>
+  </section>
+
+  <!-- VALUES STRIP -->
+  <section class="bg-navy py-16 text-cream lg:py-20">
+    <div class="container-x grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <p class="font-display text-4xl font-bold text-marigold">7+</p>
+        <p class="mt-2 font-body text-cream/85">Years serving Jupiter</p>
+      </div>
+      <div>
+        <p class="font-display text-4xl font-bold text-marigold">100%</p>
+        <p class="mt-2 font-body text-cream/85">Family-owned &amp; operated</p>
+      </div>
+      <div>
+        <p class="font-display text-4xl font-bold text-marigold">Daily</p>
+        <p class="mt-2 font-body text-cream/85">Fresh handmade tortillas</p>
+      </div>
+      <div>
+        <p class="font-display text-4xl font-bold text-marigold">5+</p>
+        <p class="mt-2 font-body text-cream/85">Premier venues we cater</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="container-x py-20 text-center lg:py-24">
+    <p class="mx-auto max-w-2xl text-pretty font-body text-xl leading-relaxed text-ink/80">
+      Whether you're craving authentic flavors, a family meal, or catering for your next event,
+      we're here with open arms.
+    </p>
+    <p class="mt-4 font-body text-lg text-ink/70">
+      Visit us at 200 Hibiscus St, Jupiter, FL 33458 — your Guatemalan corner awaits.
+    </p>
+    <div class="mt-9 flex flex-wrap justify-center gap-4">
+      <a href="/location" class="btn-primary">Find us &amp; hours</a>
+      <a href="/menu" class="btn-secondary">See the menu</a>
+    </div>
+  </section>
+</BaseLayout>

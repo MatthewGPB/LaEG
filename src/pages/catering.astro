@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CateringForm from '../components/CateringForm.astro';
+import SmartImage from '../components/SmartImage.astro';
+import site from '../data/site.json';
+
+const description = "Premium Guatemalan catering for events in Jupiter, Palm Beach Gardens & Palm Beach County. Custom menus, La Parrillada, tacos, empanadas. Trusted by Frenchman's Reserve, Jupiter Hills Club, Avenir, Mirasol & Breakers West.";
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FoodService',
+  name: `${site.name} Catering`,
+  description: description,
+  url: site.domain + '/catering',
+  telephone: site.phoneTel,
+  priceRange: '$$$',
+  servesCuisine: ['Guatemalan', 'Latin American', 'Central American'],
+  areaServed: site.areaServed.map((a) => ({ '@type': 'City', name: a })),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  image: site.domain + '/LAEG/la-parrillada.jpeg',
+  sameAs: [site.social.guatamigosInstagram, site.social.instagram],
+};
+---
+
+<BaseLayout
+  title="Catering in Jupiter &amp; Palm Beach — Guatemalan Cuisine"
+  description={description}
+  path="/catering"
+  image="/LAEG/la-parrillada.jpeg"
+  schema={schema}
+>
+  <!-- HERO -->
+  <section class="relative isolate overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <SmartImage
+        src="/LAEG/catering-hero.jpeg"
+        alt="Guatemalan catering setup in Jupiter FL"
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-br from-navy/80 via-navy/55 to-navy/85"></div>
+    </div>
+    <div class="container-x relative py-28 text-cream lg:py-36">
+      <div class="max-w-3xl">
+        <p class="eyebrow text-marigold">Catering · Jupiter &amp; Palm Beach</p>
+        <h1 class="mt-4 text-balance font-display text-5xl font-bold leading-[1.05] md:text-7xl">
+          Your event deserves <span class="italic text-marigold">family recipes.</span>
+        </h1>
+        <p class="mt-7 max-w-2xl text-pretty font-body text-lg leading-relaxed text-cream/85 md:text-xl">
+          Homemade Guatemalan flavors brought to your event — weddings, corporate, holidays,
+          and milestone celebrations. Delivered hot and vibrant by our professional team.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="#catering-form" class="btn-spice">Request a quote</a>
+          <a href={`tel:${site.phoneTel}`} class="rounded-full border-2 border-cream/40 bg-cream/10 px-7 py-3 font-body font-semibold text-cream backdrop-blur-sm transition-colors hover:bg-cream hover:text-navy">
+            Call {site.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELL -->
+  <section class="container-x py-20 text-center lg:py-24">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-balance font-display text-4xl font-bold text-navy md:text-5xl">
+        Catering is personal here.
+      </h2>
+      <p class="mt-6 text-pretty font-body text-lg leading-relaxed text-ink/80">
+        Silvia and our family prepare every dish with the same homemade love you taste in the
+        restaurant. Custom menus featuring our famous La Parrillada, tacos, empanadas, fresh sides
+        &amp; more. We've proudly catered Frenchman's Reserve Country Club, Jupiter Hills Club, Avenir
+        Palm Beach Gardens, Frenchman's Creek, Mirasol, Breakers West, and countless private celebrations.
+      </p>
+      <p class="mt-4 text-pretty font-body text-lg leading-relaxed text-ink/80">
+        Whether it's Mother's Day brunch, a 4th of July party, Christmas Eve gathering, wedding,
+        corporate lunch or milestone birthday — we bring the warmth of Guatemala to your table.
+      </p>
+    </div>
+  </section>
+
+  <!-- TRUST LOGOS -->
+  <section class="border-y border-navy-100 bg-white py-14 lg:py-16">
+    <div class="container-x text-center">
+      <p class="eyebrow">Trusted by Jupiter's finest venues</p>
+      <h2 class="mt-2 font-display text-2xl font-semibold text-navy md:text-3xl">
+        Where our food has been welcomed
+      </h2>
+      <div class="mt-10 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
+        {site.trustedBy.map((venue) => (
+          <div class="flex h-16 items-center justify-center">
+            <SmartImage
+              src={venue.logo}
+              alt={venue.name}
+              class="max-h-12 w-auto object-contain opacity-70 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE CATER -->
+  <section class="container-x py-20 lg:py-24">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow">What we cater</p>
+      <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">
+        Every kind of gathering.
+      </h2>
+    </div>
+    <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {[
+        { title: 'Weddings', desc: 'Rehearsal dinners, receptions, welcome parties — for 20 to 300 guests.' },
+        { title: 'Corporate', desc: 'Office lunches, holiday parties, client appreciation events.' },
+        { title: 'Holidays', desc: "Mother's Day, 4th of July, Christmas Eve — we make the holiday." },
+        { title: 'Celebrations', desc: 'Birthdays, anniversaries, quinceañeras, baptisms, milestones.' },
+      ].map((card) => (
+        <article class="rounded-3xl border border-navy-100 bg-white p-7 shadow-soft transition-shadow hover:shadow-card">
+          <h3 class="font-display text-xl font-bold text-navy">{card.title}</h3>
+          <p class="mt-3 font-body text-base leading-relaxed text-ink/70">{card.desc}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section id="catering-form" class="bg-cream-200/40 py-20 lg:py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">24-hour reply</p>
+        <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">
+          Get your custom quote today
+        </h2>
+        <p class="mt-5 font-body text-lg text-ink/75">
+          Tell us about your event — we'll craft the perfect menu and get back within 24 hours.
+        </p>
+      </div>
+      <div class="mt-12 rounded-3xl bg-white p-7 shadow-card md:p-10">
+        <CateringForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="container-x my-16 text-center lg:my-20">
+    <p class="font-body text-xl text-ink/80">
+      Ready to bring the taste of Guatemala to your event?
+    </p>
+    <p class="mt-2 font-body text-lg text-ink/65">
+      Call <a href={`tel:${site.phoneTel}`} class="font-semibold text-navy hover:text-spice">{site.phone}</a>
+      &nbsp;or follow
+      <a href={site.social.guatamigosInstagram} target="_blank" rel="noopener" class="font-semibold text-navy hover:text-spice">
+        {site.social.guatamigosHandle}
+      </a> for inspiration.
+    </p>
+  </section>
+</BaseLayout>
