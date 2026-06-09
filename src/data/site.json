@@ -40,10 +40,10 @@
     "gaId": "G-4D9S6PF7M4"
   },
   "formspree": {
-    "contact": "https://formspree.io/f/mojzjqyq",
-    "catering": "https://formspree.io/f/xrevegrl",
-    "foodTruck": "https://formspree.io/f/mjgdgvjp",
-    "newsletter": "https://formspree.io/f/mlgkgeak"
+    "contact": "https://formspree.io/f/REPLACE_CONTACT_ID",
+    "catering": "https://formspree.io/f/REPLACE_CATERING_ID",
+    "foodTruck": "https://formspree.io/f/REPLACE_FOODTRUCK_ID",
+    "newsletter": "https://formspree.io/f/REPLACE_NEWSLETTER_ID"
   },
   "trustedBy": [
     { "name": "Frenchman's Reserve Country Club", "logo": "/LAEG/frenchmans-reserve.png" },

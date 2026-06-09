@@ -92,7 +92,7 @@
         { "name": "Tacos", "image": "/LAEG/tacos.jpeg", "description": "Topped with cabbage, cilantro, and caramelized onions on a homemade corn tortilla. Carne Asada +$3.", "price": "$13" },
         { "name": "Burrito Bowls", "image": "/LAEG/burrito-bowls.jpeg", "description": "Rice, beans, lettuce, mozzarella, pico de gallo & avocado. Carne Asada +$3.", "price": "$16" },
         { "name": "Quesadillas", "image": "/LAEG/quesadillas.jpeg", "description": "Flour tortilla stuffed with red & green peppers, onion, choice of protein & melted mozzarella.", "price": "$13" },
-        { "name": "Shuco", "image": "/LAEG/shuco.jpeg", "description": "Grilled Guatemalan-style hot dog with avocado smash, tomato, onion, lime cabbage & savory sauces on a toasted bun. Side of fries. Mixto +$5.", "price": "$13" },
+        { "name": "Sincos", "image": "/LAEG/sincos.jpeg", "description": "Grilled Guatemalan-style hot dog with avocado smash, tomato, onion, lime cabbage & savory sauces on a toasted bun. Side of fries. Mixto +$5.", "price": "$13" },
         { "name": "Burrito", "image": "/LAEG/burrito.jpeg", "description": "Stuffed with rice, beans, lettuce, cheese & pico. Served with house pickled jalapeños. Grilled Chicken +$2 / Carne Asada +$3.", "price": "$13" },
         { "name": "Tortas", "image": "/LAEG/tortas.jpeg", "description": "Toasted deli loaf with refried black beans, choice of protein, lettuce, queso fresco & avocado. Pickled jalapeños on side + a side.", "price": "$13" }
       ]
