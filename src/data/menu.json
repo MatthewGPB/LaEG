@@ -142,7 +142,7 @@
       "items": [
         { "name": "Pollo Asado", "image": "/LAEG/pollo-asado.jpeg", "description": "6 oz. in-house cut chicken breast marinated in citrus herb blend.", "price": "$20" },
         { "name": "Carne Asada", "image": "/LAEG/carne-asada.jpeg", "description": "6 oz. in-house cut and marinated skirt steak.", "price": "$21" },
-        { "name": "Costilla de Res", "image": "/LAEG/costilla-de-res.jpeg", "description": "Tender Guatemalan-style grilled beef ribs marinated in traditional spices and slow-cooked over the grill for deep, smoky flavor.", "price": "$25" },
+        { "name": "Costilla de Res", "image": "/LAEG/costilla-de-res.jpg", "description": "Tender Guatemalan-style grilled beef ribs marinated in traditional spices and slow-cooked over the grill for deep, smoky flavor.", "price": "$25" },
         { "name": "La Parrillada", "image": "/LAEG/la-parrillada.jpeg", "description": "Traditional Guatemalan grill platter with tender carne asada, savory longaniza, and juicy grilled shrimp.", "price": "Market Price" },
         { "name": "Costilla de Carnero", "image": "/LAEG/costilla-de-carnero.jpeg", "description": "Tender bilbao lamb chops marinated with savory citrus mojo, grilled to perfection over an open flame.", "price": "Market Price" }
       ]
