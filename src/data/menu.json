@@ -111,7 +111,7 @@
       "name": "Caldos",
       "subtitle": "Hearty Homemade Soups",
       "items": [
-        { "name": "Caldo de Res", "image": "/LAEG/caldo-de-res.jpeg", "description": "Rich beef broth with hearty cut vegetables, red potatoes, chayote, carrot & cabbage. Served with rice, jalapeños, onions & homemade tortillas.", "price": "$20" },
+        { "name": "Caldo de Res", "image": "/LAEG/caldo-de-res.png", "description": "Rich beef broth with hearty cut vegetables, red potatoes, chayote, carrot & cabbage. Served with rice, jalapeños, onions & homemade tortillas.", "price": "$20" },
         { "name": "Caldo de Pollo", "image": "/LAEG/caldo-de-pollo.jpeg", "description": "Chicken soup in rich broth with pasta, diced red potatoes, carrots, chayote & cilantro. Served with jalapeños, onions & homemade tortillas.", "price": "$16" }
       ]
     },
