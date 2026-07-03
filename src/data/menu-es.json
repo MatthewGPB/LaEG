@@ -1,0 +1,127 @@
+{
+  "_comment": "Spanish strings ONLY. Structure, prices, and images live in menu.json — this file never duplicates them, so prices can never drift out of sync. Items are keyed by their English name from menu.json. If a key is missing here, the Spanish page falls back to the English text automatically.",
+  "ui": {
+    "heroEyebrow": "Hecho fresco, todos los días",
+    "heroTitle": "Nuestro Menú Completo",
+    "heroSub": "Sabores guatemaltecos caseros, hechos frescos cada día — auténticos, abundantes y llenos de tradición familiar.",
+    "specialsTitle": "Especiales Semanales de $10",
+    "specialsSub": "Frescos cada semana — ideales para estudiantes, familias con prisa, o cualquiera que antoje auténtico sabor guatemalteco.",
+    "newsletterTitle": "¿Quieres más?",
+    "newsletterSub": "¡Nuevos especiales cada semana — suscríbete para no perderte ninguno!",
+    "newsletterBtn": "Suscríbete gratis",
+    "fullMenuTitle": "Explora el menú completo",
+    "fullMenuSub": "Toca cualquier platillo para ordenar en línea — fresco, caliente y listo para recoger o entrega.",
+    "orderNow": "Ordenar ahora",
+    "ctaTitle": "Ordena para llevar — Jupiter, FL",
+    "ctaSub": "Comida guatemalteca auténtica, fresca y caliente, directo a tu puerta. Tacos, La Parrillada, especiales semanales y más.",
+    "ctaBtn": "Ordenar para llevar",
+    "ctaFoot": "Rápido · Fresco · Favoritos de la familia · Servimos Jupiter, Tequesta y Palm Beach Gardens",
+    "langBannerText": "This menu is also available in English.",
+    "langBannerLink": "View in English",
+    "marketPrice": "Precio del día"
+  },
+  "weeklySpecials": {
+    "Taco Tuesday": {
+      "name": "Martes de Tacos",
+      "description": "4 tacos: carnitas, al pastor, pollo o chorizo. Repollo, cilantro y cebolla salteada."
+    },
+    "Empanada Wednesday": {
+      "name": "Miércoles de Empanadas",
+      "description": "4 empanadas: pollo, brisket de res, o chorizo y papa. Queso fresco, lechuga, crema y salsa ranchera."
+    },
+    "Taquito Thursday": {
+      "name": "Jueves de Taquitos",
+      "description": "4 taquitos crujientes: pollo o brisket de res. Lechuga, queso fresco, crema y salsa ranchera."
+    },
+    "Garnacha Friday": {
+      "name": "Viernes de Garnachas",
+      "description": "4 tortillas hechas a mano estilo garnacha: carne molida, salsa ranchera, queso fresco, cilantro + crema aparte."
+    }
+  },
+  "categories": {
+    "aperitivos": {
+      "subtitle": "Entradas y platos para compartir",
+      "items": {
+        "Guacamole & Chips": "Guacamole fresco hecho en casa con totopos crujientes.",
+        "Pico & Chips": "Pico de gallo fresco con totopos crujientes.",
+        "Bean Dip & Chips": "Dip cremoso de frijoles refritos servido con totopos calientes.",
+        "Queso Dip": "Dip de queso derretido, cremoso y caliente. Agrega chorizo +$3.",
+        "Enchilada": "Tostada de la casa con frijoles refritos, zanahoria rallada, repollo, remolacha, pollo, queso fresco y crema.",
+        "Loaded Nachos": "Totopos dorados con chorizo, frijol negro, lechuga, pico, guacamole, crema y jalapeños encurtidos. A elección de proteína."
+      }
+    },
+    "nuestras-raices": {
+      "subtitle": "Nuestras raíces — clásicos guatemaltecos tradicionales",
+      "items": {
+        "Tamales": "Tamales de pollo de La Trapana envueltos en hoja de plátano, con base de maíz o arroz.",
+        "Enchiladas": "Pollo deshebrado con base de maíz. Tamales envueltos en tuza de maíz."
+      }
+    },
+    "amanecer": {
+      "subtitle": "Desayuno",
+      "note": "Todos los desayunos incluyen frijoles refritos, plátano maduro, queso fresco y 5 tortillas hechas a mano.",
+      "items": {
+        "Huevos Rancheros": "Dos huevos al gusto sobre una tostada, bañados en salsa ranchera casera.",
+        "Huevos Revueltos": "Dos huevos revueltos.",
+        "Huevos con Chorizo": "Dos huevos revueltos con chorizo.",
+        "Huevos con Salchicha": "Dos huevos revueltos con rodajas de salchicha.",
+        "Huevos Entomatados": "Dos huevos revueltos con tomate, cebolla y especias guatemaltecas."
+      }
+    },
+    "burritos-y-mas": {
+      "subtitle": "Burritos, tacos, tortas y quesadillas",
+      "note": "<strong>Elige tu proteína:</strong> Asada · Pollo · Carnitas · Barbacoa · Chorizo · Al Pastor · Vegetales",
+      "items": {
+        "Tacos": "Con repollo, cilantro y cebolla caramelizada sobre tortilla de maíz hecha a mano. Carne Asada +$3.",
+        "Burrito Bowls": "Arroz, frijoles, lechuga, mozzarella, pico de gallo y aguacate. Carne Asada +$3.",
+        "Quesadillas": "Tortilla de harina rellena de chile rojo y verde, cebolla, tu proteína y mozzarella derretido.",
+        "Sincos": "Hot dog estilo guatemalteco con guacamole, tomate, cebolla, repollo al limón y salsas de la casa en pan tostado. Con papas fritas. Mixto +$5.",
+        "Burrito": "Relleno de arroz, frijoles, lechuga, queso y pico. Con jalapeños encurtidos de la casa. Pollo a la parrilla +$2 / Carne Asada +$3.",
+        "Tortas": "Pan tostado con frijol negro refrito, tu proteína, lechuga, queso fresco y aguacate. Jalapeños encurtidos aparte + un acompañante."
+      }
+    },
+    "birrias": {
+      "subtitle": "Especialidades de res estofada",
+      "items": {
+        "Birria Tacos": "Birria de res tierna y estofada con queso derretido en tortilla dorada, con cebolla cruda y cilantro. Servida con consomé.",
+        "Birria Pizza": "Cubierta de mozzarella derretido, rellena de jugosa birria de res, con cilantro y cebolla. Servida con consomé y limón fresco."
+      }
+    },
+    "caldos": {
+      "subtitle": "Caldos caseros y abundantes",
+      "items": {
+        "Caldo de Res": "Caldo de res con verduras, papa roja, güisquil, zanahoria y repollo. Con arroz, jalapeños, cebolla y tortillas hechas a mano.",
+        "Caldo de Pollo": "Caldo de pollo con pasta, papa roja, zanahoria, güisquil y cilantro. Con jalapeños, cebolla y tortillas hechas a mano."
+      }
+    },
+    "lo-autentico": {
+      "subtitle": "Los platillos guatemaltecos más auténticos",
+      "items": {
+        "Chaomin de Pollo": "Chow mein de pollo estilo guatemalteco con chile verde y rojo y zanahoria. Con frijoles refritos y 5 tortillas hechas a mano.",
+        "Pepián de Pollo": "El platillo nacional de Guatemala — pollo cocido a fuego lento en una salsa espesa de tomate, chiles, especias y semillas tostadas. Con arroz y tortillas.",
+        "Guisado de Res": "Guisado de res estilo guatemalteco cocido a fuego lento, con papas, arroz fresco y 5 tortillas hechas a mano."
+      }
+    },
+    "de-la-freidora": {
+      "subtitle": "De la freidora",
+      "items": {
+        "Pollo Dorado": "Dos piernas de pollo doradas, sazonadas y crujientes por fuera, jugosas por dentro. Con dos acompañantes, ensalada y tortillas.",
+        "Mojarra Frita": "Tilapia entera sazonada, empanizada y frita hasta quedar dorada y crujiente. Con ensalada, limón, dos acompañantes y tortillas."
+      }
+    },
+    "de-la-parrilla": {
+      "subtitle": "De la parrilla",
+      "note": "Todos los platos de la parrilla incluyen ensalada de la casa, dos acompañantes y tortillas.",
+      "items": {
+        "Pollo Asado": "Pechuga de pollo de 6 oz cortada en casa, marinada en mezcla de cítricos y hierbas.",
+        "Carne Asada": "Arrachera de 6 oz cortada y marinada en casa.",
+        "Costilla de Res": "Costilla de res a la parrilla estilo guatemalteco, marinada en especias tradicionales y cocida lentamente para un sabor profundo y ahumado.",
+        "La Parrillada": "Parrillada tradicional guatemalteca con carne asada, longaniza y camarón a la parrilla.",
+        "Costilla de Carnero": "Chuletas de cordero bilbao marinadas en mojo de cítricos, asadas a la perfección sobre fuego abierto."
+      }
+    },
+    "acompanantes": {
+      "subtitle": "Acompañantes"
+    }
+  }
+}

@@ -1,12 +1,15 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SignatureCarousel from '../components/SignatureCarousel.astro';
-import NewsletterForm from '../components/NewsletterForm.astro';
-import SmartImage from '../components/SmartImage.astro';
-import site from '../data/site.json';
-import menu from '../data/menu.json';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SmartImage from '../../components/SmartImage.astro';
+import site from '../../data/site.json';
+import menu from '../../data/menu.json';
+import es from '../../data/menu-es.json';
 
-const description = "Full menu of authentic Guatemalan food in Jupiter, FL. Tacos, La Parrillada, Pepián de Pollo, Birria, Caldos, weekly $10 specials, and homemade tortillas every day.";
+const ui = es.ui;
+const esCats: Record<string, any> = es.categories;
+const esSpecials: Record<string, any> = es.weeklySpecials;
+
+const description = "Menú completo de comida guatemalteca auténtica en Jupiter, FL. Tacos, La Parrillada, Pepián de Pollo, birria, caldos, especiales semanales de $10 y tortillas hechas a mano todos los días.";
 
 const alternates = [
   { hreflang: 'en', href: site.domain + '/menu' },
@@ -14,18 +17,28 @@ const alternates = [
   { hreflang: 'x-default', href: site.domain + '/menu' },
 ];
 
+// Helper: Spanish description for an item, falling back to English
+const itemDesc = (catId: string, item: any) =>
+  esCats[catId]?.items?.[item.name] || item.description;
+
+const catSubtitle = (cat: any) => esCats[cat.id]?.subtitle || cat.subtitle;
+const catNote = (cat: any) => esCats[cat.id]?.note || cat.note;
+const priceText = (price?: string) =>
+  price === 'Market Price' ? ui.marketPrice : price;
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Menu',
-  name: `${site.name} Menu`,
+  inLanguage: 'es',
+  name: `Menú de ${site.name}`,
   hasMenuSection: menu.categories.filter((c) => !c.isSidesList).map((cat) => ({
     '@type': 'MenuSection',
     name: cat.name,
-    description: cat.subtitle,
+    description: catSubtitle(cat),
     hasMenuItem: cat.items.map((item: any) => ({
       '@type': 'MenuItem',
       name: item.name,
-      description: item.description,
+      description: itemDesc(cat.id, item),
       offers: item.price
         ? { '@type': 'Offer', price: item.price.replace(/[^0-9.]/g, '') || undefined, priceCurrency: 'USD' }
         : undefined,
@@ -35,92 +48,85 @@ const schema = {
 ---
 
 <BaseLayout
-  title="Full Menu — Authentic Guatemalan Food in Jupiter, FL"
+  title="Menú — Comida Guatemalteca Auténtica en Jupiter, FL"
   description={description}
-  path="/menu"
+  path="/es/menu"
   image="/LAEG/la-parrillada.jpeg"
   schema={schema}
+  lang="es"
   alternates={alternates}
 >
   <!-- Hero strip -->
   <section class="container-x pt-12 pb-8 text-center lg:pt-16">
-    <p class="eyebrow">Made fresh, every single day</p>
+    <p class="eyebrow">{ui.heroEyebrow}</p>
     <h1 class="mt-3 text-balance font-display text-5xl font-bold text-navy md:text-6xl">
-      Our Full Menu
+      {ui.heroTitle}
     </h1>
     <p class="mx-auto mt-5 max-w-2xl text-pretty font-body text-lg leading-relaxed text-ink/75">
-      Homemade Guatemalan flavors made fresh daily — authentic, hearty, and full of family tradition.
+      {ui.heroSub}
     </p>
   </section>
 
   <!-- Language access banner -->
   <section class="container-x pb-4">
     <a
-      href="/es/menu"
+      href="/menu"
       class="mx-auto flex max-w-2xl items-center justify-center gap-3 rounded-full border border-navy-100 bg-white px-6 py-3 font-body text-sm font-semibold text-navy shadow-soft transition-colors hover:border-navy hover:bg-navy hover:text-cream"
-      lang="es"
+      lang="en"
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="12" cy="12" r="10" />
         <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
       </svg>
-      ¿Prefieres español? Ver el menú en español →
+      {ui.langBannerLink} →
     </a>
   </section>
-
-  <SignatureCarousel />
 
   <!-- WEEKLY SPECIALS -->
   <section class="container-x py-12 lg:py-16">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="text-balance font-display text-4xl font-bold text-navy md:text-5xl">
-        $10 Weekly Specials
+        {ui.specialsTitle}
       </h2>
       <p class="mt-4 text-pretty font-body text-lg leading-relaxed text-ink/75">
-        Fresh every week — ideal for college students, families on the go, or anyone craving
-        authentic Guatemalan flavors.
+        {ui.specialsSub}
       </p>
     </div>
 
-    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {menu.weeklySpecials.map((special) => (
         <article class="overflow-hidden rounded-3xl bg-white shadow-card transition-transform hover:-translate-y-1">
-          <SmartImage src={special.image} alt={special.name} class="h-48 w-full object-cover" />
+          <SmartImage
+            src={special.image}
+            alt={esSpecials[special.name]?.name || special.name}
+            class="h-48 w-full object-cover"
+          />
           <div class="p-5">
-            <h3 class="font-display text-lg font-bold text-navy">{special.name}</h3>
-            <p class="mt-2 font-body text-sm leading-relaxed text-ink/70">{special.description}</p>
+            <h3 class="font-display text-lg font-bold text-navy">
+              {esSpecials[special.name]?.name || special.name}
+            </h3>
+            <p class="mt-2 font-body text-sm leading-relaxed text-ink/70">
+              {esSpecials[special.name]?.description || special.description}
+            </p>
             <p class="mt-3 font-display text-xl font-bold text-price">{special.price}</p>
           </div>
         </article>
       ))}
-
-      <!-- Newsletter signup card -->
-      <article class="flex flex-col justify-between rounded-3xl bg-navy p-6 text-cream shadow-card">
-        <div>
-          <h3 class="font-display text-lg font-bold text-marigold">Hungry for more?</h3>
-          <p class="mt-2 font-body text-sm leading-relaxed text-cream/80">
-            New specials every week — sign up to never miss one.
-          </p>
-        </div>
-        <div class="mt-4">
-          <NewsletterForm source="menu-page" variant="card" />
-        </div>
-      </article>
     </div>
   </section>
 
   <!-- Full menu intro -->
   <section class="container-x pt-8 pb-4 text-center">
     <h2 class="text-balance font-display text-4xl font-bold text-navy md:text-5xl">
-      Explore the full menu
+      {ui.fullMenuTitle}
     </h2>
     <p class="mt-4 font-body text-lg text-ink/75">
-      Tap any item to order online — fresh, hot, ready for pickup or delivery.
+      {ui.fullMenuSub}
     </p>
   </section>
 
   <!-- Sticky category nav -->
-  <nav class="sticky top-16 z-30 mt-8 border-y border-navy-100 bg-cream/95 backdrop-blur-md lg:top-20" aria-label="Menu categories">
+  <nav class="sticky top-16 z-30 mt-8 border-y border-navy-100 bg-cream/95 backdrop-blur-md lg:top-20" aria-label="Categorías del menú">
     <div class="container-x">
       <div class="-mx-2 flex gap-1 overflow-x-auto py-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {menu.categories.map((cat) => (
@@ -141,9 +147,9 @@ const schema = {
       <section id={cat.id} class="scroll-mt-32 py-12 lg:py-16">
         <div class="text-center">
           <h2 class="text-balance font-display text-3xl font-bold text-navy md:text-4xl">{cat.name}</h2>
-          <p class="mt-2 font-body italic text-ink/60">{cat.subtitle}</p>
-          {cat.note && (
-            <p class="mx-auto mt-4 max-w-2xl font-body text-sm text-ink/70" set:html={cat.note} />
+          <p class="mt-2 font-body italic text-ink/60">{catSubtitle(cat)}</p>
+          {catNote(cat) && (
+            <p class="mx-auto mt-4 max-w-2xl font-body text-sm text-ink/70" set:html={catNote(cat)} />
           )}
         </div>
 
@@ -170,7 +176,7 @@ const schema = {
                 <div class="flex flex-1 flex-col p-5">
                   <h3 class="font-display text-lg font-bold text-navy">{item.name}</h3>
                   <p class="mt-2 flex-1 font-body text-sm leading-relaxed text-ink/65">
-                    {item.description}
+                    {itemDesc(cat.id, item)}
                   </p>
 
                   {item.priceSplit ? (
@@ -179,7 +185,7 @@ const schema = {
                       <span class="text-xs italic text-ink/50">{item.priceSplit.label}</span>
                     </div>
                   ) : (
-                    <p class="mt-4 font-display text-xl font-bold text-price">{item.price}</p>
+                    <p class="mt-4 font-display text-xl font-bold text-price">{priceText(item.price)}</p>
                   )}
 
                   <a
@@ -188,7 +194,7 @@ const schema = {
                     rel="noopener"
                     class="mt-4 block rounded-full bg-navy py-2.5 text-center font-body text-sm font-semibold text-cream transition-colors hover:bg-navy-600"
                   >
-                    Order now
+                    {ui.orderNow}
                   </a>
                 </div>
               </article>
@@ -203,23 +209,21 @@ const schema = {
   <section class="container-x my-16 lg:my-20">
     <div class="rounded-3xl bg-gradient-to-br from-navy via-navy-600 to-navy px-6 py-16 text-center text-cream shadow-deep lg:px-10 lg:py-20">
       <h2 class="text-balance font-display text-4xl font-bold leading-tight md:text-5xl">
-        Order takeout now — Jupiter, FL
+        {ui.ctaTitle}
       </h2>
       <p class="mx-auto mt-5 max-w-2xl font-body text-lg text-cream/85">
-        Fresh, hot, authentic Guatemalan food straight to your door. Tacos, La Parrillada,
-        weekly specials &amp; more.
+        {ui.ctaSub}
       </p>
       <a href={site.orderUrl} target="_blank" rel="noopener" class="btn-spice mt-9 px-10 py-5 text-lg">
-        Order takeout now
+        {ui.ctaBtn}
       </a>
       <p class="mt-6 font-body text-sm text-cream/70">
-        Fast · Fresh · Family favorites · Serving Jupiter, Tequesta &amp; Palm Beach Gardens
+        {ui.ctaFoot}
       </p>
     </div>
   </section>
 
   <script>
-    // Smooth scroll with offset for sticky category nav
     document.querySelectorAll<HTMLAnchorElement>('.menu-nav-link').forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();

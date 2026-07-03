@@ -8,9 +8,10 @@ interface Props {
   image?: string;
   schema?: object;
   noindex?: boolean;
+  alternates?: { hreflang: string; href: string }[];
 }
 
-const { title, description, path, image, schema, noindex = false } = Astro.props;
+const { title, description, path, image, schema, noindex = false, alternates = [] } = Astro.props;
 
 const canonical = new URL(path, site.domain).toString();
 const ogImage = image
@@ -25,6 +26,11 @@ const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<!-- hreflang alternates (bilingual pages) -->
+{alternates.map((alt) => (
+  <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+))}
 
 <!-- Open Graph -->
 <meta property="og:type" content="restaurant.restaurant" />
