@@ -164,9 +164,9 @@ const schema = {
             </ul>
           </div>
         ) : (
-          <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div class="mt-10 flex flex-wrap justify-center gap-6">
             {cat.items.map((item: any) => (
-              <article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-soft transition-all hover:-translate-y-1 hover:shadow-card">
+              <article class="group flex w-full flex-col overflow-hidden rounded-2xl bg-white shadow-soft transition-all hover:-translate-y-1 hover:shadow-card sm:w-[calc(50%_-_0.75rem)] lg:w-[calc(33.333%_-_1rem)] xl:w-[calc(25%_-_1.125rem)]">
                 <SmartImage
                   src={item.image}
                   alt={item.name}
