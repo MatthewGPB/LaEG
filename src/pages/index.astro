@@ -1,11 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SignatureCarousel from '../components/SignatureCarousel.astro';
+import DeliveryOptions from '../components/DeliveryOptions.astro';
 import SmartImage from '../components/SmartImage.astro';
 import site from '../data/site.json';
 import menu from '../data/menu.json';
 
-const description = "Family-run Guatemalan restaurant in Jupiter, FL serving authentic homemade tacos, La Parrillada, Pepián, empanadas, and weekly $10 specials. Dine in, takeout, catering and the Guatamigos food truck.";
+const description = "Family-run Guatemalan restaurant in Jupiter, FL serving authentic homemade tacos, La Parrillada, Pepián, empanadas, and weekly $10 specials. Dine in, takeout, delivery on DoorDash & Uber Eats, catering and the Guatamigos food truck.";
+
+const alternates = [
+  { hreflang: 'en', href: site.domain + '/' },
+  { hreflang: 'es', href: site.domain + '/es/' },
+  { hreflang: 'x-default', href: site.domain + '/' },
+];
 
 const schema = {
   '@context': 'https://schema.org',
@@ -52,6 +59,7 @@ const schema = {
   image="/LAEG/hero-mural.jpeg"
   schema={schema}
   showPopup={true}
+  alternates={alternates}
 >
   <!-- HERO -->
   <section class="relative isolate overflow-hidden">
@@ -82,14 +90,14 @@ const schema = {
           <a href={site.orderUrl} target="_blank" rel="noopener" class="btn-spice text-base">
             Order online
           </a>
-          <a href={site.directionsUrl} target="_blank" rel="noopener" class="rounded-full border-2 border-cream/40 bg-cream/10 px-7 py-3 font-body font-semibold text-cream backdrop-blur-sm transition-colors hover:bg-cream hover:text-navy">
-            Visit us in Jupiter
+          <a href="#delivery" class="rounded-full border-2 border-cream/40 bg-cream/10 px-7 py-3 font-body font-semibold text-cream backdrop-blur-sm transition-colors hover:bg-cream hover:text-navy">
+            Get it delivered
           </a>
         </div>
 
         <div class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-cream/75">
           <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-marigold"></span> Open Mon–Sun 11am–9pm</span>
-          <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-marigold"></span> Dine-in · Takeout · Catering</span>
+          <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-marigold"></span> Dine-in · Takeout · Delivery · Catering</span>
           <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-marigold"></span> {site.phone}</span>
         </div>
       </div>
@@ -123,8 +131,11 @@ const schema = {
     </a>
   </section>
 
+  <!-- DELIVERY OPTIONS -->
+  <DeliveryOptions lang="en" />
+
   <!-- SIGNATURE CAROUSEL -->
-  <SignatureCarousel />
+  <SignatureCarousel lang="en" />
 
   <!-- STORY TEASER -->
   <section class="bg-navy/95 py-20 text-cream lg:py-28">

@@ -1,13 +1,20 @@
 {
   "enabled": true,
   "title": "This Week's Special",
-  "name": "Shuco!",
-  "description": "Loaded Guatamalean Hot Dog with Golden Crispy Fries!",
-  "price": "$10",
-  "dates": "July 14– July 20",
-  "image": "/LAEG/shuco.jpeg",
+  "name": "Caldo De Res!",
+  "description": "Warm up with a comforting bowl of Caldo De Res, a traditional beef and vegetable stew slow-simmered to hearty perfection with tender chunks of beef, corn, squash, and cabbage in a savory, flavor-rich broth.",
+  "price": "$18",
+  "dates": "May 26 – May 31",
+  "image": "/LAEG/caldo-de-res.jpeg",
   "ctaText": "Dine-in or order ahead only",
   "ctaSubtext": "Call (561) 768-9137",
   "delaySeconds": 3,
-  "showOnHomeOnly": true
+  "showOnHomeOnly": true,
+  "es": {
+    "title": "El Especial de la Semana",
+    "name": "¡Caldo de Res!",
+    "description": "Calienta el alma con un plato de Caldo de Res — caldo tradicional de res y verduras cocido a fuego lento, con trozos tiernos de res, elote, güisquil y repollo en un caldo lleno de sabor.",
+    "ctaText": "Solo para comer aquí u ordenar por teléfono",
+    "ctaSubtext": "Llama al (561) 768-9137"
+  }
 }

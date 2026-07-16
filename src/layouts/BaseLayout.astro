@@ -14,7 +14,7 @@ interface Props {
   schema?: object;
   showPopup?: boolean;
   noindex?: boolean;
-  lang?: string;
+  lang?: 'en' | 'es';
   alternates?: { hreflang: string; href: string }[];
 }
 
@@ -29,6 +29,8 @@ const {
   lang = 'en',
   alternates = [],
 } = Astro.props;
+
+const skipLabel = lang === 'es' ? 'Saltar al contenido' : 'Skip to content';
 ---
 
 <!doctype html>
@@ -40,7 +42,6 @@ const {
     <link rel="apple-touch-icon" href="/LAEG/favicon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- DNS prefetch for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -53,23 +54,24 @@ const {
       image={image}
       schema={schema}
       noindex={noindex}
+      lang={lang}
       alternates={alternates}
     />
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-cream">
-      Skip to content
+      {skipLabel}
     </a>
 
-    <Header />
+    <Header lang={lang} />
 
     <main id="main">
       <slot />
     </main>
 
-    <Footer />
+    <Footer lang={lang} />
 
-    {showPopup && <WeeklySpecialPopup />}
+    {showPopup && <WeeklySpecialPopup lang={lang} />}
 
     <!-- Shared form submission handler -->
     <script>
@@ -83,13 +85,13 @@ const {
             const successEl = form.querySelector<HTMLElement>('.form-success');
             const errorEl = form.querySelector<HTMLElement>('.form-error');
             const originalLabel = label?.textContent || 'Send';
+            const sendingLabel = form.dataset.sendingLabel || 'Sending…';
 
-            // Block spam via honeypot
             const honeypot = form.querySelector<HTMLInputElement>('input[name="_gotcha"]');
             if (honeypot && honeypot.value) return;
 
             if (button) button.disabled = true;
-            if (label) label.textContent = 'Sending…';
+            if (label) label.textContent = sendingLabel;
 
             const fd = new FormData(form);
             fetch(form.action, {
@@ -109,7 +111,6 @@ const {
                     const formName = form.dataset.formName || 'unknown';
                     window.gtag('event', 'form_submit', { form_name: formName });
                   }
-                  // Smooth scroll to success
                   successEl?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                   throw new Error('Form submission failed');

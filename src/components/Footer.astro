@@ -1,7 +1,46 @@
 ---
 import site from '../data/site.json';
 
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
 const year = new Date().getFullYear();
+
+const T = {
+  en: {
+    blurb: `Family-run since ${site.founded.split('-')[0]}. We bring the homemade flavors of Huehuetenango, Guatemala to Jupiter, Florida — one plate, one tortilla, one warm welcome at a time.`,
+    visit: 'Visit',
+    explore: 'Explore',
+    menu: 'Full Menu',
+    story: 'Our Story',
+    catering: 'Catering',
+    foodTruck: 'Food Truck',
+    hoursMap: 'Hours & Map',
+    order: 'Order Online →',
+    rights: `Made with love in Jupiter, FL. Proudly serving Jupiter, Tequesta, Palm Beach Gardens, Juno Beach & all of Palm Beach County.`,
+    prefix: '',
+    hours: site.hours.regular,
+  },
+  es: {
+    blurb: `Negocio familiar desde ${site.founded.split('-')[0]}. Traemos los sabores caseros de Huehuetenango, Guatemala a Jupiter, Florida — un plato, una tortilla y una cálida bienvenida a la vez.`,
+    visit: 'Visítanos',
+    explore: 'Explora',
+    menu: 'Menú Completo',
+    story: 'Nuestra Historia',
+    catering: 'Catering',
+    foodTruck: 'Food Truck',
+    hoursMap: 'Horario y Mapa',
+    order: 'Ordenar en Línea →',
+    rights: `Hecho con amor en Jupiter, FL. Orgullosamente servimos a Jupiter, Tequesta, Palm Beach Gardens, Juno Beach y todo Palm Beach County.`,
+    prefix: '/es',
+    hours: '11:00 AM – 9:00 PM, lunes a domingo',
+  },
+};
+
+const t = T[lang];
+const p = t.prefix;
 ---
 
 <footer class="mt-24 bg-navy text-cream">
@@ -11,7 +50,7 @@ const year = new Date().getFullYear();
     <div class="grid gap-12 lg:grid-cols-4">
       <!-- Brand block -->
       <div class="lg:col-span-2">
-        <a href="/" class="flex items-center gap-3" aria-label="La Esquina Guatemalteca home">
+        <a href={lang === 'es' ? '/es/' : '/'} class="flex items-center gap-3" aria-label="La Esquina Guatemalteca">
           <div class="flex h-12 w-12 items-center justify-center rounded-full bg-cream text-navy">
             <span class="font-display text-xl font-bold">LE</span>
           </div>
@@ -21,8 +60,7 @@ const year = new Date().getFullYear();
           </div>
         </a>
         <p class="mt-6 max-w-md font-body text-sm leading-relaxed text-cream/80">
-          Family-run since {site.founded.split('-')[0]}. We bring the homemade flavors of Huehuetenango, Guatemala
-          to Jupiter, Florida — one plate, one tortilla, one warm welcome at a time.
+          {t.blurb}
         </p>
         <div class="mt-6 flex gap-3">
           <a
@@ -57,7 +95,7 @@ const year = new Date().getFullYear();
 
       <!-- Visit -->
       <div>
-        <h3 class="font-display text-lg font-semibold text-marigold">Visit</h3>
+        <h3 class="font-display text-lg font-semibold text-marigold">{t.visit}</h3>
         <address class="mt-4 not-italic font-body text-sm leading-relaxed text-cream/80">
           {site.address.street}<br />
           {site.address.city}, {site.address.region} {site.address.postalCode}<br />
@@ -65,21 +103,21 @@ const year = new Date().getFullYear();
             {site.phone}
           </a>
         </address>
-        <p class="mt-4 font-body text-sm text-cream/80">{site.hours.regular}</p>
+        <p class="mt-4 font-body text-sm text-cream/80">{t.hours}</p>
       </div>
 
       <!-- Explore -->
       <div>
-        <h3 class="font-display text-lg font-semibold text-marigold">Explore</h3>
+        <h3 class="font-display text-lg font-semibold text-marigold">{t.explore}</h3>
         <ul class="mt-4 flex flex-col gap-2 font-body text-sm">
-          <li><a href="/menu" class="text-cream/80 hover:text-cream">Full Menu</a></li>
-          <li><a href="/about" class="text-cream/80 hover:text-cream">Our Story</a></li>
-          <li><a href="/catering" class="text-cream/80 hover:text-cream">Catering</a></li>
-          <li><a href="/food-truck" class="text-cream/80 hover:text-cream">Food Truck</a></li>
-          <li><a href="/location" class="text-cream/80 hover:text-cream">Hours &amp; Map</a></li>
+          <li><a href={`${p}/menu`} class="text-cream/80 hover:text-cream">{t.menu}</a></li>
+          <li><a href={`${p}/about`} class="text-cream/80 hover:text-cream">{t.story}</a></li>
+          <li><a href={`${p}/catering`} class="text-cream/80 hover:text-cream">{t.catering}</a></li>
+          <li><a href={`${p}/food-truck`} class="text-cream/80 hover:text-cream">{t.foodTruck}</a></li>
+          <li><a href={`${p}/location`} class="text-cream/80 hover:text-cream">{t.hoursMap}</a></li>
           <li>
             <a href={site.orderUrl} target="_blank" rel="noopener" class="font-semibold text-marigold hover:text-cream">
-              Order Online →
+              {t.order}
             </a>
           </li>
         </ul>
@@ -87,8 +125,7 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="mt-12 border-t border-cream/15 pt-6 text-center font-body text-xs text-cream/60">
-      © {year} {site.name}. Made with love in Jupiter, FL. Proudly serving Jupiter, Tequesta,
-      Palm Beach Gardens, Juno Beach &amp; all of Palm Beach County.
+      © {year} {site.name}. {t.rights}
     </div>
   </div>
 </footer>

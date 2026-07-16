@@ -1,10 +1,10 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import CateringForm from '../components/CateringForm.astro';
-import SmartImage from '../components/SmartImage.astro';
-import site from '../data/site.json';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CateringForm from '../../components/CateringForm.astro';
+import SmartImage from '../../components/SmartImage.astro';
+import site from '../../data/site.json';
 
-const description = "Guatemalan catering in Palm Beach County. Trusted by Frenchman's Reserve, Jupiter Hills Club, Avenir, Mirasol & Breakers West. Custom menus for weddings, corporate & private events. Request a quote.";
+const description = "Catering guatemalteco en Palm Beach County. Con la confianza de Frenchman's Reserve, Jupiter Hills Club, Avenir, Mirasol y Breakers West. Menús a la medida para bodas, eventos corporativos y celebraciones privadas.";
 
 const alternates = [
   { hreflang: 'en', href: site.domain + '/catering' },
@@ -17,7 +17,8 @@ const schema = {
   '@type': 'FoodEstablishment',
   name: `${site.name} Catering`,
   servesCuisine: 'Guatemalan',
-  url: site.domain + '/catering',
+  url: site.domain + '/es/catering',
+  inLanguage: 'es',
   telephone: site.phoneTel,
   address: {
     '@type': 'PostalAddress',
@@ -32,11 +33,12 @@ const schema = {
 ---
 
 <BaseLayout
-  title="Catering — Weddings, Corporate & Private Events"
+  title="Catering — Bodas, Eventos Corporativos y Privados"
   description={description}
-  path="/catering"
+  path="/es/catering"
   image="/LAEG/catering-spread.jpeg"
   schema={schema}
+  lang="es"
   alternates={alternates}
 >
   <!-- HERO -->
@@ -44,29 +46,29 @@ const schema = {
     <div class="absolute inset-0 -z-10">
       <SmartImage
         src="/LAEG/catering-spread.jpeg"
-        alt="Guatemalan catering spread by La Esquina Guatemalteca"
+        alt="Banquete de catering guatemalteco de La Esquina Guatemalteca"
         class="h-full w-full object-cover"
         loading="eager"
       />
       <div class="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/50 to-navy/90"></div>
     </div>
     <div class="container-x relative py-28 text-center text-cream lg:py-36">
-      <p class="eyebrow text-marigold">Catering by La Esquina</p>
+      <p class="eyebrow text-marigold">Catering por La Esquina</p>
       <h1 class="mx-auto mt-4 max-w-3xl text-balance font-display text-5xl font-bold leading-tight md:text-6xl">
-        Flavors your guests will <span class="italic text-marigold">still be talking about.</span>
+        Sabores de los que tus invitados <span class="italic text-marigold">seguirán hablando.</span>
       </h1>
       <p class="mx-auto mt-6 max-w-2xl text-pretty font-body text-lg text-cream/85 md:text-xl">
-        Authentic Guatemalan catering for weddings, corporate events, and private celebrations
-        across Palm Beach County.
+        Catering guatemalteco auténtico para bodas, eventos corporativos y celebraciones privadas
+        en todo Palm Beach County.
       </p>
-      <a href="#quote" class="btn-spice mt-9">Request your custom quote</a>
+      <a href="#quote" class="btn-spice mt-9">Solicita tu cotización</a>
     </div>
   </section>
 
-  <!-- TRUSTED BY -->
+  <!-- CONFÍAN EN NOSOTROS -->
   <section class="border-b border-navy-100 bg-white py-12">
     <div class="container-x text-center">
-      <p class="eyebrow">Trusted by Palm Beach County's premier venues</p>
+      <p class="eyebrow">Con la confianza de los mejores clubes de Palm Beach County</p>
       <div class="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
         {site.trustedBy.map((venue) => (
           <SmartImage
@@ -79,65 +81,65 @@ const schema = {
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
+  <!-- CÓMO FUNCIONA -->
   <section class="container-x py-20 lg:py-24">
     <div class="mx-auto max-w-2xl text-center">
-      <p class="eyebrow">Simple &amp; stress-free</p>
-      <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">How it works</h2>
+      <p class="eyebrow">Simple y sin estrés</p>
+      <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">Cómo funciona</h2>
     </div>
 
     <div class="mt-14 grid gap-8 md:grid-cols-3">
       <div class="rounded-3xl bg-white p-8 shadow-card">
         <div class="flex h-12 w-12 items-center justify-center rounded-full bg-marigold/20 font-display text-xl font-bold text-marigold-dark">1</div>
-        <h3 class="mt-5 font-display text-xl font-bold text-navy">Tell us your vision</h3>
+        <h3 class="mt-5 font-display text-xl font-bold text-navy">Cuéntanos tu visión</h3>
         <p class="mt-3 font-body text-ink/70">
-          Share your date, guest count, and the vibe you're going for. Traditional Guatemalan feast?
-          Taco bar? La Parrillada station? We'll shape it together.
+          Comparte tu fecha, número de invitados y el ambiente que buscas. ¿Banquete guatemalteco
+          tradicional? ¿Barra de tacos? ¿Estación de La Parrillada? Lo armamos juntos.
         </p>
       </div>
       <div class="rounded-3xl bg-white p-8 shadow-card">
         <div class="flex h-12 w-12 items-center justify-center rounded-full bg-marigold/20 font-display text-xl font-bold text-marigold-dark">2</div>
-        <h3 class="mt-5 font-display text-xl font-bold text-navy">Get your custom menu</h3>
+        <h3 class="mt-5 font-display text-xl font-bold text-navy">Recibe tu menú a la medida</h3>
         <p class="mt-3 font-body text-ink/70">
-          Within 24 hours, Silvia sends a proposed menu and clear pricing tailored to your event —
-          with options for every dietary need.
+          En menos de 24 horas, Silvia te envía una propuesta de menú y precios claros hechos
+          para tu evento — con opciones para toda necesidad dietética.
         </p>
       </div>
       <div class="rounded-3xl bg-white p-8 shadow-card">
         <div class="flex h-12 w-12 items-center justify-center rounded-full bg-marigold/20 font-display text-xl font-bold text-marigold-dark">3</div>
-        <h3 class="mt-5 font-display text-xl font-bold text-navy">We handle the rest</h3>
+        <h3 class="mt-5 font-display text-xl font-bold text-navy">Nosotros nos encargamos</h3>
         <p class="mt-3 font-body text-ink/70">
-          Fresh preparation, on-time delivery or full service, beautiful presentation. You enjoy
-          the party; we handle the food.
+          Preparación fresca, entrega puntual o servicio completo, presentación hermosa.
+          Tú disfrutas la fiesta; nosotros nos encargamos de la comida.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- QUOTE FORM -->
+  <!-- FORMULARIO -->
   <section id="quote" class="scroll-mt-24 bg-cream-200/50 py-20 lg:py-24">
     <div class="container-x">
       <div class="mx-auto max-w-2xl text-center">
-        <p class="eyebrow">Let's plan your event</p>
+        <p class="eyebrow">Planeemos tu evento</p>
         <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">
-          Request your custom quote
+          Solicita tu cotización
         </h2>
         <p class="mt-4 font-body text-lg text-ink/75">
-          Tell us about your celebration and we'll reply within 24 hours — every day of the week.
+          Cuéntanos de tu celebración y te respondemos en menos de 24 horas — todos los días de la semana.
         </p>
       </div>
       <div class="mt-12">
-        <CateringForm lang="en" />
+        <CateringForm lang="es" />
       </div>
     </div>
   </section>
 
-  <!-- CTA STRIP -->
+  <!-- CTA -->
   <section class="container-x py-16 text-center">
     <p class="font-body text-lg text-ink/75">
-      Prefer to talk it through?
-      <a href={`tel:${site.phoneTel}`} class="font-semibold text-spice hover:underline">Call {site.phone}</a>
-      — Silvia loves planning menus.
+      ¿Prefieres platicarlo?
+      <a href={`tel:${site.phoneTel}`} class="font-semibold text-spice hover:underline">Llama al {site.phone}</a>
+      — a Silvia le encanta planear menús.
     </p>
   </section>
 </BaseLayout>

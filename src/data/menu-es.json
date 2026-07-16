@@ -1,5 +1,5 @@
 {
-  "_comment": "Spanish strings ONLY. Structure, prices, and images live in menu.json — this file never duplicates them, so prices can never drift out of sync. Items are keyed by their English name from menu.json. If a key is missing here, the Spanish page falls back to the English text automatically.",
+  "_comment": "Spanish strings ONLY. Structure, prices, and images live in menu.json / site.json — never duplicated here, so data can't drift. Menu items keyed by English name; missing keys fall back to English automatically.",
   "ui": {
     "heroEyebrow": "Hecho fresco, todos los días",
     "heroTitle": "Nuestro Menú Completo",
@@ -16,9 +16,18 @@
     "ctaSub": "Comida guatemalteca auténtica, fresca y caliente, directo a tu puerta. Tacos, La Parrillada, especiales semanales y más.",
     "ctaBtn": "Ordenar para llevar",
     "ctaFoot": "Rápido · Fresco · Favoritos de la familia · Servimos Jupiter, Tequesta y Palm Beach Gardens",
-    "langBannerText": "This menu is also available in English.",
-    "langBannerLink": "View in English",
     "marketPrice": "Precio del día"
+  },
+  "signatureCarousel": {
+    "sectionEyebrow": "Favoritos de la familia",
+    "sectionTitle": "Nuestros Platillos Estrella",
+    "sectionSub": "Clásicos guatemaltecos auténticos que unen a las familias — caseros, abundantes y llenos de tradición. Ven a probar de lo que todos hablan.",
+    "items": {
+      "La Parrillada": "Salchicha italiana suave, camarón al chimichurri y carne asada tierna — con 2 acompañantes, jalapeño asado y tortillas frescas. Casera, abundante y perfecta para compartir.",
+      "Pepián de Pollo": "El platillo nacional de Guatemala — pollo tierno cocido a fuego lento en una salsa espesa de semillas tostadas, especias y verduras. Puro sabor casero en cada bocado.",
+      "Costillas de Carnero": "Jugosas chuletas de cordero a la parrilla, sazonadas con especias guatemaltecas tradicionales y servidas con acompañantes frescos. Favorito de la familia para ocasiones especiales.",
+      "Shuco": "El icónico hot dog guatemalteco — salchicha, guacamole, repollo y nuestras salsas de la casa en pan suave. El clásico callejero hecho en casa."
+    }
   },
   "weeklySpecials": {
     "Taco Tuesday": {

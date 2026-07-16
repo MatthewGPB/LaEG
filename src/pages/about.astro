@@ -5,6 +5,12 @@ import site from '../data/site.json';
 
 const description = "Meet the Cano family behind La Esquina Guatemalteca. From Huehuetenango, Guatemala to Jupiter, FL — Silvia, Santos, William and the family share their story of authentic homemade Guatemalan cooking since 2018.";
 
+const alternates = [
+  { hreflang: 'en', href: site.domain + '/about' },
+  { hreflang: 'es', href: site.domain + '/es/about' },
+  { hreflang: 'x-default', href: site.domain + '/about' },
+];
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Restaurant',
@@ -34,6 +40,7 @@ const schema = {
   path="/about"
   image="/LAEG/family.jpeg"
   schema={schema}
+  alternates={alternates}
 >
   <!-- HERO -->
   <section class="relative isolate overflow-hidden">

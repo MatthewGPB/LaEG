@@ -53,22 +53,7 @@ const schema = {
     </p>
   </section>
 
-  <!-- Language access banner -->
-  <section class="container-x pb-4">
-    <a
-      href="/es/menu"
-      class="mx-auto flex max-w-2xl items-center justify-center gap-3 rounded-full border border-navy-100 bg-white px-6 py-3 font-body text-sm font-semibold text-navy shadow-soft transition-colors hover:border-navy hover:bg-navy hover:text-cream"
-      lang="es"
-    >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-      </svg>
-      ¿Prefieres español? Ver el menú en español →
-    </a>
-  </section>
-
-  <SignatureCarousel />
+  <SignatureCarousel lang="en" />
 
   <!-- WEEKLY SPECIALS -->
   <section class="container-x py-12 lg:py-16">
@@ -94,7 +79,6 @@ const schema = {
         </article>
       ))}
 
-      <!-- Newsletter signup card -->
       <article class="flex flex-col justify-between rounded-3xl bg-navy p-6 text-cream shadow-card">
         <div>
           <h3 class="font-display text-lg font-bold text-marigold">Hungry for more?</h3>
@@ -103,7 +87,7 @@ const schema = {
           </p>
         </div>
         <div class="mt-4">
-          <NewsletterForm source="menu-page" variant="card" />
+          <NewsletterForm source="menu-page" variant="card" lang="en" />
         </div>
       </article>
     </div>
@@ -219,7 +203,6 @@ const schema = {
   </section>
 
   <script>
-    // Smooth scroll with offset for sticky category nav
     document.querySelectorAll<HTMLAnchorElement>('.menu-nav-link').forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();

@@ -1,19 +1,52 @@
 ---
 import menu from '../data/menu.json';
+import es from '../data/menu-es.json';
 import SmartImage from './SmartImage.astro';
 
-const slides = menu.signatureCarousel;
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+const isEs = lang === 'es';
+const sig: any = (es as any).signatureCarousel || {};
+
+const slides = menu.signatureCarousel.map((s) => ({
+  ...s,
+  description: isEs ? sig.items?.[s.name] || s.description : s.description,
+}));
+
+const T = isEs
+  ? {
+      eyebrow: sig.sectionEyebrow || 'Favoritos de la familia',
+      title: sig.sectionTitle || 'Nuestros Platillos Estrella',
+      sub: sig.sectionSub || '',
+      region: 'Carrusel de platillos estrella',
+      slide: 'diapositiva',
+      prev: 'Platillo anterior',
+      next: 'Platillo siguiente',
+      goto: 'Ir a la diapositiva',
+    }
+  : {
+      eyebrow: 'Family Favorites',
+      title: 'Our Signature Dishes',
+      sub: 'Authentic Guatemalan classics that bring families together — homemade, hearty, and full of tradition. Come taste what everyone talks about.',
+      region: 'Signature dishes carousel',
+      slide: 'slide',
+      prev: 'Previous dish',
+      next: 'Next dish',
+      goto: 'Go to slide',
+    };
 ---
 
 <section class="container-x py-20 lg:py-24">
   <div class="mx-auto max-w-2xl text-center">
-    <p class="eyebrow">Family Favorites</p>
+    <p class="eyebrow">{T.eyebrow}</p>
     <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">
-      Our Signature Dishes
+      {T.title}
     </h2>
     <p class="mt-5 text-pretty font-body text-lg leading-relaxed text-ink/75">
-      Authentic Guatemalan classics that bring families together — homemade, hearty,
-      and full of tradition. Come taste what everyone talks about.
+      {T.sub}
     </p>
   </div>
 
@@ -21,7 +54,7 @@ const slides = menu.signatureCarousel;
     id="sig-carousel"
     class="relative mt-12 overflow-hidden rounded-3xl bg-white shadow-card"
     role="region"
-    aria-label="Signature dishes carousel"
+    aria-label={T.region}
     aria-roledescription="carousel"
   >
     <div id="sig-track" class="relative min-h-[520px] md:min-h-[460px]">
@@ -31,7 +64,7 @@ const slides = menu.signatureCarousel;
             idx === 0 ? 'opacity-100' : 'pointer-events-none opacity-0'
           }`}
           aria-roledescription="slide"
-          aria-label={`${idx + 1} of ${slides.length}: ${slide.name}`}
+          aria-label={`${idx + 1} / ${slides.length}: ${slide.name}`}
           aria-hidden={idx !== 0 ? 'true' : 'false'}
           data-idx={idx}
         >
@@ -55,28 +88,26 @@ const slides = menu.signatureCarousel;
       ))}
     </div>
 
-    <!-- Controls -->
     <button
       type="button"
       id="sig-prev"
       class="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-cream/95 text-2xl text-navy shadow-soft transition-transform hover:scale-110 md:left-5 md:h-14 md:w-14 md:text-3xl"
-      aria-label="Previous dish"
+      aria-label={T.prev}
     >‹</button>
     <button
       type="button"
       id="sig-next"
       class="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-cream/95 text-2xl text-navy shadow-soft transition-transform hover:scale-110 md:right-5 md:h-14 md:w-14 md:text-3xl"
-      aria-label="Next dish"
+      aria-label={T.next}
     >›</button>
 
-    <!-- Dots -->
     <div class="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
       {slides.map((_, idx) => (
         <button
           type="button"
           class={`sig-dot h-2 rounded-full transition-all ${idx === 0 ? 'w-8 bg-navy' : 'w-2 bg-navy/30'}`}
           data-idx={idx}
-          aria-label={`Go to slide ${idx + 1}`}
+          aria-label={`${T.goto} ${idx + 1}`}
         ></button>
       ))}
     </div>
@@ -125,7 +156,6 @@ const slides = menu.signatureCarousel;
     carousel.addEventListener('mouseenter', stop);
     carousel.addEventListener('mouseleave', start);
 
-    // Swipe support
     let touchStart = 0;
     carousel.addEventListener('touchstart', (e) => { touchStart = e.changedTouches[0].clientX; }, { passive: true });
     carousel.addEventListener('touchend', (e) => {

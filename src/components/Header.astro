@@ -1,23 +1,59 @@
 ---
 import site from '../data/site.json';
 
-const nav = [
-  { href: '/menu', label: 'Menu' },
-  { href: '/about', label: 'Our Story' },
-  { href: '/catering', label: 'Catering' },
-  { href: '/food-truck', label: 'Food Truck' },
-  { href: '/location', label: 'Visit' },
-  { href: '/contact', label: 'Contact' },
-];
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const NAV = {
+  en: [
+    { href: '/menu', label: 'Menu' },
+    { href: '/about', label: 'Our Story' },
+    { href: '/catering', label: 'Catering' },
+    { href: '/food-truck', label: 'Food Truck' },
+    { href: '/location', label: 'Visit' },
+    { href: '/contact', label: 'Contact' },
+  ],
+  es: [
+    { href: '/es/menu', label: 'Menú' },
+    { href: '/es/about', label: 'Nuestra Historia' },
+    { href: '/es/catering', label: 'Catering' },
+    { href: '/es/food-truck', label: 'Food Truck' },
+    { href: '/es/location', label: 'Visítanos' },
+    { href: '/es/contact', label: 'Contacto' },
+  ],
+};
+
+const T = {
+  en: { order: 'Order Online', switchLabel: 'Ver en español', switchShort: 'ES', openMenu: 'Open menu', closeMenu: 'Close menu' },
+  es: { order: 'Ordenar en Línea', switchLabel: 'View in English', switchShort: 'EN', openMenu: 'Abrir menú', closeMenu: 'Cerrar menú' },
+};
+
+const nav = NAV[lang];
+const t = T[lang];
 
 const pathname = new URL(Astro.request.url).pathname;
-const isActive = (href: string) => pathname === href || (href !== '/' && pathname.startsWith(href));
+const isActive = (href: string) => pathname === href || pathname === href + '/' || (href !== '/' && href !== '/es' && pathname.startsWith(href));
+
+// Compute the same page in the other language.
+// EN routes and ES routes mirror each other 1:1 under /es/.
+const normalized = pathname.replace(/\/+$/, '') || '/';
+const altPath =
+  lang === 'es'
+    ? normalized.replace(/^\/es/, '') || '/'
+    : normalized === '/'
+      ? '/es/'
+      : '/es' + normalized;
+
+const homeHref = lang === 'es' ? '/es/' : '/';
 ---
 
 <header class="sticky top-0 z-40 border-b border-navy-100 bg-cream/90 backdrop-blur-md">
   <div class="container-x flex h-16 items-center justify-between lg:h-20">
     <!-- Logo / Wordmark -->
-    <a href="/" class="group flex items-center gap-3" aria-label="La Esquina Guatemalteca home">
+    <a href={homeHref} class="group flex items-center gap-3" aria-label="La Esquina Guatemalteca">
       <div class="flex h-10 w-10 items-center justify-center rounded-full bg-navy text-cream shadow-soft lg:h-12 lg:w-12">
         <span class="font-display text-lg font-bold lg:text-xl">LE</span>
       </div>
@@ -28,7 +64,7 @@ const isActive = (href: string) => pathname === href || (href !== '/' && pathnam
     </a>
 
     <!-- Desktop Nav -->
-    <nav class="hidden lg:flex lg:items-center lg:gap-8" aria-label="Primary">
+    <nav class="hidden lg:flex lg:items-center lg:gap-7" aria-label={lang === 'es' ? 'Principal' : 'Primary'}>
       {nav.map((item) => (
         <a
           href={item.href}
@@ -44,21 +80,37 @@ const isActive = (href: string) => pathname === href || (href !== '/' && pathnam
       ))}
     </nav>
 
-    <!-- CTA + Mobile Toggle -->
-    <div class="flex items-center gap-3">
+    <!-- Language toggle + CTA + Mobile toggle -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a
+        href={altPath}
+        class="inline-flex items-center gap-1.5 rounded-full border border-navy-200 bg-white px-3 py-2 font-body text-xs font-bold uppercase tracking-wider text-navy shadow-soft transition-colors hover:bg-navy hover:text-cream sm:px-4"
+        aria-label={t.switchLabel}
+        title={t.switchLabel}
+        lang={lang === 'es' ? 'en' : 'es'}
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </svg>
+        {t.switchShort}
+      </a>
+
       <a
         href={site.orderUrl}
         target="_blank"
         rel="noopener"
         class="hidden rounded-full bg-navy px-5 py-2.5 font-body text-sm font-semibold text-cream shadow-soft transition-all hover:bg-navy-600 md:inline-flex"
       >
-        Order Online
+        {t.order}
       </a>
       <button
         type="button"
         id="mobile-menu-toggle"
-        aria-label="Open menu"
+        aria-label={t.openMenu}
         aria-expanded="false"
+        data-label-open={t.openMenu}
+        data-label-close={t.closeMenu}
         class="rounded-lg p-2 text-navy lg:hidden"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -72,7 +124,7 @@ const isActive = (href: string) => pathname === href || (href !== '/' && pathnam
 
   <!-- Mobile Menu Drawer -->
   <div id="mobile-menu" class="hidden border-t border-navy-100 bg-cream lg:hidden">
-    <nav class="container-x flex flex-col py-4" aria-label="Mobile">
+    <nav class="container-x flex flex-col py-4" aria-label={lang === 'es' ? 'Móvil' : 'Mobile'}>
       {nav.map((item) => (
         <a
           href={item.href}
@@ -84,12 +136,23 @@ const isActive = (href: string) => pathname === href || (href !== '/' && pathnam
         </a>
       ))}
       <a
+        href={altPath}
+        class="flex items-center gap-2 border-b border-navy-50 py-3 font-body text-base font-medium text-navy"
+        lang={lang === 'es' ? 'en' : 'es'}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </svg>
+        {t.switchLabel}
+      </a>
+      <a
         href={site.orderUrl}
         target="_blank"
         rel="noopener"
         class="mt-4 inline-flex items-center justify-center rounded-full bg-navy px-6 py-3 font-body text-sm font-semibold text-cream shadow-soft"
       >
-        Order Online
+        {t.order}
       </a>
     </nav>
   </div>
@@ -105,7 +168,10 @@ const isActive = (href: string) => pathname === href || (href !== '/' && pathnam
       const isOpen = !menu.classList.contains('hidden');
       menu.classList.toggle('hidden');
       toggle.setAttribute('aria-expanded', String(!isOpen));
-      toggle.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+      toggle.setAttribute(
+        'aria-label',
+        isOpen ? toggle.dataset.labelOpen || 'Open menu' : toggle.dataset.labelClose || 'Close menu'
+      );
     });
   }
 </script>

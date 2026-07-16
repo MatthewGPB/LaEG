@@ -87,12 +87,12 @@
       "id": "burritos-y-mas",
       "name": "Burritos y Más",
       "subtitle": "Burritos, Tacos, Tortas & Quesadillas",
-      "note": "Choose your protein: Asada · Pollo · Carnitas · Barbacoa · Chorizo · Al Pastor · Veggies",
+      "note": "<strong>Choose your protein:</strong> Asada · Pollo · Carnitas · Barbacoa · Chorizo · Al Pastor · Veggies",
       "items": [
         { "name": "Tacos", "image": "/LAEG/tacos.jpeg", "description": "Topped with cabbage, cilantro, and caramelized onions on a homemade corn tortilla. Carne Asada +$3.", "price": "$13" },
         { "name": "Burrito Bowls", "image": "/LAEG/burrito-bowls.jpeg", "description": "Rice, beans, lettuce, mozzarella, pico de gallo & avocado. Carne Asada +$3.", "price": "$16" },
         { "name": "Quesadillas", "image": "/LAEG/quesadillas.jpeg", "description": "Flour tortilla stuffed with red & green peppers, onion, choice of protein & melted mozzarella.", "price": "$13" },
-        { "name": "Shuco", "image": "/LAEG/shuco.jpeg", "description": "Grilled Guatemalan-style hot dog with avocado smash, tomato, onion, lime cabbage & savory sauces on a toasted bun. Side of fries. Mixto +$5.", "price": "$13" },
+        { "name": "Sincos", "image": "/LAEG/sincos.jpeg", "description": "Grilled Guatemalan-style hot dog with avocado smash, tomato, onion, lime cabbage & savory sauces on a toasted bun. Side of fries. Mixto +$5.", "price": "$13" },
         { "name": "Burrito", "image": "/LAEG/burrito.jpeg", "description": "Stuffed with rice, beans, lettuce, cheese & pico. Served with house pickled jalapeños. Grilled Chicken +$2 / Carne Asada +$3.", "price": "$13" },
         { "name": "Tortas", "image": "/LAEG/tortas.jpeg", "description": "Toasted deli loaf with refried black beans, choice of protein, lettuce, queso fresco & avocado. Pickled jalapeños on side + a side.", "price": "$13" }
       ]
@@ -111,7 +111,7 @@
       "name": "Caldos",
       "subtitle": "Hearty Homemade Soups",
       "items": [
-        { "name": "Caldo de Res", "image": "/LAEG/caldo-de-res.png", "description": "Rich beef broth with hearty cut vegetables, red potatoes, chayote, carrot & cabbage. Served with rice, jalapeños, onions & homemade tortillas.", "price": "$20" },
+        { "name": "Caldo de Res", "image": "/LAEG/caldo-de-res.jpeg", "description": "Rich beef broth with hearty cut vegetables, red potatoes, chayote, carrot & cabbage. Served with rice, jalapeños, onions & homemade tortillas.", "price": "$20" },
         { "name": "Caldo de Pollo", "image": "/LAEG/caldo-de-pollo.jpeg", "description": "Chicken soup in rich broth with pasta, diced red potatoes, carrots, chayote & cilantro. Served with jalapeños, onions & homemade tortillas.", "price": "$16" }
       ]
     },
@@ -142,7 +142,7 @@
       "items": [
         { "name": "Pollo Asado", "image": "/LAEG/pollo-asado.jpeg", "description": "6 oz. in-house cut chicken breast marinated in citrus herb blend.", "price": "$20" },
         { "name": "Carne Asada", "image": "/LAEG/carne-asada.jpeg", "description": "6 oz. in-house cut and marinated skirt steak.", "price": "$21" },
-        { "name": "Costilla de Res", "image": "/LAEG/costilla-de-res.jpg", "description": "Tender Guatemalan-style grilled beef ribs marinated in traditional spices and slow-cooked over the grill for deep, smoky flavor.", "price": "$25" },
+        { "name": "Costilla de Res", "image": "/LAEG/costilla-de-res.jpeg", "description": "Tender Guatemalan-style grilled beef ribs marinated in traditional spices and slow-cooked over the grill for deep, smoky flavor.", "price": "$25" },
         { "name": "La Parrillada", "image": "/LAEG/la-parrillada.jpeg", "description": "Traditional Guatemalan grill platter with tender carne asada, savory longaniza, and juicy grilled shrimp.", "price": "Market Price" },
         { "name": "Costilla de Carnero", "image": "/LAEG/costilla-de-carnero.jpeg", "description": "Tender bilbao lamb chops marinated with savory citrus mojo, grilled to perfection over an open flame.", "price": "Market Price" }
       ]

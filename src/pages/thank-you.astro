@@ -4,34 +4,21 @@ import site from '../data/site.json';
 ---
 
 <BaseLayout
-  title="Gracias — Message Received"
-  description="Thank you for reaching out to La Esquina Guatemalteca. We'll be in touch within 24 hours."
+  title="Thank You"
+  description="Thank you for reaching out to La Esquina Guatemalteca."
   path="/thank-you"
   noindex={true}
 >
-  <section class="container-x py-24 text-center lg:py-32">
-    <div class="mx-auto max-w-2xl">
-      <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-marigold/20">
-        <span class="font-display text-5xl">🎉</span>
-      </div>
-      <p class="eyebrow mt-8">Message received</p>
-      <h1 class="mt-4 text-balance font-display text-5xl font-bold text-navy md:text-6xl">
-        ¡Gracias!
-      </h1>
-      <p class="mt-6 text-pretty font-body text-lg leading-relaxed text-ink/80">
-        Your message has made it to the family. Silvia or one of our team will be in touch within
-        24 hours — usually much sooner. In the meantime, why not browse the menu?
-      </p>
-
-      <div class="mt-10 flex flex-wrap justify-center gap-4">
-        <a href="/menu" class="btn-primary">See the menu</a>
-        <a href={site.orderUrl} target="_blank" rel="noopener" class="btn-secondary">Order takeout</a>
-      </div>
-
-      <p class="mt-12 font-body text-base text-ink/65">
-        Or call us directly at
-        <a href={`tel:${site.phoneTel}`} class="font-semibold text-navy hover:text-spice">{site.phone}</a>.
-      </p>
+  <section class="container-x flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
+    <p class="font-display text-6xl">🎉</p>
+    <h1 class="mt-6 text-balance font-display text-5xl font-bold text-navy">¡Gracias!</h1>
+    <p class="mx-auto mt-4 max-w-xl font-body text-lg text-ink/75">
+      Your message is on its way to the family. We reply within 24 hours —
+      usually much sooner.
+    </p>
+    <div class="mt-9 flex flex-wrap justify-center gap-4">
+      <a href="/" class="btn-primary">Back to home</a>
+      <a href="/menu" class="btn-secondary">Browse the menu</a>
     </div>
   </section>
 </BaseLayout>

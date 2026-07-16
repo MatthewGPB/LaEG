@@ -32,6 +32,10 @@
     "guatamigosHandle": "@guatamigos"
   },
   "orderUrl": "https://online.skytab.com/f9922b7e286149ff56493e39b66fc6cb?referralGuid=&referralSource=skytabwebsite",
+  "delivery": {
+    "doordash": "https://www.doordash.com/store/la-esquina-guatemalteca-jupiter-24690916/",
+    "uberEats": "https://www.ubereats.com/store/la-esquina-guatemalteca/MabsQk0kSZ6ZCwsL2Jmgag"
+  },
   "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2931.752986424579!2d-80.09881272555803!3d26.934949359136375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88df2927bf704ccf%3A0x75f4a306cb1fbb78!2sLa%20Esquina%20Guatemalteca!5e1!3m2!1sen!2sus!4v1774118542657!5m2!1sen!2sus",
   "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=200+Hibiscus+St,+Jupiter,+FL+33458",
   "founded": "2018-12",

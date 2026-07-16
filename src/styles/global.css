@@ -33,7 +33,6 @@
     @apply bg-navy text-cream;
   }
 
-  /* Focus rings */
   a:focus-visible,
   button:focus-visible,
   input:focus-visible,
@@ -72,7 +71,6 @@
     @apply mb-2 block font-body text-sm font-semibold text-navy;
   }
 
-  /* Mayan-textile inspired decorative divider */
   .textile-divider {
     background-image: repeating-linear-gradient(
       90deg,
@@ -91,10 +89,6 @@
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .text-pretty {
-    text-wrap: pretty;
-  }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
 }

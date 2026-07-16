@@ -1,5 +1,25 @@
 ---
 import site from '../data/site.json';
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const T = lang === 'es'
+  ? {
+      name: 'Tu nombre *', email: 'Correo electrónico *', phone: 'Teléfono',
+      message: '¿Cómo podemos ayudarte? *', send: 'Enviar mensaje', sending: 'Enviando…',
+      successTitle: '¡Gracias!', success: 'Tu mensaje va en camino a Silvia. Te responderemos dentro de 24 horas.',
+      error: 'Algo salió mal al enviar tu mensaje. Por favor llámanos al',
+    }
+  : {
+      name: 'Your name *', email: 'Email *', phone: 'Phone',
+      message: 'How can we help? *', send: 'Send message', sending: 'Sending…',
+      successTitle: '¡Gracias!', success: "Your message is on its way to Silvia. We'll get back to you within 24 hours.",
+      error: 'Something went wrong sending your message. Please call us at',
+    };
 ---
 
 <form
@@ -7,44 +27,45 @@ import site from '../data/site.json';
   action={site.formspree.contact}
   method="POST"
   data-form-name="contact"
+  data-sending-label={T.sending}
 >
   <input type="hidden" name="_subject" value="New contact message — laesquinaguatemalteca.com" />
+  <input type="hidden" name="language" value={lang} />
 
   <div class="grid gap-5 md:grid-cols-2">
     <div>
-      <label for="contact-name" class="label-field">Your name *</label>
+      <label for="contact-name" class="label-field">{T.name}</label>
       <input id="contact-name" name="name" type="text" required class="input-field" autocomplete="name" />
     </div>
     <div>
-      <label for="contact-email" class="label-field">Email *</label>
+      <label for="contact-email" class="label-field">{T.email}</label>
       <input id="contact-email" name="email" type="email" required class="input-field" autocomplete="email" />
     </div>
   </div>
 
   <div>
-    <label for="contact-phone" class="label-field">Phone</label>
+    <label for="contact-phone" class="label-field">{T.phone}</label>
     <input id="contact-phone" name="phone" type="tel" class="input-field" autocomplete="tel" />
   </div>
 
   <div>
-    <label for="contact-message" class="label-field">How can we help? *</label>
+    <label for="contact-message" class="label-field">{T.message}</label>
     <textarea id="contact-message" name="message" rows="5" required class="input-field resize-y"></textarea>
   </div>
 
-  <!-- Honeypot -->
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="absolute left-[-9999px]" aria-hidden="true" />
 
   <div class="text-center">
     <button type="submit" class="btn-primary text-base">
-      <span class="btn-label">Send message</span>
+      <span class="btn-label">{T.send}</span>
     </button>
   </div>
 
   <div class="form-success hidden rounded-2xl bg-marigold/15 p-6 text-center" role="status" aria-live="polite">
-    <p class="font-display text-2xl font-bold text-navy">¡Gracias!</p>
-    <p class="mt-2 font-body text-navy-700/80">Your message is on its way to Silvia. We'll get back to you within 24 hours.</p>
+    <p class="font-display text-2xl font-bold text-navy">{T.successTitle}</p>
+    <p class="mt-2 font-body text-navy-700/80">{T.success}</p>
   </div>
   <div class="form-error hidden rounded-2xl bg-spice/15 p-4 text-center text-spice-dark" role="alert">
-    Something went wrong sending your message. Please call us at <a href={`tel:${site.phoneTel}`} class="font-semibold underline">{site.phone}</a>.
+    {T.error} <a href={`tel:${site.phoneTel}`} class="font-semibold underline">{site.phone}</a>.
   </div>
 </form>

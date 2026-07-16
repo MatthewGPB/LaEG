@@ -4,9 +4,22 @@ import site from '../data/site.json';
 interface Props {
   source?: string;
   variant?: 'card' | 'inline';
+  lang?: 'en' | 'es';
 }
 
-const { source = 'inline', variant = 'card' } = Astro.props;
+const { source = 'inline', variant = 'card', lang = 'en' } = Astro.props;
+
+const T = lang === 'es'
+  ? {
+      placeholder: 'tu@correo.com', btn: 'Suscríbete gratis', sending: 'Enviando…',
+      success: '🎉 ¡Listo! Atento a tu correo para el especial de la próxima semana.',
+      error: 'No pudimos suscribirte — inténtalo de nuevo o escríbenos.',
+    }
+  : {
+      placeholder: 'your@email.com', btn: 'Sign up free', sending: 'Sending…',
+      success: "🎉 You're in! Watch your inbox for next week's special.",
+      error: "Couldn't sign you up — please try again or message us.",
+    };
 ---
 
 <form
@@ -14,30 +27,32 @@ const { source = 'inline', variant = 'card' } = Astro.props;
   action={site.formspree.newsletter}
   method="POST"
   data-form-name="newsletter"
+  data-sending-label={T.sending}
 >
   <input type="hidden" name="_subject" value="New newsletter signup" />
   <input type="hidden" name="source" value={source} />
+  <input type="hidden" name="language" value={lang} />
 
   <div class={variant === 'card' ? 'flex flex-col gap-3' : 'flex flex-col gap-2 sm:flex-row'}>
     <input
       type="email"
       name="email"
-      placeholder="your@email.com"
+      placeholder={T.placeholder}
       required
       class="input-field flex-1"
       autocomplete="email"
     />
     <button type="submit" class="btn-primary justify-center whitespace-nowrap text-sm">
-      <span class="btn-label">Sign up free</span>
+      <span class="btn-label">{T.btn}</span>
     </button>
   </div>
 
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="absolute left-[-9999px]" aria-hidden="true" />
 
   <div class="form-success hidden pt-3 text-sm font-semibold text-spice" role="status" aria-live="polite">
-    🎉 You're in! Watch your inbox for next week's special.
+    {T.success}
   </div>
   <div class="form-error hidden pt-3 text-sm text-spice-dark" role="alert">
-    Couldn't sign you up — please try again or message us.
+    {T.error}
   </div>
 </form>

@@ -3,7 +3,46 @@ import special from '../data/weekly-special.json';
 import site from '../data/site.json';
 import SmartImage from './SmartImage.astro';
 
-const { enabled, title, name, description, price, dates, image, ctaText, ctaSubtext, delaySeconds } = special;
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const es = (special as any).es || {};
+const isEs = lang === 'es';
+
+const enabled = special.enabled;
+const title = isEs ? es.title || special.title : special.title;
+const name = isEs ? es.name || special.name : special.name;
+const description = isEs ? es.description || special.description : special.description;
+const ctaText = isEs ? es.ctaText || special.ctaText : special.ctaText;
+const ctaSubtext = isEs ? es.ctaSubtext || special.ctaSubtext : special.ctaSubtext;
+const { price, dates, image, delaySeconds } = special;
+
+const T = isEs
+  ? {
+      close: 'Cerrar oferta especial',
+      joinTitle: 'Únete a la familia La Esquina',
+      joinSub: 'El especial de la próxima semana, ofertas exclusivas y noticias de catering — directo a tu correo.',
+      placeholder: 'tu@correo.com',
+      subscribe: 'Suscribirme',
+      respect: 'Respetamos tu correo · Cancela cuando quieras',
+      thanks: '🎉 ¡Gracias — ya eres parte de la familia!',
+      thanksSub: 'El próximo especial llega directo a tu correo.',
+      alt: 'especial de la semana en La Esquina Guatemalteca',
+    }
+  : {
+      close: 'Close special offer',
+      joinTitle: 'Join the La Esquina family',
+      joinSub: "Next week's special, exclusive offers, and catering news — straight to your inbox.",
+      placeholder: 'your@email.com',
+      subscribe: 'Subscribe',
+      respect: 'We respect your inbox · Unsubscribe anytime',
+      thanks: "🎉 Thank you — you're part of the family.",
+      thanksSub: "Next special drops straight to your inbox.",
+      alt: 'weekly special at La Esquina Guatemalteca',
+    };
 ---
 
 {enabled && (
@@ -19,24 +58,22 @@ const { enabled, title, name, description, price, dates, image, ctaText, ctaSubt
       <button
         type="button"
         id="weekly-special-close"
-        aria-label="Close special offer"
+        aria-label={T.close}
         class="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-2xl leading-none text-navy shadow-soft transition-colors hover:bg-spice hover:text-cream"
       >
         ×
       </button>
 
       <div class="grid md:grid-cols-2">
-        <!-- Image side -->
         <div class="relative h-64 md:h-full md:min-h-[500px]">
           <SmartImage
             src={image}
-            alt={`${name} weekly special at La Esquina Guatemalteca`}
+            alt={`${name} — ${T.alt}`}
             class="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
           />
         </div>
 
-        <!-- Content side -->
         <div class="flex flex-col p-7 md:p-10">
           <div class="mb-3 flex items-center gap-2">
             <span class="h-2.5 w-2.5 animate-pulse rounded-full bg-spice"></span>
@@ -67,9 +104,9 @@ const { enabled, title, name, description, price, dates, image, ctaText, ctaSubt
           </a>
 
           <div class="mt-8 border-t border-navy-100 pt-6">
-            <p class="font-body text-base font-semibold text-navy">Join the La Esquina family</p>
+            <p class="font-body text-base font-semibold text-navy">{T.joinTitle}</p>
             <p class="mt-1 font-body text-sm text-navy-700/70">
-              Next week's special, exclusive offers, and catering news — straight to your inbox.
+              {T.joinSub}
             </p>
 
             <form
@@ -80,11 +117,12 @@ const { enabled, title, name, description, price, dates, image, ctaText, ctaSubt
             >
               <input type="hidden" name="_subject" value="New newsletter signup — Weekly Special popup" />
               <input type="hidden" name="source" value="weekly-special-popup" />
+              <input type="hidden" name="language" value={lang} />
               <div class="flex flex-wrap gap-2">
                 <input
                   type="email"
                   name="email"
-                  placeholder="your@email.com"
+                  placeholder={T.placeholder}
                   required
                   class="input-field min-w-[200px] flex-1"
                 />
@@ -92,15 +130,15 @@ const { enabled, title, name, description, price, dates, image, ctaText, ctaSubt
                   type="submit"
                   class="rounded-xl bg-navy px-6 py-3.5 font-body font-semibold text-cream shadow-soft transition-colors hover:bg-navy-600"
                 >
-                  Subscribe
+                  {T.subscribe}
                 </button>
               </div>
-              <p class="text-center text-xs text-navy-700/50">We respect your inbox · Unsubscribe anytime</p>
+              <p class="text-center text-xs text-navy-700/50">{T.respect}</p>
             </form>
 
             <div id="popup-newsletter-success" class="hidden py-5 text-center">
-              <p class="text-lg font-semibold text-spice">🎉 Thank you — you're part of the family.</p>
-              <p class="mt-1 text-sm text-navy-700/70">Next special drops straight to your inbox.</p>
+              <p class="text-lg font-semibold text-spice">{T.thanks}</p>
+              <p class="mt-1 text-sm text-navy-700/70">{T.thanksSub}</p>
             </div>
           </div>
         </div>
@@ -117,7 +155,7 @@ const { enabled, title, name, description, price, dates, image, ctaText, ctaSubt
       if (!popup || !closeBtn) return;
 
       const DISMISS_KEY = 'laEsquinaWeeklyPopupDismissed';
-      const TTL_HOURS = 72; // re-show after 3 days if user didn't subscribe
+      const TTL_HOURS = 72;
 
       function show() {
         popup.classList.remove('hidden');
@@ -135,10 +173,7 @@ const { enabled, title, name, description, price, dates, image, ctaText, ctaSubt
           popup.classList.add('hidden');
           popup.classList.remove('flex');
         }, 300);
-        localStorage.setItem(
-          DISMISS_KEY,
-          JSON.stringify({ at: Date.now() })
-        );
+        localStorage.setItem(DISMISS_KEY, JSON.stringify({ at: Date.now() }));
       }
 
       function shouldShow() {
@@ -179,12 +214,10 @@ const { enabled, title, name, description, price, dates, image, ctaText, ctaSubt
                 }
                 setTimeout(hide, 2800);
               } else {
-                alert("Thanks! You're on the list.");
                 hide();
               }
             })
             .catch(() => {
-              alert("Thanks! You're on the list.");
               hide();
             });
         });

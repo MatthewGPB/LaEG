@@ -1,5 +1,37 @@
 ---
 import site from '../data/site.json';
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const T = lang === 'es'
+  ? {
+      name: 'Tu nombre *', email: 'Correo electrónico *', phone: 'Teléfono *',
+      eventType: 'Tipo de evento', select: 'Elige uno…',
+      types: ['Boda', 'Corporativo / Empresa', 'Cumpleaños / Aniversario', 'Día festivo (Día de la Madre, 4 de Julio, Nochebuena)', 'Celebración privada', 'Otro'],
+      date: 'Fecha y hora del evento', datePh: 'ej., 15 de junio de 2026 a las 6:00 PM',
+      guests: 'Invitados estimados', guestsPh: 'ej., 75',
+      venue: 'Lugar del evento', venuePh: 'Club, dirección de casa, etc.',
+      message: 'Cuéntanos sobre tu evento *', messagePh: '¿Qué menú imaginas? ¿Alguna necesidad dietética? ¿Alguna tradición que quieras destacar?',
+      send: 'Solicitar cotización', sending: 'Enviando…', reply: 'Respondemos en 24 horas · 7 días a la semana',
+      successTitle: '¡Gracias!', success: 'Silvia te contactará dentro de 24 horas con ideas de menú y precios para tu evento.',
+      error: 'Algo salió mal. Por favor llámanos directamente al',
+    }
+  : {
+      name: 'Your name *', email: 'Email *', phone: 'Phone *',
+      eventType: 'Event type', select: 'Select one…',
+      types: ['Wedding', 'Corporate / Business', 'Birthday / Anniversary', "Holiday (Mother's Day, 4th of July, Christmas Eve)", 'Private celebration', 'Other'],
+      date: 'Event date & time', datePh: 'e.g., June 15, 2026 at 6:00 PM',
+      guests: 'Expected guests', guestsPh: 'e.g., 75',
+      venue: 'Venue / location', venuePh: 'Country club, home address, etc.',
+      message: 'Tell us about your event *', messagePh: "What menu vibe are you imagining? Any dietary needs? Tradition you'd like featured?",
+      send: 'Request your custom quote', sending: 'Sending…', reply: 'We reply within 24 hours · 7 days a week',
+      successTitle: '¡Gracias!', success: 'Silvia will reach out within 24 hours with menu ideas and pricing for your event.',
+      error: 'Something went wrong. Please call us directly at',
+    };
 ---
 
 <form
@@ -7,75 +39,72 @@ import site from '../data/site.json';
   action={site.formspree.catering}
   method="POST"
   data-form-name="catering"
+  data-sending-label={T.sending}
 >
   <input type="hidden" name="_subject" value="New CATERING inquiry — laesquinaguatemalteca.com" />
   <input type="hidden" name="form_type" value="catering" />
+  <input type="hidden" name="language" value={lang} />
 
   <div class="grid gap-5 md:grid-cols-2">
     <div>
-      <label for="cat-name" class="label-field">Your name *</label>
+      <label for="cat-name" class="label-field">{T.name}</label>
       <input id="cat-name" name="name" type="text" required class="input-field" autocomplete="name" />
     </div>
     <div>
-      <label for="cat-email" class="label-field">Email *</label>
+      <label for="cat-email" class="label-field">{T.email}</label>
       <input id="cat-email" name="email" type="email" required class="input-field" autocomplete="email" />
     </div>
   </div>
 
   <div class="grid gap-5 md:grid-cols-2">
     <div>
-      <label for="cat-phone" class="label-field">Phone *</label>
+      <label for="cat-phone" class="label-field">{T.phone}</label>
       <input id="cat-phone" name="phone" type="tel" required class="input-field" autocomplete="tel" />
     </div>
     <div>
-      <label for="cat-event-type" class="label-field">Event type</label>
+      <label for="cat-event-type" class="label-field">{T.eventType}</label>
       <select id="cat-event-type" name="event_type" class="input-field">
-        <option value="">Select one…</option>
-        <option>Wedding</option>
-        <option>Corporate / Business</option>
-        <option>Birthday / Anniversary</option>
-        <option>Holiday (Mother's Day, 4th of July, Christmas Eve)</option>
-        <option>Private celebration</option>
-        <option>Other</option>
+        <option value="">{T.select}</option>
+        {T.types.map((type) => <option>{type}</option>)}
       </select>
     </div>
   </div>
 
   <div class="grid gap-5 md:grid-cols-2">
     <div>
-      <label for="cat-date" class="label-field">Event date &amp; time</label>
-      <input id="cat-date" name="event_date" type="text" placeholder="e.g., June 15, 2026 at 6:00 PM" class="input-field" />
+      <label for="cat-date" class="label-field">{T.date}</label>
+      <input id="cat-date" name="event_date" type="text" placeholder={T.datePh} class="input-field" />
     </div>
     <div>
-      <label for="cat-guests" class="label-field">Expected guests</label>
-      <input id="cat-guests" name="guests" type="number" min="20" placeholder="e.g., 75" class="input-field" />
+      <label for="cat-guests" class="label-field">{T.guests}</label>
+      <input id="cat-guests" name="guests" type="number" min="20" placeholder={T.guestsPh} class="input-field" />
     </div>
   </div>
 
   <div>
-    <label for="cat-venue" class="label-field">Venue / location</label>
-    <input id="cat-venue" name="venue" type="text" placeholder="Country club, home address, etc." class="input-field" />
+    <label for="cat-venue" class="label-field">{T.venue}</label>
+    <input id="cat-venue" name="venue" type="text" placeholder={T.venuePh} class="input-field" />
   </div>
 
   <div>
-    <label for="cat-message" class="label-field">Tell us about your event *</label>
-    <textarea id="cat-message" name="message" rows="5" required class="input-field resize-y" placeholder="What menu vibe are you imagining? Any dietary needs? Tradition you'd like featured?"></textarea>
+    <label for="cat-message" class="label-field">{T.message}</label>
+    <textarea id="cat-message" name="message" rows="5" required class="input-field resize-y" placeholder={T.messagePh}></textarea>
   </div>
 
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="absolute left-[-9999px]" aria-hidden="true" />
 
   <div class="text-center">
     <button type="submit" class="btn-primary text-base">
-      <span class="btn-label">Request your custom quote</span>
+      <span class="btn-label">{T.send}</span>
     </button>
-    <p class="mt-3 text-sm text-navy/60">We reply within 24 hours · 7 days a week</p>
+    <p class="mt-3 text-sm text-navy/60">{T.reply}</p>
   </div>
 
   <div class="form-success hidden rounded-2xl bg-marigold/15 p-6 text-center" role="status" aria-live="polite">
-    <p class="font-display text-2xl font-bold text-navy">¡Gracias!</p>
-    <p class="mt-2 font-body text-navy-700/80">Silvia will reach out within 24 hours with menu ideas and pricing for your event.</p>
+    <p class="font-display text-2xl font-bold text-navy">{T.successTitle}</p>
+    <p class="mt-2 font-body text-navy-700/80">{T.success}</p>
   </div>
   <div class="form-error hidden rounded-2xl bg-spice/15 p-4 text-center text-spice-dark" role="alert">
-    Something went wrong. Please call us directly at <a href={`tel:${site.phoneTel}`} class="font-semibold underline">{site.phone}</a>.
+    {T.error} <a href={`tel:${site.phoneTel}`} class="font-semibold underline">{site.phone}</a>.
   </div>
 </form>

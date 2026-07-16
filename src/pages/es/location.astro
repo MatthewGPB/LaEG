@@ -1,8 +1,8 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import site from '../data/site.json';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import site from '../../data/site.json';
 
-const description = "Find La Esquina Guatemalteca at 200 Hibiscus St, Jupiter, FL 33458. Hours, directions, parking & holiday schedules. Open Mon-Sun 11am-9pm. Call 561-768-9137.";
+const description = "Encuentra La Esquina Guatemalteca en 200 Hibiscus St, Jupiter, FL 33458. Horario, direcciones, estacionamiento y horarios festivos. Abierto lun–dom 11am–9pm. Llama al 561-768-9137.";
 
 const alternates = [
   { hreflang: 'en', href: site.domain + '/location' },
@@ -10,12 +10,20 @@ const alternates = [
   { hreflang: 'x-default', href: site.domain + '/location' },
 ];
 
+// Spanish versions of the holiday hour notes (site.json holds English)
+const notesEs = [
+  { label: 'Día de la Madre', value: 'Horario especial — llama antes' },
+  { label: '4 de Julio', value: 'Horario extendido' },
+  { label: 'Nochebuena', value: 'Horario reducido' },
+];
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Restaurant',
   '@id': site.domain + '/#restaurant',
   name: site.name,
-  url: site.domain + '/location',
+  url: site.domain + '/es/location',
+  inLanguage: 'es',
   telephone: site.phoneTel,
   address: {
     '@type': 'PostalAddress',
@@ -36,24 +44,26 @@ const schema = {
 ---
 
 <BaseLayout
-  title="Location & Hours — 200 Hibiscus St, Jupiter FL"
+  title="Ubicación y Horario — 200 Hibiscus St, Jupiter FL"
   description={description}
-  path="/location"
+  path="/es/location"
   schema={schema}
+  lang="es"
   alternates={alternates}
 >
   <section class="container-x pt-14 pb-10 text-center lg:pt-20">
-    <p class="eyebrow">Visit us</p>
+    <p class="eyebrow">Visítanos</p>
     <h1 class="mt-3 text-balance font-display text-5xl font-bold text-navy md:text-6xl">
-      Your Guatemalan corner in Jupiter
+      Tu esquina guatemalteca en Jupiter
     </h1>
     <p class="mx-auto mt-5 max-w-2xl font-body text-lg text-ink/75">
-      Right on Hibiscus Street — easy parking, warm welcome, and homemade tortillas waiting.
+      Justo en Hibiscus Street — estacionamiento fácil, bienvenida cálida y tortillas
+      hechas a mano esperándote.
     </p>
   </section>
 
   <section class="container-x grid gap-10 pb-20 lg:grid-cols-5 lg:gap-14">
-    <!-- Map -->
+    <!-- Mapa -->
     <div class="overflow-hidden rounded-3xl shadow-card lg:col-span-3">
       <iframe
         src={site.mapEmbed}
@@ -63,7 +73,7 @@ const schema = {
         allowfullscreen=""
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="Map to La Esquina Guatemalteca, 200 Hibiscus St, Jupiter FL"
+        title="Mapa a La Esquina Guatemalteca, 200 Hibiscus St, Jupiter FL"
         class="h-[480px] w-full"
       ></iframe>
     </div>
@@ -71,21 +81,21 @@ const schema = {
     <!-- Info -->
     <div class="flex flex-col gap-6 lg:col-span-2">
       <div class="rounded-3xl bg-white p-8 shadow-card">
-        <h2 class="font-display text-2xl font-bold text-navy">Address</h2>
+        <h2 class="font-display text-2xl font-bold text-navy">Dirección</h2>
         <address class="mt-3 not-italic font-body text-lg leading-relaxed text-ink/80">
           {site.address.street}<br />
           {site.address.city}, {site.address.region} {site.address.postalCode}
         </address>
         <a href={site.directionsUrl} target="_blank" rel="noopener" class="btn-primary mt-5 w-full justify-center">
-          Get directions
+          Cómo llegar
         </a>
       </div>
 
       <div class="rounded-3xl bg-white p-8 shadow-card">
-        <h2 class="font-display text-2xl font-bold text-navy">Hours</h2>
-        <p class="mt-3 font-body text-lg text-ink/80">{site.hours.regular}</p>
+        <h2 class="font-display text-2xl font-bold text-navy">Horario</h2>
+        <p class="mt-3 font-body text-lg text-ink/80">11:00 AM – 9:00 PM, lunes a domingo</p>
         <ul class="mt-4 space-y-2 border-t border-navy-100 pt-4">
-          {site.hours.notes.map((note) => (
+          {notesEs.map((note) => (
             <li class="flex justify-between gap-4 font-body text-sm">
               <span class="font-semibold text-navy">{note.label}</span>
               <span class="text-ink/70">{note.value}</span>
@@ -95,8 +105,8 @@ const schema = {
       </div>
 
       <div class="rounded-3xl bg-navy p-8 text-cream shadow-card">
-        <h2 class="font-display text-2xl font-bold text-marigold">Call us</h2>
-        <p class="mt-2 font-body text-cream/80">Questions, orders ahead, big-group heads-up:</p>
+        <h2 class="font-display text-2xl font-bold text-marigold">Llámanos</h2>
+        <p class="mt-2 font-body text-cream/80">Preguntas, órdenes por adelantado o aviso de grupos grandes:</p>
         <a href={`tel:${site.phoneTel}`} class="mt-3 block font-display text-3xl font-bold hover:text-marigold">
           {site.phone}
         </a>
@@ -108,9 +118,9 @@ const schema = {
   <section class="container-x pb-20 text-center">
     <div class="rounded-3xl bg-gradient-to-br from-navy via-navy-600 to-navy px-6 py-14 text-cream shadow-deep">
       <h2 class="text-balance font-display text-3xl font-bold md:text-4xl">
-        Skip the wait — order ahead.
+        Evita la espera — ordena por adelantado.
       </h2>
-      <a href={site.orderUrl} target="_blank" rel="noopener" class="btn-spice mt-7">Order takeout online</a>
+      <a href={site.orderUrl} target="_blank" rel="noopener" class="btn-spice mt-7">Ordenar para llevar en línea</a>
     </div>
   </section>
 </BaseLayout>
