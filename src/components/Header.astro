@@ -52,15 +52,15 @@ const homeHref = lang === 'es' ? '/es/' : '/';
 
 <header class="sticky top-0 z-40 border-b border-navy-100 bg-cream/90 backdrop-blur-md">
   <div class="container-x flex h-16 items-center justify-between lg:h-20">
-    <!-- Logo / Wordmark -->
-    <a href={homeHref} class="group flex items-center gap-3" aria-label="La Esquina Guatemalteca">
-      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-navy text-cream shadow-soft lg:h-12 lg:w-12">
-        <span class="font-display text-lg font-bold lg:text-xl">LE</span>
-      </div>
-      <div class="hidden flex-col leading-none sm:flex">
-        <span class="font-display text-lg font-semibold text-navy lg:text-xl">La Esquina</span>
-        <span class="font-body text-[0.7rem] uppercase tracking-[0.25em] text-spice lg:text-xs">Guatemalteca</span>
-      </div>
+    <!-- Logo -->
+    <a href={homeHref} class="flex items-center" aria-label="La Esquina Guatemalteca">
+      <img
+        src="/LAEG/logo.png"
+        alt="La Esquina Guatemalteca — Guatemalan Cuisine"
+        width="516"
+        height="352"
+        class="h-12 w-auto lg:h-14"
+      />
     </a>
 
     <!-- Desktop Nav -->

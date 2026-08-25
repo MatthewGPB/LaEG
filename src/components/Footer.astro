@@ -50,14 +50,14 @@ const p = t.prefix;
     <div class="grid gap-12 lg:grid-cols-4">
       <!-- Brand block -->
       <div class="lg:col-span-2">
-        <a href={lang === 'es' ? '/es/' : '/'} class="flex items-center gap-3" aria-label="La Esquina Guatemalteca">
-          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-cream text-navy">
-            <span class="font-display text-xl font-bold">LE</span>
-          </div>
-          <div class="flex flex-col leading-none">
-            <span class="font-display text-xl font-semibold">La Esquina</span>
-            <span class="font-body text-xs uppercase tracking-[0.25em] text-marigold">Guatemalteca</span>
-          </div>
+        <a href={lang === 'es' ? '/es/' : '/'} class="inline-flex rounded-2xl bg-cream p-4 shadow-soft" aria-label="La Esquina Guatemalteca">
+          <img
+            src="/LAEG/logo.png"
+            alt="La Esquina Guatemalteca — Guatemalan Cuisine"
+            width="516"
+            height="352"
+            class="h-16 w-auto"
+          />
         </a>
         <p class="mt-6 max-w-md font-body text-sm leading-relaxed text-cream/80">
           {t.blurb}
