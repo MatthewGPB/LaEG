@@ -26,25 +26,25 @@
       "name": "Taco Tuesday",
       "image": "/LAEG/taco-tuesday.jpeg",
       "description": "4 tacos: carnitas, al pastor, pollo, or chorizo. Cabbage, cilantro, sautéed onions.",
-      "price": "$10"
+      "price": "$12"
     },
     {
       "name": "Empanada Wednesday",
       "image": "/LAEG/empanada-wednesday.jpeg",
       "description": "4 empanadas: chicken, beef brisket, or chorizo & potato. Queso fresco, lettuce, sour cream, salsa ranchera.",
-      "price": "$10"
+      "price": "$12"
     },
     {
       "name": "Taquito Thursday",
       "image": "/LAEG/taquito-thursday.jpeg",
       "description": "4 crispy taquitos: chicken or beef brisket. Lettuce, queso fresco, sour cream, salsa ranchera.",
-      "price": "$10"
+      "price": "$12"
     },
     {
       "name": "Garnacha Friday",
       "image": "/LAEG/garnacha-friday.jpeg",
       "description": "4 homemade tortilla bowls: ground beef, ranchero sauce, queso fresco, cilantro + sour cream side.",
-      "price": "$10"
+      "price": "$12"
     }
   ],
   "categories": [
