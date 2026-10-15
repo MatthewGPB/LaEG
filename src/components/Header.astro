@@ -1,165 +1,58 @@
 ---
 import site from '../data/site.json';
-
-interface Props {
-  lang?: 'en' | 'es';
-}
-
+interface Props { lang?: 'en' | 'es'; }
 const { lang = 'en' } = Astro.props;
-
 const NAV = {
-  en: [
-    { href: '/menu', label: 'Menu' },
-    { href: '/about', label: 'Our Story' },
-    { href: '/catering', label: 'Catering' },
-    { href: '/food-truck', label: 'Food Truck' },
-    { href: '/location', label: 'Visit' },
-    { href: '/contact', label: 'Contact' },
-  ],
-  es: [
-    { href: '/es/menu', label: 'Menú' },
-    { href: '/es/about', label: 'Nuestra Historia' },
-    { href: '/es/catering', label: 'Catering' },
-    { href: '/es/food-truck', label: 'Food Truck' },
-    { href: '/es/location', label: 'Visítanos' },
-    { href: '/es/contact', label: 'Contacto' },
-  ],
+  en: [ { href: '/menu', label: 'Menu' }, { href: '/about', label: 'Our Story' }, { href: '/catering', label: 'Catering' }, { href: '/food-truck', label: 'Food Truck' }, { href: '/location', label: 'Visit' }, { href: '/contact', label: 'Contact' } ],
+  es: [ { href: '/es/menu', label: 'Menú' }, { href: '/es/about', label: 'Nuestra Historia' }, { href: '/es/catering', label: 'Catering' }, { href: '/es/food-truck', label: 'Food Truck' }, { href: '/es/location', label: 'Visítanos' }, { href: '/es/contact', label: 'Contacto' } ],
 };
-
 const T = {
   en: { order: 'Order Online', switchLabel: 'Ver en español', switchShort: 'ES', openMenu: 'Open menu', closeMenu: 'Close menu' },
   es: { order: 'Ordenar en Línea', switchLabel: 'View in English', switchShort: 'EN', openMenu: 'Abrir menú', closeMenu: 'Cerrar menú' },
 };
-
-const nav = NAV[lang];
-const t = T[lang];
-
+const nav = NAV[lang]; const t = T[lang];
 const pathname = new URL(Astro.request.url).pathname;
-const isActive = (href: string) => pathname === href || pathname === href + '/' || (href !== '/' && href !== '/es' && pathname.startsWith(href));
-
-// Compute the same page in the other language.
-// EN routes and ES routes mirror each other 1:1 under /es/.
+const isActive = (href) => pathname === href || pathname === href + '/' || (href !== '/' && href !== '/es' && pathname.startsWith(href));
 const normalized = pathname.replace(/\/+$/, '') || '/';
-const altPath =
-  lang === 'es'
-    ? normalized.replace(/^\/es/, '') || '/'
-    : normalized === '/'
-      ? '/es/'
-      : '/es' + normalized;
-
+const altPath = lang === 'es' ? (normalized.replace(/^\/es/, '') || '/') : (normalized === '/' ? '/es/' : '/es' + normalized);
 const homeHref = lang === 'es' ? '/es/' : '/';
 ---
-
 <header class="sticky top-0 z-40 border-b border-navy-100 bg-cream/90 backdrop-blur-md">
   <div class="container-x flex h-16 items-center justify-between lg:h-20">
-    <!-- Logo -->
     <a href={homeHref} class="flex items-center" aria-label="La Esquina Guatemalteca">
-      <img
-        src="/LAEG/logo.png"
-        alt="La Esquina Guatemalteca — Guatemalan Cuisine"
-        width="516"
-        height="352"
-        class="h-12 w-auto lg:h-14"
-      />
+      <img src="/LAEG/logo.png" alt="La Esquina Guatemalteca — Guatemalan Cuisine" width="516" height="352" class="h-12 w-auto lg:h-14" />
     </a>
-
-    <!-- Desktop Nav -->
     <nav class="hidden lg:flex lg:items-center lg:gap-7" aria-label={lang === 'es' ? 'Principal' : 'Primary'}>
       {nav.map((item) => (
-        <a
-          href={item.href}
-          class={`relative font-body text-sm font-medium transition-colors hover:text-spice ${
-            isActive(item.href) ? 'text-spice' : 'text-navy'
-          }`}
-        >
+        <a href={item.href} class={`relative font-body text-sm font-medium transition-colors hover:text-spice ${isActive(item.href) ? 'text-spice' : 'text-navy'}`}>
           {item.label}
-          {isActive(item.href) && (
-            <span class="absolute -bottom-1 left-0 right-0 h-0.5 bg-spice" />
-          )}
+          {isActive(item.href) && (<span class="absolute -bottom-1 left-0 right-0 h-0.5 bg-spice" />)}
         </a>
       ))}
     </nav>
-
-    <!-- Language toggle + CTA + Mobile toggle -->
     <div class="flex items-center gap-2 sm:gap-3">
-      <a
-        href={altPath}
-        class="inline-flex items-center gap-1.5 rounded-full border border-navy-200 bg-white px-3 py-2 font-body text-xs font-bold uppercase tracking-wider text-navy shadow-soft transition-colors hover:bg-navy hover:text-cream sm:px-4"
-        aria-label={t.switchLabel}
-        title={t.switchLabel}
-        lang={lang === 'es' ? 'en' : 'es'}
-      >
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-        </svg>
+      <a href={altPath} class="inline-flex items-center gap-1.5 rounded-full border border-navy-200 bg-white px-3 py-2 font-body text-xs font-bold uppercase tracking-wider text-navy shadow-soft transition-colors hover:bg-navy hover:text-cream sm:px-4" aria-label={t.switchLabel} title={t.switchLabel} lang={lang === 'es' ? 'en' : 'es'}>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
         {t.switchShort}
       </a>
-
-      <a
-        href={site.orderUrl}
-        target="_blank"
-        rel="noopener"
-        class="hidden rounded-full bg-navy px-5 py-2.5 font-body text-sm font-semibold text-cream shadow-soft transition-all hover:bg-navy-600 md:inline-flex"
-      >
-        {t.order}
-      </a>
-      <button
-        type="button"
-        id="mobile-menu-toggle"
-        aria-label={t.openMenu}
-        aria-expanded="false"
-        data-label-open={t.openMenu}
-        data-label-close={t.closeMenu}
-        class="rounded-lg p-2 text-navy lg:hidden"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <line x1="4" y1="7" x2="20" y2="7" />
-          <line x1="4" y1="12" x2="20" y2="12" />
-          <line x1="4" y1="17" x2="20" y2="17" />
-        </svg>
+      <a href={site.orderUrl} target="_blank" rel="noopener" class="hidden rounded-full bg-navy px-5 py-2.5 font-body text-sm font-semibold text-cream shadow-soft transition-all hover:bg-navy-600 md:inline-flex">{t.order}</a>
+      <button type="button" id="mobile-menu-toggle" aria-label={t.openMenu} aria-expanded="false" data-label-open={t.openMenu} data-label-close={t.closeMenu} class="rounded-lg p-2 text-navy lg:hidden">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" /></svg>
       </button>
     </div>
   </div>
-
-  <!-- Mobile Menu Drawer -->
   <div id="mobile-menu" class="hidden border-t border-navy-100 bg-cream lg:hidden">
     <nav class="container-x flex flex-col py-4" aria-label={lang === 'es' ? 'Móvil' : 'Mobile'}>
-      {nav.map((item) => (
-        <a
-          href={item.href}
-          class={`border-b border-navy-50 py-3 font-body text-base font-medium ${
-            isActive(item.href) ? 'text-spice' : 'text-navy'
-          }`}
-        >
-          {item.label}
-        </a>
-      ))}
-      <a
-        href={altPath}
-        class="flex items-center gap-2 border-b border-navy-50 py-3 font-body text-base font-medium text-navy"
-        lang={lang === 'es' ? 'en' : 'es'}
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-        </svg>
+      {nav.map((item) => (<a href={item.href} class={`border-b border-navy-50 py-3 font-body text-base font-medium ${isActive(item.href) ? 'text-spice' : 'text-navy'}`}>{item.label}</a>))}
+      <a href={altPath} class="flex items-center gap-2 border-b border-navy-50 py-3 font-body text-base font-medium text-navy" lang={lang === 'es' ? 'en' : 'es'}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
         {t.switchLabel}
       </a>
-      <a
-        href={site.orderUrl}
-        target="_blank"
-        rel="noopener"
-        class="mt-4 inline-flex items-center justify-center rounded-full bg-navy px-6 py-3 font-body text-sm font-semibold text-cream shadow-soft"
-      >
-        {t.order}
-      </a>
+      <a href={site.orderUrl} target="_blank" rel="noopener" class="mt-4 inline-flex items-center justify-center rounded-full bg-navy px-6 py-3 font-body text-sm font-semibold text-cream shadow-soft">{t.order}</a>
     </nav>
   </div>
 </header>
-
 <div class="textile-divider" aria-hidden="true"></div>
-
 <script>
   const toggle = document.getElementById('mobile-menu-toggle');
   const menu = document.getElementById('mobile-menu');
@@ -168,10 +61,7 @@ const homeHref = lang === 'es' ? '/es/' : '/';
       const isOpen = !menu.classList.contains('hidden');
       menu.classList.toggle('hidden');
       toggle.setAttribute('aria-expanded', String(!isOpen));
-      toggle.setAttribute(
-        'aria-label',
-        isOpen ? toggle.dataset.labelOpen || 'Open menu' : toggle.dataset.labelClose || 'Close menu'
-      );
+      toggle.setAttribute('aria-label', isOpen ? toggle.dataset.labelOpen || 'Open menu' : toggle.dataset.labelClose || 'Close menu');
     });
   }
 </script>

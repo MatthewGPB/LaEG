@@ -1,51 +1,15 @@
 {
   "signatureCarousel": [
-    {
-      "name": "La Parrillada",
-      "image": "/LAEG/la-parrillada.jpeg",
-      "description": "Mild Italian sausage, chimichurri shrimp, tender Carne Asada — served with 2 sides, grilled jalapeño, and fresh tortillas. Homemade, hearty, and perfect for sharing."
-    },
-    {
-      "name": "Pepián de Pollo",
-      "image": "/LAEG/pepian-de-pollo.jpeg",
-      "description": "Guatemala's national dish — tender chicken simmered in a rich, thick sauce of roasted seeds, spices, and vegetables. Pure homemade comfort in every bite."
-    },
-    {
-      "name": "Costillas de Carnero",
-      "image": "/LAEG/costilla-de-carnero.jpeg",
-      "description": "Juicy grilled lamb chops seasoned with traditional Guatemalan spices and served with fresh sides. A family favorite for special gatherings."
-    },
-    {
-      "name": "Shuco",
-      "image": "/LAEG/shuco.jpeg",
-      "description": "The iconic Guatemalan hot dog — loaded sausage, guacamole, cabbage, and our signature sauces in a soft bun. Street-food classic done right at home."
-    }
+    { "name": "La Parrillada", "image": "/LAEG/la-parrillada.jpeg", "description": "Tender carne asada, savory longaniza, and juicy grilled shrimp — served with 2 sides, grilled jalapeño, and fresh tortillas. Homemade, hearty, and perfect for sharing." },
+    { "name": "Pepián de Pollo", "image": "/LAEG/pepian-de-pollo.jpeg", "description": "Guatemala's national dish — tender chicken simmered in a rich, thick sauce of roasted seeds, spices, and vegetables. Pure homemade comfort in every bite." },
+    { "name": "Costillas de Carnero", "image": "/LAEG/costilla-de-carnero.jpeg", "description": "Juicy grilled lamb chops seasoned with traditional Guatemalan spices and served with fresh sides. A family favorite for special gatherings." },
+    { "name": "Shuco", "image": "/LAEG/shuco.jpeg", "description": "The iconic Guatemalan hot dog — loaded sausage, guacamole, cabbage, and our signature sauces in a soft bun. Street-food classic done right at home." }
   ],
   "weeklySpecials": [
-    {
-      "name": "Taco Tuesday",
-      "image": "/LAEG/taco-tuesday.jpeg",
-      "description": "4 tacos: carnitas, al pastor, pollo, or chorizo. Cabbage, cilantro, sautéed onions.",
-      "price": "$12"
-    },
-    {
-      "name": "Empanada Wednesday",
-      "image": "/LAEG/empanada-wednesday.jpeg",
-      "description": "4 empanadas: chicken, beef brisket, or chorizo & potato. Queso fresco, lettuce, sour cream, salsa ranchera.",
-      "price": "$12"
-    },
-    {
-      "name": "Taquito Thursday",
-      "image": "/LAEG/taquito-thursday.jpeg",
-      "description": "4 crispy taquitos: chicken or beef brisket. Lettuce, queso fresco, sour cream, salsa ranchera.",
-      "price": "$12"
-    },
-    {
-      "name": "Garnacha Friday",
-      "image": "/LAEG/garnacha-friday.jpeg",
-      "description": "4 homemade tortilla bowls: ground beef, ranchero sauce, queso fresco, cilantro + sour cream side.",
-      "price": "$12"
-    }
+    { "name": "Taco Tuesday", "image": "/LAEG/taco-tuesday.jpeg", "description": "4 tacos: carnitas, al pastor, pollo, or chorizo. Cabbage, cilantro, sautéed onions.", "price": "$10" },
+    { "name": "Empanada Wednesday", "image": "/LAEG/empanada-wednesday.jpeg", "description": "4 empanadas: chicken, beef brisket, or chorizo & potato. Queso fresco, lettuce, sour cream, salsa ranchera.", "price": "$10" },
+    { "name": "Taquito Thursday", "image": "/LAEG/taquito-thursday.jpeg", "description": "4 crispy taquitos: chicken or beef brisket. Lettuce, queso fresco, sour cream, salsa ranchera.", "price": "$10" },
+    { "name": "Garnacha Friday", "image": "/LAEG/garnacha-friday.jpeg", "description": "4 homemade tortilla bowls: ground beef, ranchero sauce, queso fresco, cilantro + sour cream side.", "price": "$10" }
   ],
   "categories": [
     {
@@ -57,72 +21,52 @@
         { "name": "Pico & Chips", "image": "/LAEG/pico-chips.jpeg", "description": "Fresh pico de gallo with crispy tortilla chips on the side.", "priceSplit": { "left": "$8 / $14", "label": "Ind. / Familiar" } },
         { "name": "Bean Dip & Chips", "image": "/LAEG/bean-dip-chips.jpeg", "description": "Creamy refried bean dip served with warm tortilla chips.", "priceSplit": { "left": "$7 / $13", "label": "Ind. / Familiar" } },
         { "name": "Queso Dip", "image": "/LAEG/queso-dip.jpeg", "description": "Warm, creamy melted cheese dip. Add chorizo +$3.", "priceSplit": { "left": "$12 / $18", "label": "Ind. / Familiar" } },
-        { "name": "Enchilada", "image": "/LAEG/enchilada.jpeg", "description": "In-house tostada with refried beans, shredded carrots, cabbage, beets, chicken, queso fresco & crema.", "price": "$4" },
+        { "name": "Chuchitos", "image": "/LAEG/chuchitos.jpeg", "description": "Traditional Guatemalan masa chuchitos steamed in a corn husk, topped with tomato sauce and queso.", "price": "$4" },
+        { "name": "Enchiladas", "image": "/LAEG/enchilada.jpeg", "description": "In-house tostada with refried beans, shredded carrots, cabbage, beets, chicken, queso fresco & crema.", "price": "$4" },
+        { "name": "Tamales de Masa", "image": "/LAEG/tamales.jpeg", "description": "Banana-leaf wrapped masa tamales, slow-steamed in the Guatemalan tradition.", "price": "$5" },
         { "name": "Loaded Nachos", "image": "/LAEG/loaded-nachos.jpeg", "description": "Golden chips topped with chorizo, black beans, lettuce, pico, guacamole, sour cream & pickled jalapeños. Choice of protein.", "price": "$20" }
-      ]
-    },
-    {
-      "id": "nuestras-raices",
-      "name": "Nuestras Raíces",
-      "subtitle": "Our Roots — Traditional Guatemalan Classics",
-      "items": [
-        { "name": "Tamales", "image": "/LAEG/tamales.jpeg", "description": "La Trapana's banana-leaf wrapped chicken tamales with a base of corn or rice.", "price": "Market Price" },
-        { "name": "Enchiladas", "image": "/LAEG/enchiladas.jpeg", "description": "Shredded chicken with corn base. Tamales wrapped in corn husk.", "price": "Market Price" }
       ]
     },
     {
       "id": "amanecer",
       "name": "Amanecer",
       "subtitle": "Breakfast",
-      "note": "All breakfast plates come with refried beans, sweet plantains, queso fresco, and 5 handmade tortillas.",
+      "isPriceList": true,
+      "note": "Served with refried beans, sweet plantains, queso fresco, and handmade tortillas.",
       "items": [
-        { "name": "Huevos Rancheros", "image": "/LAEG/huevos-rancheros.jpeg", "description": "Two eggs any style over a tostada topped with homestyle ranchero sauce.", "price": "$12" },
-        { "name": "Huevos Revueltos", "image": "/LAEG/huevos-revueltos.jpeg", "description": "Two scrambled eggs.", "price": "$12" },
-        { "name": "Huevos con Chorizo", "image": "/LAEG/huevos-con-chorizo.jpeg", "description": "Two scrambled eggs mixed with chorizo.", "price": "$14" },
-        { "name": "Huevos con Salchicha", "image": "/LAEG/huevos-con-salchicha.jpeg", "description": "Two scrambled eggs with sausage slices.", "price": "$14" },
-        { "name": "Huevos Entomatados", "image": "/LAEG/huevos-entomatados.jpeg", "description": "Two scrambled eggs mixed with diced tomato, onion, and Guatemalan spice.", "price": "$14" }
+        { "name": "Huevos Rancheros", "description": "Two eggs any style over a tostada, topped with homestyle ranchero sauce.", "price": "$15" },
+        { "name": "Huevos Revueltos", "description": "Two scrambled eggs, Guatemalan style.", "price": "$12" },
+        { "name": "Huevos con Chorizo", "description": "Two scrambled eggs mixed with chorizo.", "price": "$15" },
+        { "name": "Huevos con Salchicha", "description": "Two scrambled eggs with sausage.", "price": "$14" },
+        { "name": "Huevos Entomatados", "description": "Two scrambled eggs with tomato, onion, and Guatemalan spice.", "price": "$14" }
       ]
     },
     {
-      "id": "burritos-y-mas",
-      "name": "Burritos y Más",
-      "subtitle": "Burritos, Tacos, Tortas & Quesadillas",
-      "note": "<strong>Choose your protein:</strong> Asada · Pollo · Carnitas · Barbacoa · Chorizo · Al Pastor · Veggies",
+      "id": "tacos-y-mas",
+      "name": "Tacos y Más",
+      "subtitle": "Tacos, Burritos, Tortas & Quesadillas",
+      "note": "<strong>Choose your protein:</strong> Al Pastor · Pollo · Carnitas · Barbacoa · Chorizo · Asada · Veggie",
       "items": [
-        { "name": "Tacos", "image": "/LAEG/tacos.jpeg", "description": "Topped with cabbage, cilantro, and caramelized onions on a homemade corn tortilla. Carne Asada +$3.", "price": "$13" },
-        { "name": "Burrito Bowls", "image": "/LAEG/burrito-bowls.jpeg", "description": "Rice, beans, lettuce, mozzarella, pico de gallo & avocado. Carne Asada +$3.", "price": "$16" },
-        { "name": "Quesadillas", "image": "/LAEG/quesadillas.jpeg", "description": "Flour tortilla stuffed with red & green peppers, onion, choice of protein & melted mozzarella.", "price": "$13" },
-        { "name": "Sincos", "image": "/LAEG/sincos.jpeg", "description": "Grilled Guatemalan-style hot dog with avocado smash, tomato, onion, lime cabbage & savory sauces on a toasted bun. Side of fries. Mixto +$5.", "price": "$13" },
-        { "name": "Burrito", "image": "/LAEG/burrito.jpeg", "description": "Stuffed with rice, beans, lettuce, cheese & pico. Served with house pickled jalapeños. Grilled Chicken +$2 / Carne Asada +$3.", "price": "$16" },
-        { "name": "Tortas", "image": "/LAEG/tortas.jpeg", "description": "Toasted deli loaf with refried black beans, choice of protein, lettuce, queso fresco & avocado. Pickled jalapeños on side + a side.", "price": "$13" }
+        { "name": "Street Tacos", "image": "/LAEG/tacos.jpeg", "description": "Handmade corn tortilla, cabbage, cilantro & caramelized onion. Al Pastor, Barbacoa, Carnitas, Chorizo or Pollo $3.50 · Asada $4 · Veggie $3.75.", "price": "From $3.50" },
+        { "name": "Birria Tacos", "image": "/LAEG/birria-tacos.jpeg", "description": "Slow-braised beef birria with melted cheese in a crispy tortilla, raw onion & cilantro. Served with rich consomé.", "price": "$15" },
+        { "name": "Burritos", "image": "/LAEG/burrito.jpeg", "description": "Stuffed with rice, beans, lettuce, cheese & pico, with house pickled jalapeños. Choice of protein.", "price": "$16" },
+        { "name": "Burrito Bowls", "image": "/LAEG/burrito-bowls.jpeg", "description": "Rice, beans, lettuce, mozzarella, pico de gallo & avocado. Choice of protein.", "price": "$17" },
+        { "name": "Quesadillas", "image": "/LAEG/quesadillas.jpeg", "description": "Flour tortilla with red & green peppers, onion, choice of protein & melted mozzarella.", "price": "$13" },
+        { "name": "Shuco", "image": "/LAEG/shuco.jpeg", "description": "Grilled Guatemalan-style hot dog with avocado, cabbage, onion & our signature sauces on a toasted bun.", "price": "$12" },
+        { "name": "Tortas", "image": "/LAEG/tortas.jpeg", "description": "Toasted loaf with refried black beans, choice of protein, lettuce, queso fresco & avocado.", "price": "$15" }
       ]
     },
     {
-      "id": "birrias",
-      "name": "Birrias",
-      "subtitle": "Slow-Braised Beef Specialties",
+      "id": "de-la-parrilla",
+      "name": "De la Parrilla",
+      "subtitle": "Off the Grill",
+      "note": "Served with house salad, two sides and handmade tortillas.",
       "items": [
-        { "name": "Birria Tacos", "image": "/LAEG/birria-tacos.jpeg", "description": "Slow-braised tender beef birria with melted cheese in a warm crispy tortilla, topped with raw onions and cilantro. Served with rich consomé.", "price": "$15" },
-        { "name": "Birria Pizza", "image": "/LAEG/birria-pizza.jpeg", "description": "Loaded with melted mozzarella, stuffed with juicy beef birria, finished with cilantro & diced onions. Served with consomé and fresh limes.", "price": "$20" }
-      ]
-    },
-    {
-      "id": "caldos",
-      "name": "Caldos",
-      "subtitle": "Hearty Homemade Soups",
-      "items": [
-        { "name": "Caldo de Res", "image": "/LAEG/caldo-de-res.jpeg", "description": "Rich beef broth with hearty cut vegetables, red potatoes, chayote, carrot & cabbage. Served with rice, jalapeños, onions & homemade tortillas.", "price": "$20" },
-        { "name": "Caldo de Pollo", "image": "/LAEG/caldo-de-pollo.jpeg", "description": "Chicken soup in rich broth with pasta, diced red potatoes, carrots, chayote & cilantro. Served with jalapeños, onions & homemade tortillas.", "price": "$16" }
-      ]
-    },
-    {
-      "id": "lo-autentico",
-      "name": "Lo Auténtico",
-      "subtitle": "The Most Authentic Guatemalan Dishes",
-      "items": [
-        { "name": "Chaomin de Pollo", "image": "/LAEG/chaomin-de-pollo.jpeg", "description": "Guatemalan-style chicken Lo Mein cooked with green & red peppers and carrots. Served with refried beans and 5 handmade tortillas.", "price": "$15" },
-        { "name": "Pepián de Pollo", "image": "/LAEG/pepian-de-pollo.jpeg", "description": "Guatemala's national dish — chicken slow-cooked in a thick sauce of roasted tomatoes, peppers, spices & toasted seeds. Served with rice and tortillas.", "price": "$17" },
-        { "name": "Guisado de Res", "image": "/LAEG/guisado-de-res.jpeg", "description": "Slow-roasted Guatemalan-style beef stew, served with potatoes, fresh rice, and 5 handmade tortillas.", "price": "$25" }
+        { "name": "Pollo Asado", "image": "/LAEG/pollo-asado.jpeg", "description": "In-house cut chicken breast marinated in a citrus-herb blend.", "price": "$18" },
+        { "name": "Carne Asada", "image": "/LAEG/carne-asada.jpeg", "description": "In-house cut and marinated skirt steak, grilled to order.", "price": "$22" },
+        { "name": "Costilla de Res", "image": "/LAEG/costilla-de-res.jpeg", "description": "Tender Guatemalan-style grilled beef ribs marinated in traditional spices.", "price": "$24" },
+        { "name": "La Parrillada", "image": "/LAEG/la-parrillada.jpeg", "description": "Traditional grill platter with carne asada, savory longaniza, and grilled shrimp.", "price": "$32" },
+        { "name": "Costilla de Carnero", "image": "/LAEG/costilla-de-carnero.jpeg", "description": "Tender lamb chops marinated in savory citrus mojo, grilled over an open flame.", "price": "$32" }
       ]
     },
     {
@@ -130,35 +74,108 @@
       "name": "De la Freidora",
       "subtitle": "From the Fryer",
       "items": [
-        { "name": "Pollo Dorado", "image": "/LAEG/pollo-dorado.jpeg", "description": "Two golden fried chicken legs, seasoned and cooked crispy outside, juicy inside. Served with two sides, salad and tortillas.", "price": "$15" },
-        { "name": "Mojarra Frita", "image": "/LAEG/mojarra-frita.jpeg", "description": "Whole tilapia, seasoned, breaded and deep-fried until golden crispy outside, tender inside. Served with side salad, lime, two sides and tortillas.", "price": "$25" }
+        { "name": "Pollo Dorado", "image": "/LAEG/pollo-dorado.jpeg", "description": "Golden fried chicken, seasoned crispy outside and juicy inside. Served with two sides, salad and tortillas.", "price": "$16" },
+        { "name": "Mojarra Frita", "image": "/LAEG/mojarra-frita.jpeg", "description": "Whole fried tilapia, seasoned and crispy. Served with side salad, lime, two sides and tortillas.", "price": "$23" }
       ]
     },
     {
-      "id": "de-la-parrilla",
-      "name": "De la Parrilla",
-      "subtitle": "From the Grill",
-      "note": "All grill plates served with house salad, two sides and tortillas.",
+      "id": "lo-autentico",
+      "name": "Lo Auténtico",
+      "subtitle": "The Most Authentic Guatemalan Dishes",
       "items": [
-        { "name": "Pollo Asado", "image": "/LAEG/pollo-asado.jpeg", "description": "6 oz. in-house cut chicken breast marinated in citrus herb blend.", "price": "$20" },
-        { "name": "Carne Asada", "image": "/LAEG/carne-asada.jpeg", "description": "6 oz. in-house cut and marinated skirt steak.", "price": "$21" },
-        { "name": "Costilla de Res", "image": "/LAEG/costilla-de-res.jpeg", "description": "Tender Guatemalan-style grilled beef ribs marinated in traditional spices and slow-cooked over the grill for deep, smoky flavor.", "price": "$25" },
-        { "name": "La Parrillada", "image": "/LAEG/la-parrillada.jpeg", "description": "Traditional Guatemalan grill platter with tender carne asada, savory longaniza, and juicy grilled shrimp.", "price": "Market Price" },
-        { "name": "Costilla de Carnero", "image": "/LAEG/costilla-de-carnero.jpeg", "description": "Tender bilbao lamb chops marinated with savory citrus mojo, grilled to perfection over an open flame.", "price": "Market Price" }
+        { "name": "Chaomin de Pollo", "image": "/LAEG/chaomin-de-pollo.jpeg", "description": "Guatemalan-style chicken chow mein with green & red peppers and carrots. Served with refried beans and handmade tortillas.", "price": "$16" },
+        { "name": "Pepián de Pollo", "image": "/LAEG/pepian-de-pollo.jpeg", "description": "Guatemala's national dish — chicken slow-cooked in a thick sauce of roasted tomatoes, peppers, spices & toasted seeds. Served with rice and tortillas.", "price": "$17" }
+      ]
+    },
+    {
+      "id": "caldos",
+      "name": "Caldos",
+      "subtitle": "Hearty Homemade Soups",
+      "items": [
+        { "name": "Caldo de Res", "image": "/LAEG/caldo-de-res.jpeg", "description": "Rich beef broth with hearty cut vegetables, red potatoes, chayote, carrot & cabbage. Served with rice, jalapeños, onions & handmade tortillas.", "price": "$20" },
+        { "name": "Caldo de Pollo", "image": "/LAEG/caldo-de-pollo.jpeg", "description": "Chicken soup in rich broth with pasta, red potatoes, carrots, chayote & cilantro. Served with jalapeños, onions & handmade tortillas.", "price": "$16" }
+      ]
+    },
+    {
+      "id": "vegetariano",
+      "name": "Vegetariano",
+      "subtitle": "Vegetarian",
+      "isPriceList": true,
+      "items": [
+        { "name": "La Esquina Salad", "description": "Fresh house salad with garden vegetables.", "price": "$10" },
+        { "name": "Quesadilla de Vegetales", "description": "Flour tortilla with sautéed peppers, onion & melted mozzarella.", "price": "$11" },
+        { "name": "Veggie Burrito", "description": "Rice, beans, lettuce, cheese, pico & grilled vegetables.", "price": "$14" },
+        { "name": "Veggie Tacos", "description": "Handmade corn tortillas with grilled vegetables, cabbage & cilantro.", "price": "$3.75" }
+      ]
+    },
+    {
+      "id": "para-ninos",
+      "name": "Para Niños",
+      "subtitle": "Kids Menu",
+      "isPriceList": true,
+      "items": [
+        { "name": "Carne Asada", "description": "Kid-sized grilled steak with a side.", "price": "$12" },
+        { "name": "Pollo Asado", "description": "Kid-sized grilled chicken with a side.", "price": "$10" },
+        { "name": "Pollo Dorado", "description": "Kid-sized fried chicken with a side.", "price": "$10" },
+        { "name": "Quesadilla", "description": "Cheese quesadilla with a side.", "price": "$8" }
+      ]
+    },
+    {
+      "id": "extra-proteinas",
+      "name": "Extra Proteínas",
+      "subtitle": "Add Extra Protein",
+      "isPriceList": true,
+      "items": [
+        { "name": "Skirt Steak (1 pc)", "price": "$12" },
+        { "name": "Shrimp (4 ct)", "price": "$10" },
+        { "name": "Costilla de Res (1 pc)", "price": "$7" },
+        { "name": "Grilled Chicken (1 pc)", "price": "$5" },
+        { "name": "Pierna de Pollo Dorado (1 pc)", "price": "$5" },
+        { "name": "Egg (1 ct)", "price": "$1" }
+      ]
+    },
+    {
+      "id": "postres",
+      "name": "Postres",
+      "subtitle": "Desserts",
+      "isPriceList": true,
+      "items": [
+        { "name": "Churros", "description": "Crispy fried churros dusted in cinnamon sugar.", "price": "$8" },
+        { "name": "Caramel Vanilla Flan", "description": "Silky vanilla custard with caramel.", "price": "$8" },
+        { "name": "Rellenitos Dulces", "description": "Sweet plantain filled with black beans.", "price": "$7.50" },
+        { "name": "Plátano Dulce", "description": "Sweet fried ripe plantain.", "price": "$4" },
+        { "name": "Platanitos", "description": "Fried plantains.", "price": "$4" }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "name": "Bebidas",
+      "subtitle": "Drinks",
+      "isPriceList": true,
+      "items": [
+        { "name": "Aguas Frescas", "description": "Fresh house-made fruit waters.", "price": "$4" },
+        { "name": "Atoles", "description": "Warm traditional Guatemalan atol — Sm $4 / Lg $5.", "price": "$4" },
+        { "name": "Jarritos", "description": "Mexican fruit sodas.", "price": "$2.50" },
+        { "name": "Bottled Coke / Sprite", "price": "$3" },
+        { "name": "Canned Soda", "price": "$2" },
+        { "name": "Bottled Water", "price": "$2" },
+        { "name": "Coffee", "description": "Freshly brewed — Reg $2 / Lg $4.", "price": "$2" }
       ]
     },
     {
       "id": "acompanantes",
       "name": "Acompañantes",
       "subtitle": "Sides",
-      "isSidesList": true,
+      "isPriceList": true,
       "items": [
-        { "name": "Arroz", "translation": "Rice" },
-        { "name": "Frijole Negro", "translation": "Black Beans" },
-        { "name": "Ensalada Rusa", "translation": "Potato Salad" },
-        { "name": "Platanitos", "translation": "Fried Plantains" },
-        { "name": "Papas Fritas", "translation": "French Fries" },
-        { "name": "Ensalada Fresca", "translation": "Fresh House Salad" }
+        { "name": "Arroz", "description": "Rice", "price": "$4" },
+        { "name": "Frijoles", "description": "Black beans", "price": "$4.50" },
+        { "name": "Half Order Rice & Beans", "price": "$4" },
+        { "name": "Ensalada Fresca", "description": "House salad", "price": "$3" },
+        { "name": "Ensalada Rusa", "description": "Russian potato salad", "price": "$3" },
+        { "name": "Platanitos", "description": "Fried plantains", "price": "$4" },
+        { "name": "Papas Fritas", "description": "French fries", "price": "$4" },
+        { "name": "Tortillas (5)", "description": "Handmade tortillas", "price": "$3" }
       ]
     }
   ]

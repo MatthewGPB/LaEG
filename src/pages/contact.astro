@@ -2,61 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import site from '../data/site.json';
-
 const description = "Contact La Esquina Guatemalteca in Jupiter, FL. Questions, feedback, press, or just to say hola — send us a message or call 561-768-9137.";
-
-const alternates = [
-  { hreflang: 'en', href: site.domain + '/contact' },
-  { hreflang: 'es', href: site.domain + '/es/contact' },
-  { hreflang: 'x-default', href: site.domain + '/contact' },
-];
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'ContactPage',
-  name: `Contact ${site.name}`,
-  url: site.domain + '/contact',
-};
+const alternates = [ { hreflang: 'en', href: site.domain + '/contact' }, { hreflang: 'es', href: site.domain + '/es/contact' }, { hreflang: 'x-default', href: site.domain + '/contact' } ];
+const schema = { '@context': 'https://schema.org', '@type': 'ContactPage', name: `Contact ${site.name}`, url: site.domain + '/contact' };
 ---
-
-<BaseLayout
-  title="Contact Us"
-  description={description}
-  path="/contact"
-  schema={schema}
-  alternates={alternates}
->
-  <section class="container-x pt-14 pb-10 text-center lg:pt-20">
-    <p class="eyebrow">Say hola</p>
-    <h1 class="mt-3 text-balance font-display text-5xl font-bold text-navy md:text-6xl">
-      We'd love to hear from you
-    </h1>
-    <p class="mx-auto mt-5 max-w-2xl font-body text-lg text-ink/75">
-      Questions, feedback, press, lost-and-found, or just to say hi — drop us a note below.
-      For catering and food truck bookings, use the forms on those pages so we can help you faster.
-    </p>
-  </section>
-
-  <section class="container-x pb-14">
-    <div class="mx-auto grid max-w-4xl gap-4 sm:grid-cols-3">
-      <a href={`tel:${site.phoneTel}`} class="rounded-2xl bg-white p-6 text-center shadow-soft transition-transform hover:-translate-y-0.5">
-        <p class="font-display text-lg font-bold text-navy">Call</p>
-        <p class="mt-1 font-body text-sm text-spice">{site.phone}</p>
-      </a>
-      <a href="/catering" class="rounded-2xl bg-white p-6 text-center shadow-soft transition-transform hover:-translate-y-0.5">
-        <p class="font-display text-lg font-bold text-navy">Catering</p>
-        <p class="mt-1 font-body text-sm text-spice">Request a quote →</p>
-      </a>
-      <a href="/food-truck" class="rounded-2xl bg-white p-6 text-center shadow-soft transition-transform hover:-translate-y-0.5">
-        <p class="font-display text-lg font-bold text-navy">Food Truck</p>
-        <p class="mt-1 font-body text-sm text-spice">Book Guatamigos →</p>
-      </a>
-    </div>
-  </section>
-
-  <section class="container-x pb-24">
-    <div class="mx-auto max-w-2xl rounded-3xl bg-white p-8 shadow-card md:p-12">
-      <ContactForm lang="en" />
-    </div>
-  </section>
+<BaseLayout title="Contact Us" description={description} path="/contact" schema={schema} alternates={alternates}>
+  <section class="container-x pt-14 pb-10 text-center lg:pt-20"><p class="eyebrow">Say hola</p><h1 class="mt-3 text-balance font-display text-5xl font-bold text-navy md:text-6xl">We'd love to hear from you</h1><p class="mx-auto mt-5 max-w-2xl font-body text-lg text-ink/75">Questions, feedback, press, lost-and-found, or just to say hi — drop us a note below. For catering and food truck bookings, use the forms on those pages so we can help you faster.</p></section>
+  <section class="container-x pb-14"><div class="mx-auto grid max-w-4xl gap-4 sm:grid-cols-3"><a href={`tel:${site.phoneTel}`} class="rounded-2xl bg-white p-6 text-center shadow-soft transition-transform hover:-translate-y-0.5"><p class="font-display text-lg font-bold text-navy">Call</p><p class="mt-1 font-body text-sm text-spice">{site.phone}</p></a><a href="/catering" class="rounded-2xl bg-white p-6 text-center shadow-soft transition-transform hover:-translate-y-0.5"><p class="font-display text-lg font-bold text-navy">Catering</p><p class="mt-1 font-body text-sm text-spice">Request a quote →</p></a><a href="/food-truck" class="rounded-2xl bg-white p-6 text-center shadow-soft transition-transform hover:-translate-y-0.5"><p class="font-display text-lg font-bold text-navy">Food Truck</p><p class="mt-1 font-body text-sm text-spice">Book Guatamigos →</p></a></div></section>
+  <section class="container-x pb-24"><div class="mx-auto max-w-2xl rounded-3xl bg-white p-8 shadow-card md:p-12"><ContactForm lang="en" /></div></section>
 </BaseLayout>

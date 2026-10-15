@@ -18,7 +18,7 @@ const schema = {
   '@context': 'https://schema.org',
   '@type': 'Menu',
   name: `${site.name} Menu`,
-  hasMenuSection: menu.categories.filter((c) => !c.isSidesList).map((cat) => ({
+  hasMenuSection: menu.categories.map((cat) => ({
     '@type': 'MenuSection',
     name: cat.name,
     description: cat.subtitle,
@@ -42,12 +42,9 @@ const schema = {
   schema={schema}
   alternates={alternates}
 >
-  <!-- Hero strip -->
   <section class="container-x pt-12 pb-8 text-center lg:pt-16">
     <p class="eyebrow">Made fresh, every single day</p>
-    <h1 class="mt-3 text-balance font-display text-5xl font-bold text-navy md:text-6xl">
-      Our Full Menu
-    </h1>
+    <h1 class="mt-3 text-balance font-display text-5xl font-bold text-navy md:text-6xl">Our Full Menu</h1>
     <p class="mx-auto mt-5 max-w-2xl text-pretty font-body text-lg leading-relaxed text-ink/75">
       Homemade Guatemalan flavors made fresh daily — authentic, hearty, and full of family tradition.
     </p>
@@ -58,15 +55,11 @@ const schema = {
   <!-- WEEKLY SPECIALS -->
   <section class="container-x py-12 lg:py-16">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-balance font-display text-4xl font-bold text-navy md:text-5xl">
-        $10 Weekly Specials
-      </h2>
+      <h2 class="text-balance font-display text-4xl font-bold text-navy md:text-5xl">$10 Weekly Specials</h2>
       <p class="mt-4 text-pretty font-body text-lg leading-relaxed text-ink/75">
-        Fresh every week — ideal for college students, families on the go, or anyone craving
-        authentic Guatemalan flavors.
+        Fresh every week — ideal for college students, families on the go, or anyone craving authentic Guatemalan flavors.
       </p>
     </div>
-
     <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
       {menu.weeklySpecials.map((special) => (
         <article class="overflow-hidden rounded-3xl bg-white shadow-card transition-transform hover:-translate-y-1">
@@ -78,29 +71,19 @@ const schema = {
           </div>
         </article>
       ))}
-
       <article class="flex flex-col justify-between rounded-3xl bg-navy p-6 text-cream shadow-card">
         <div>
           <h3 class="font-display text-lg font-bold text-marigold">Hungry for more?</h3>
-          <p class="mt-2 font-body text-sm leading-relaxed text-cream/80">
-            New specials every week — sign up to never miss one.
-          </p>
+          <p class="mt-2 font-body text-sm leading-relaxed text-cream/80">New specials every week — sign up to never miss one.</p>
         </div>
-        <div class="mt-4">
-          <NewsletterForm source="menu-page" variant="card" lang="en" />
-        </div>
+        <div class="mt-4"><NewsletterForm source="menu-page" variant="card" lang="en" /></div>
       </article>
     </div>
   </section>
 
-  <!-- Full menu intro -->
   <section class="container-x pt-8 pb-4 text-center">
-    <h2 class="text-balance font-display text-4xl font-bold text-navy md:text-5xl">
-      Explore the full menu
-    </h2>
-    <p class="mt-4 font-body text-lg text-ink/75">
-      Tap any item to order online — fresh, hot, ready for pickup or delivery.
-    </p>
+    <h2 class="text-balance font-display text-4xl font-bold text-navy md:text-5xl">Explore the full menu</h2>
+    <p class="mt-4 font-body text-lg text-ink/75">Tap any item to order online — fresh, hot, ready for pickup or delivery.</p>
   </section>
 
   <!-- Sticky category nav -->
@@ -108,12 +91,7 @@ const schema = {
     <div class="container-x">
       <div class="-mx-2 flex gap-1 overflow-x-auto py-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {menu.categories.map((cat) => (
-          <a
-            href={`#${cat.id}`}
-            class="menu-nav-link shrink-0 rounded-full px-4 py-2 font-body text-sm font-medium text-navy transition-colors hover:bg-navy hover:text-cream"
-          >
-            {cat.name}
-          </a>
+          <a href={`#${cat.id}`} class="menu-nav-link shrink-0 rounded-full px-4 py-2 font-body text-sm font-medium text-navy transition-colors hover:bg-navy hover:text-cream">{cat.name}</a>
         ))}
       </div>
     </div>
@@ -121,42 +99,37 @@ const schema = {
 
   <!-- Menu categories -->
   <div class="container-x py-12 lg:py-16">
-    {menu.categories.map((cat) => (
+    {menu.categories.map((cat: any) => (
       <section id={cat.id} class="scroll-mt-32 py-12 lg:py-16">
         <div class="text-center">
           <h2 class="text-balance font-display text-3xl font-bold text-navy md:text-4xl">{cat.name}</h2>
           <p class="mt-2 font-body italic text-ink/60">{cat.subtitle}</p>
-          {cat.note && (
-            <p class="mx-auto mt-4 max-w-2xl font-body text-sm text-ink/70" set:html={cat.note} />
-          )}
+          {cat.note && <p class="mx-auto mt-4 max-w-2xl font-body text-sm text-ink/70" set:html={cat.note} />}
         </div>
 
-        {cat.isSidesList ? (
-          <div class="mx-auto mt-10 max-w-2xl rounded-3xl bg-white p-8 shadow-card">
+        {cat.isPriceList ? (
+          <div class="mx-auto mt-10 max-w-3xl rounded-3xl bg-white p-6 shadow-card sm:p-9">
             <ul class="divide-y divide-navy-100">
               {cat.items.map((item: any) => (
                 <li class="flex items-baseline justify-between gap-4 py-4">
-                  <span class="font-display text-lg font-semibold text-navy">{item.name}</span>
-                  <span class="font-body italic text-ink/60">{item.translation}</span>
+                  <div class="min-w-0">
+                    <span class="font-display text-lg font-semibold text-navy">{item.name}</span>
+                    {item.description && <span class="mt-0.5 block font-body text-sm text-ink/60">{item.description}</span>}
+                  </div>
+                  <span class="shrink-0 font-display text-lg font-bold text-price">{item.price}</span>
                 </li>
               ))}
             </ul>
+            <a href={site.orderUrl} target="_blank" rel="noopener" class="btn-primary mt-7 w-full justify-center">Order online</a>
           </div>
         ) : (
           <div class="mt-10 flex flex-wrap justify-center gap-6">
             {cat.items.map((item: any) => (
               <article class="group flex w-full flex-col overflow-hidden rounded-2xl bg-white shadow-soft transition-all hover:-translate-y-1 hover:shadow-card sm:w-[calc(50%_-_0.75rem)] lg:w-[calc(33.333%_-_1rem)] xl:w-[calc(25%_-_1.125rem)]">
-                <SmartImage
-                  src={item.image}
-                  alt={item.name}
-                  class="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                <SmartImage src={item.image} alt={item.name} class="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div class="flex flex-1 flex-col p-5">
                   <h3 class="font-display text-lg font-bold text-navy">{item.name}</h3>
-                  <p class="mt-2 flex-1 font-body text-sm leading-relaxed text-ink/65">
-                    {item.description}
-                  </p>
-
+                  <p class="mt-2 flex-1 font-body text-sm leading-relaxed text-ink/65">{item.description}</p>
                   {item.priceSplit ? (
                     <div class="mt-4 flex items-baseline justify-between">
                       <span class="font-display text-lg font-bold text-price">{item.priceSplit.left}</span>
@@ -165,15 +138,7 @@ const schema = {
                   ) : (
                     <p class="mt-4 font-display text-xl font-bold text-price">{item.price}</p>
                   )}
-
-                  <a
-                    href={site.orderUrl}
-                    target="_blank"
-                    rel="noopener"
-                    class="mt-4 block rounded-full bg-navy py-2.5 text-center font-body text-sm font-semibold text-cream transition-colors hover:bg-navy-600"
-                  >
-                    Order now
-                  </a>
+                  <a href={site.orderUrl} target="_blank" rel="noopener" class="mt-4 block rounded-full bg-navy py-2.5 text-center font-body text-sm font-semibold text-cream transition-colors hover:bg-navy-600">Order now</a>
                 </div>
               </article>
             ))}
@@ -183,22 +148,12 @@ const schema = {
     ))}
   </div>
 
-  <!-- Big takeout CTA -->
   <section class="container-x my-16 lg:my-20">
     <div class="rounded-3xl bg-gradient-to-br from-navy via-navy-600 to-navy px-6 py-16 text-center text-cream shadow-deep lg:px-10 lg:py-20">
-      <h2 class="text-balance font-display text-4xl font-bold leading-tight md:text-5xl">
-        Order takeout now — Jupiter, FL
-      </h2>
-      <p class="mx-auto mt-5 max-w-2xl font-body text-lg text-cream/85">
-        Fresh, hot, authentic Guatemalan food straight to your door. Tacos, La Parrillada,
-        weekly specials &amp; more.
-      </p>
-      <a href={site.orderUrl} target="_blank" rel="noopener" class="btn-spice mt-9 px-10 py-5 text-lg">
-        Order takeout now
-      </a>
-      <p class="mt-6 font-body text-sm text-cream/70">
-        Fast · Fresh · Family favorites · Serving Jupiter, Tequesta &amp; Palm Beach Gardens
-      </p>
+      <h2 class="text-balance font-display text-4xl font-bold leading-tight md:text-5xl">Order takeout now — Jupiter, FL</h2>
+      <p class="mx-auto mt-5 max-w-2xl font-body text-lg text-cream/85">Fresh, hot, authentic Guatemalan food straight to your door. Tacos, La Parrillada, weekly specials &amp; more.</p>
+      <a href={site.orderUrl} target="_blank" rel="noopener" class="btn-spice mt-9 px-10 py-5 text-lg">Order takeout now</a>
+      <p class="mt-6 font-body text-sm text-cream/70">Fast · Fresh · Family favorites · Serving Jupiter, Tequesta &amp; Palm Beach Gardens</p>
     </div>
   </section>
 

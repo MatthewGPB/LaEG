@@ -5,15 +5,7 @@
   "phone": "561-768-9137",
   "phoneTel": "+15617689137",
   "email": "hola@laesquinaguatemalteca.com",
-  "address": {
-    "street": "200 Hibiscus St",
-    "city": "Jupiter",
-    "region": "FL",
-    "postalCode": "33458",
-    "country": "US",
-    "lat": 26.9335,
-    "lng": -80.1284
-  },
+  "address": { "street": "200 Hibiscus St", "city": "Jupiter", "region": "FL", "postalCode": "33458", "country": "US", "lat": 26.9335, "lng": -80.1284 },
   "hours": {
     "regular": "11:00 AM – 9:00 PM, Monday through Sunday",
     "notes": [
@@ -21,8 +13,7 @@
       { "label": "4th of July", "value": "Extended hours" },
       { "label": "Christmas Eve", "value": "Shortened hours" }
     ],
-    "schemaOpens": "11:00",
-    "schemaCloses": "21:00"
+    "schemaOpens": "11:00", "schemaCloses": "21:00"
   },
   "social": {
     "instagram": "https://www.instagram.com/laesquinaguatemalteca",
@@ -40,9 +31,7 @@
   "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=200+Hibiscus+St,+Jupiter,+FL+33458",
   "founded": "2018-12",
   "founder": "Silvia Cano",
-  "analytics": {
-    "gaId": "G-4D9S6PF7M4"
-  },
+  "analytics": { "gaId": "G-4D9S6PF7M4" },
   "formspree": {
     "contact": "https://formspree.io/f/xrevegrl",
     "catering": "https://formspree.io/f/xrevegrl",
@@ -56,12 +45,5 @@
     { "name": "The Country Club at Mirasol", "logo": "/LAEG/mirasol.png" },
     { "name": "Breakers West Country Club", "logo": "/LAEG/breakers-west.png" }
   ],
-  "areaServed": [
-    "Jupiter",
-    "Tequesta",
-    "Palm Beach Gardens",
-    "Juno Beach",
-    "North Palm Beach",
-    "Palm Beach County"
-  ]
+  "areaServed": ["Jupiter", "Tequesta", "Palm Beach Gardens", "Juno Beach", "North Palm Beach", "Palm Beach County"]
 }

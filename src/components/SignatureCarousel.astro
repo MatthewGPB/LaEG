@@ -2,171 +2,63 @@
 import menu from '../data/menu.json';
 import es from '../data/menu-es.json';
 import SmartImage from './SmartImage.astro';
-
-interface Props {
-  lang?: 'en' | 'es';
-}
-
+interface Props { lang?: 'en' | 'es'; }
 const { lang = 'en' } = Astro.props;
 const isEs = lang === 'es';
 const sig: any = (es as any).signatureCarousel || {};
-
-const slides = menu.signatureCarousel.map((s) => ({
-  ...s,
-  description: isEs ? sig.items?.[s.name] || s.description : s.description,
-}));
-
+const slides = menu.signatureCarousel.map((s) => ({ ...s, description: isEs ? sig.items?.[s.name] || s.description : s.description }));
 const T = isEs
-  ? {
-      eyebrow: sig.sectionEyebrow || 'Favoritos de la familia',
-      title: sig.sectionTitle || 'Nuestros Platillos Estrella',
-      sub: sig.sectionSub || '',
-      region: 'Carrusel de platillos estrella',
-      slide: 'diapositiva',
-      prev: 'Platillo anterior',
-      next: 'Platillo siguiente',
-      goto: 'Ir a la diapositiva',
-    }
-  : {
-      eyebrow: 'Family Favorites',
-      title: 'Our Signature Dishes',
-      sub: 'Authentic Guatemalan classics that bring families together — homemade, hearty, and full of tradition. Come taste what everyone talks about.',
-      region: 'Signature dishes carousel',
-      slide: 'slide',
-      prev: 'Previous dish',
-      next: 'Next dish',
-      goto: 'Go to slide',
-    };
+  ? { eyebrow: sig.sectionEyebrow || 'Favoritos de la familia', title: sig.sectionTitle || 'Nuestros Platillos Estrella', sub: sig.sectionSub || '', region: 'Carrusel de platillos estrella', prev: 'Platillo anterior', next: 'Platillo siguiente', goto: 'Ir a la diapositiva' }
+  : { eyebrow: 'Family Favorites', title: 'Our Signature Dishes', sub: 'Authentic Guatemalan classics that bring families together — homemade, hearty, and full of tradition. Come taste what everyone talks about.', region: 'Signature dishes carousel', prev: 'Previous dish', next: 'Next dish', goto: 'Go to slide' };
 ---
-
 <section class="container-x py-20 lg:py-24">
   <div class="mx-auto max-w-2xl text-center">
     <p class="eyebrow">{T.eyebrow}</p>
-    <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">
-      {T.title}
-    </h2>
-    <p class="mt-5 text-pretty font-body text-lg leading-relaxed text-ink/75">
-      {T.sub}
-    </p>
+    <h2 class="mt-3 text-balance font-display text-4xl font-bold text-navy md:text-5xl">{T.title}</h2>
+    <p class="mt-5 text-pretty font-body text-lg leading-relaxed text-ink/75">{T.sub}</p>
   </div>
-
-  <div
-    id="sig-carousel"
-    class="relative mt-12 overflow-hidden rounded-3xl bg-white shadow-card"
-    role="region"
-    aria-label={T.region}
-    aria-roledescription="carousel"
-  >
+  <div id="sig-carousel" class="relative mt-12 overflow-hidden rounded-3xl bg-white shadow-card" role="region" aria-label={T.region} aria-roledescription="carousel">
     <div id="sig-track" class="relative min-h-[520px] md:min-h-[460px]">
       {slides.map((slide, idx) => (
-        <article
-          class={`sig-slide absolute inset-0 grid grid-cols-1 items-center gap-0 p-6 transition-opacity duration-700 md:grid-cols-2 md:gap-12 md:p-10 ${
-            idx === 0 ? 'opacity-100' : 'pointer-events-none opacity-0'
-          }`}
-          aria-roledescription="slide"
-          aria-label={`${idx + 1} / ${slides.length}: ${slide.name}`}
-          aria-hidden={idx !== 0 ? 'true' : 'false'}
-          data-idx={idx}
-        >
-          <div class="overflow-hidden rounded-2xl shadow-card">
-            <SmartImage
-              src={slide.image}
-              alt={slide.name}
-              class="aspect-[4/3] w-full object-cover transition-transform duration-[2000ms] hover:scale-105"
-              loading={idx === 0 ? 'eager' : 'lazy'}
-            />
-          </div>
+        <article class={`sig-slide absolute inset-0 grid grid-cols-1 items-center gap-0 p-6 transition-opacity duration-700 md:grid-cols-2 md:gap-12 md:p-10 ${idx === 0 ? 'opacity-100' : 'pointer-events-none opacity-0'}`} aria-roledescription="slide" aria-label={`${idx + 1} / ${slides.length}: ${slide.name}`} aria-hidden={idx !== 0 ? 'true' : 'false'} data-idx={idx}>
+          <div class="overflow-hidden rounded-2xl shadow-card"><SmartImage src={slide.image} alt={slide.name} class="aspect-[4/3] w-full object-cover transition-transform duration-[2000ms] hover:scale-105" loading={idx === 0 ? 'eager' : 'lazy'} /></div>
           <div>
-            <h3 class="text-balance font-display text-3xl font-bold text-navy md:text-4xl">
-              {slide.name}
-            </h3>
-            <p class="mt-4 font-body text-base leading-relaxed text-ink/75 md:text-lg">
-              {slide.description}
-            </p>
+            <h3 class="text-balance font-display text-3xl font-bold text-navy md:text-4xl">{slide.name}</h3>
+            <p class="mt-4 font-body text-base leading-relaxed text-ink/75 md:text-lg">{slide.description}</p>
           </div>
         </article>
       ))}
     </div>
-
-    <button
-      type="button"
-      id="sig-prev"
-      class="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-cream/95 text-2xl text-navy shadow-soft transition-transform hover:scale-110 md:left-5 md:h-14 md:w-14 md:text-3xl"
-      aria-label={T.prev}
-    >‹</button>
-    <button
-      type="button"
-      id="sig-next"
-      class="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-cream/95 text-2xl text-navy shadow-soft transition-transform hover:scale-110 md:right-5 md:h-14 md:w-14 md:text-3xl"
-      aria-label={T.next}
-    >›</button>
-
+    <button type="button" id="sig-prev" class="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-cream/95 text-2xl text-navy shadow-soft transition-transform hover:scale-110 md:left-5 md:h-14 md:w-14 md:text-3xl" aria-label={T.prev}>‹</button>
+    <button type="button" id="sig-next" class="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-cream/95 text-2xl text-navy shadow-soft transition-transform hover:scale-110 md:right-5 md:h-14 md:w-14 md:text-3xl" aria-label={T.next}>›</button>
     <div class="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-      {slides.map((_, idx) => (
-        <button
-          type="button"
-          class={`sig-dot h-2 rounded-full transition-all ${idx === 0 ? 'w-8 bg-navy' : 'w-2 bg-navy/30'}`}
-          data-idx={idx}
-          aria-label={`${T.goto} ${idx + 1}`}
-        ></button>
-      ))}
+      {slides.map((_, idx) => (<button type="button" class={`sig-dot h-2 rounded-full transition-all ${idx === 0 ? 'w-8 bg-navy' : 'w-2 bg-navy/30'}`} data-idx={idx} aria-label={`${T.goto} ${idx + 1}`}></button>))}
     </div>
   </div>
 </section>
-
 <script>
   (function () {
-    const slides = Array.from(document.querySelectorAll<HTMLElement>('.sig-slide'));
-    const dots = Array.from(document.querySelectorAll<HTMLElement>('.sig-dot'));
+    const slides = Array.from(document.querySelectorAll('.sig-slide'));
+    const dots = Array.from(document.querySelectorAll('.sig-dot'));
     const prev = document.getElementById('sig-prev');
     const next = document.getElementById('sig-next');
     const carousel = document.getElementById('sig-carousel');
     if (!slides.length || !carousel) return;
-
-    let idx = 0;
-    let timer: number | undefined;
-
-    function show(i: number) {
+    let idx = 0; let timer;
+    function show(i) {
       idx = (i + slides.length) % slides.length;
-      slides.forEach((s, j) => {
-        const active = j === idx;
-        s.style.opacity = active ? '1' : '0';
-        s.style.pointerEvents = active ? 'auto' : 'none';
-        s.setAttribute('aria-hidden', String(!active));
-      });
-      dots.forEach((d, j) => {
-        const active = j === idx;
-        d.className = `sig-dot h-2 rounded-full transition-all ${active ? 'w-8 bg-navy' : 'w-2 bg-navy/30'}`;
-      });
+      slides.forEach((s, j) => { const a = j === idx; s.style.opacity = a ? '1' : '0'; s.style.pointerEvents = a ? 'auto' : 'none'; s.setAttribute('aria-hidden', String(!a)); });
+      dots.forEach((d, j) => { d.className = `sig-dot h-2 rounded-full transition-all ${j === idx ? 'w-8 bg-navy' : 'w-2 bg-navy/30'}`; });
     }
-
-    function nx() { show(idx + 1); }
-    function pv() { show(idx - 1); }
-
-    function start() { timer = window.setInterval(nx, 6000); }
-    function stop() { if (timer) clearInterval(timer); }
-
-    prev?.addEventListener('click', () => { stop(); pv(); start(); });
-    next?.addEventListener('click', () => { stop(); nx(); start(); });
-    dots.forEach((d) => d.addEventListener('click', () => {
-      stop();
-      show(Number(d.dataset.idx));
-      start();
-    }));
-    carousel.addEventListener('mouseenter', stop);
-    carousel.addEventListener('mouseleave', start);
-
-    let touchStart = 0;
-    carousel.addEventListener('touchstart', (e) => { touchStart = e.changedTouches[0].clientX; }, { passive: true });
-    carousel.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - touchStart;
-      if (Math.abs(dx) > 50) {
-        stop();
-        dx > 0 ? pv() : nx();
-        start();
-      }
-    });
-
+    function nx(){show(idx+1);} function pv(){show(idx-1);}
+    function start(){timer=window.setInterval(nx,6000);} function stop(){if(timer)clearInterval(timer);}
+    prev && prev.addEventListener('click',()=>{stop();pv();start();});
+    next && next.addEventListener('click',()=>{stop();nx();start();});
+    dots.forEach((d)=>d.addEventListener('click',()=>{stop();show(Number(d.dataset.idx));start();}));
+    carousel.addEventListener('mouseenter',stop); carousel.addEventListener('mouseleave',start);
+    let ts=0;
+    carousel.addEventListener('touchstart',(e)=>{ts=e.changedTouches[0].clientX;},{passive:true});
+    carousel.addEventListener('touchend',(e)=>{const dx=e.changedTouches[0].clientX-ts; if(Math.abs(dx)>50){stop();dx>0?pv():nx();start();}});
     start();
   })();
 </script>
