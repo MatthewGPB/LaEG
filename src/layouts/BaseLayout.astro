@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import SEO from '../components/SEO.astro';
 import WeeklySpecialPopup from '../components/WeeklySpecialPopup.astro';
 import FloatingOrderButton from '../components/FloatingOrderButton.astro';
+import ClickTracking from '../components/ClickTracking.astro';
 interface Props {
   title: string; description: string; path: string; image?: string;
   schema?: object | object[]; showPopup?: boolean; noindex?: boolean; lang?: 'en' | 'es';
@@ -67,5 +68,6 @@ const skipLabel = lang === 'es' ? 'Saltar al contenido' : 'Skip to content';
         });
       })();
     </script>
+    <ClickTracking />
   </body>
 </html>
