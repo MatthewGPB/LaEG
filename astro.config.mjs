@@ -11,7 +11,8 @@ export default defineConfig({
     sitemap(),
   ],
   output: 'static',
-  adapter: vercel({ webAnalytics: { enabled: false }, imageService: true }),
+  // imageService off: AVIF/WebP variants are generated at build time by sharp and served as static files.
+  adapter: vercel({ webAnalytics: { enabled: false }, imageService: false }),
   build: { inlineStylesheets: 'auto' },
   image: { domains: ['cdn.shopify.com'] },
 });
