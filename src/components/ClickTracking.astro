@@ -1,0 +1,53 @@
+---
+// ClickTracking.astro — La Esquina Guatemalteca
+// Sends GA4 events for the three actions that matter:
+//   order_online   (platform: skytab | doordash | ubereats)
+//   get_directions
+//   phone_call
+// Uses one delegated listener, so it covers the header, hero, mobile
+// order sheet, footer and every /es/ page without touching other components.
+// Drop <ClickTracking /> into the base layout, right before </body>.
+---
+<script is:inline>
+  (function () {
+    window.dataLayer = window.dataLayer || [];
+    if (typeof window.gtag !== 'function') {
+      window.gtag = function () { window.dataLayer.push(arguments); };
+    }
+
+    function classify(href) {
+      if (!href) return null;
+      var h = href.toLowerCase();
+      if (h.indexOf('tel:') === 0) return { name: 'phone_call' };
+      if (h.indexOf('online.skytab.com') > -1) return { name: 'order_online', platform: 'skytab' };
+      if (h.indexOf('doordash.com') > -1) return { name: 'order_online', platform: 'doordash' };
+      if (h.indexOf('ubereats.com') > -1) return { name: 'order_online', platform: 'ubereats' };
+      if (/google\.[a-z.]+\/maps\/dir|maps\.app\.goo\.gl|maps\.apple\.com/.test(h)) return { name: 'get_directions' };
+      return null;
+    }
+
+    function where(el) {
+      if (el.closest('header')) return 'header';
+      if (el.closest('footer')) return 'footer';
+      if (el.closest('.fob-action, [data-order-sheet]')) return 'mobile_order_sheet';
+      var s = el.closest('section[id], [data-track-section]');
+      if (s) return s.getAttribute('data-track-section') || s.id;
+      return 'body';
+    }
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var ev = classify(a.getAttribute('href'));
+      if (!ev) return;
+      var params = {
+        link_text: (a.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 80),
+        link_location: where(a),
+        language: document.documentElement.lang || 'en',
+        transport_type: 'beacon'
+      };
+      if (ev.platform) params.platform = ev.platform;
+      window.gtag('event', ev.name, params);
+    }, true);
+  })();
+</script>
