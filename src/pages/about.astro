@@ -2,9 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SmartImage from '../components/SmartImage.astro';
 import site from '../data/site.json';
+import { restaurantSchema } from '../lib/schema';
 const description = "Meet the Cano family behind La Esquina Guatemalteca. From Huehuetenango, Guatemala to Jupiter, FL — Silvia, Santos, William and the family share their story of authentic homemade Guatemalan cooking since 2018.";
 const alternates = [ { hreflang: 'en', href: site.domain + '/about' }, { hreflang: 'es', href: site.domain + '/es/about' }, { hreflang: 'x-default', href: site.domain + '/about' } ];
-const schema = { '@context': 'https://schema.org', '@type': 'Restaurant', '@id': site.domain + '/#restaurant', name: site.name, description, url: site.domain + '/about', telephone: site.phoneTel, address: { '@type': 'PostalAddress', streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.region, postalCode: site.address.postalCode, addressCountry: site.address.country }, founder: { '@type': 'Person', name: site.founder }, foundingDate: site.founded, image: site.domain + '/LAEG/family.jpeg', sameAs: [site.social.instagram, site.social.facebook] };
+const schema = restaurantSchema({ description, url: site.domain + '/about' });
 ---
 <BaseLayout title="Our Story — From Huehuetenango to Jupiter" description={description} path="/about" image="/LAEG/family.jpeg" schema={schema} alternates={alternates}>
   <section class="relative isolate overflow-hidden">

@@ -1,5 +1,6 @@
 ---
 import site from '../data/site.json';
+import SmartImage from './SmartImage.astro';
 interface Props { lang?: 'en' | 'es'; }
 const { lang = 'en' } = Astro.props;
 const NAV = {
@@ -20,7 +21,7 @@ const homeHref = lang === 'es' ? '/es/' : '/';
 <header class="sticky top-0 z-40 border-b border-navy-100 bg-cream/90 backdrop-blur-md">
   <div class="container-x flex h-16 items-center justify-between lg:h-20">
     <a href={homeHref} class="flex items-center" aria-label="La Esquina Guatemalteca">
-      <img src="/LAEG/logo.png" alt="La Esquina Guatemalteca — Guatemalan Cuisine" width="516" height="352" class="h-12 w-auto lg:h-14" />
+      <SmartImage src="/LAEG/logo.png" alt="La Esquina Guatemalteca logo" class="h-12 w-auto lg:h-14" widths={[112, 168]} sizes="56px" loading="eager" />
     </a>
     <nav class="hidden lg:flex lg:items-center lg:gap-7" aria-label={lang === 'es' ? 'Principal' : 'Primary'}>
       {nav.map((item) => (

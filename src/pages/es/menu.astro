@@ -5,13 +5,16 @@ import NewsletterForm from '../../components/NewsletterForm.astro';
 import SmartImage from '../../components/SmartImage.astro';
 import site from '../../data/site.json';
 import menu from '../../data/menu.json';
+import pending from '../../data/pending.json';
+import Confirm from '../../components/Confirm.astro';
+import { menuSchema } from '../../lib/schema';
 import es from '../../data/menu-es.json';
 
 const ui = es.ui;
 const esCats: Record<string, any> = es.categories;
 const esSpecials: Record<string, any> = es.weeklySpecials;
 
-const description = "Menú completo de comida guatemalteca auténtica en Jupiter, FL. Tacos, La Parrillada, Pepián de Pollo, birria, caldos, especiales semanales de $10 y tortillas hechas a mano todos los días.";
+const description = "Menú completo de comida guatemalteca auténtica en Jupiter, FL. Tacos, La Parrillada, Pepián de Pollo, birria, caldos, especiales semanales de $12 de martes a viernes y tortillas hechas a mano todos los días.";
 
 const alternates = [
   { hreflang: 'en', href: site.domain + '/menu' },
@@ -22,29 +25,13 @@ const alternates = [
 const itemDesc = (catId: string, item: any) => esCats[catId]?.items?.[item.name] || item.description;
 const catSubtitle = (cat: any) => esCats[cat.id]?.subtitle || cat.subtitle;
 const catNote = (cat: any) => esCats[cat.id]?.note || cat.note;
+const schema = menuSchema(menu, { lang: 'es', t: { name: (n) => n, itemDesc: (catId, item) => itemDesc(catId, item), catDesc: (cat) => catSubtitle(cat), specialsName: ui.specialsTitle, specialName: (n) => esSpecials[n]?.name || n, specialDesc: (sp) => esSpecials[sp.name]?.description || sp.description } });
 const priceText = (price?: string) => (price === 'Market Price' ? ui.marketPrice : price);
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'Menu',
-  inLanguage: 'es',
-  name: `Menú de ${site.name}`,
-  hasMenuSection: menu.categories.map((cat) => ({
-    '@type': 'MenuSection',
-    name: cat.name,
-    description: catSubtitle(cat),
-    hasMenuItem: cat.items.map((item: any) => ({
-      '@type': 'MenuItem',
-      name: item.name,
-      description: itemDesc(cat.id, item),
-      offers: item.price ? { '@type': 'Offer', price: item.price.replace(/[^0-9.]/g, '') || undefined, priceCurrency: 'USD' } : undefined,
-    })),
-  })),
-};
 ---
 
 <BaseLayout
-  title="Menú — Comida Guatemalteca Auténtica en Jupiter, FL"
+  title="Menú: Comida Guatemalteca, Tacos y Birria en Jupiter, FL | La Esquina Guatemalteca"
   description={description}
   path="/es/menu"
   image="/LAEG/la-parrillada.jpeg"
@@ -64,12 +51,13 @@ const schema = {
   <section class="container-x py-12 lg:py-16">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="text-balance font-display text-4xl font-bold text-navy md:text-5xl">{ui.specialsTitle}</h2>
+      <p class="mt-3 font-body text-sm font-semibold uppercase tracking-wider text-navy/70">{menu.specialsDays.es}</p>
       <p class="mt-4 text-pretty font-body text-lg leading-relaxed text-ink/75">{ui.specialsSub}</p>
     </div>
     <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
       {menu.weeklySpecials.map((special) => (
         <article class="overflow-hidden rounded-3xl bg-white shadow-card transition-transform hover:-translate-y-1">
-          <SmartImage src={special.image} alt={esSpecials[special.name]?.name || special.name} class="h-48 w-full object-cover" />
+          <SmartImage src={special.image} alt={esSpecials[special.name]?.alt || esSpecials[special.name]?.name || special.name} class="h-48 w-full object-cover" />
           <div class="p-5">
             <h3 class="font-display text-lg font-bold text-navy">{esSpecials[special.name]?.name || special.name}</h3>
             <p class="mt-2 font-body text-sm leading-relaxed text-ink/70">{esSpecials[special.name]?.description || special.description}</p>
@@ -109,6 +97,9 @@ const schema = {
           <h2 class="text-balance font-display text-3xl font-bold text-navy md:text-4xl">{cat.name}</h2>
           <p class="mt-2 font-body italic text-ink/60">{catSubtitle(cat)}</p>
           {catNote(cat) && <p class="mx-auto mt-4 max-w-2xl font-body text-sm text-ink/70" set:html={catNote(cat)} />}
+          {cat.id === 'amanecer' && (pending.breakfast.confirmed && pending.breakfast.hoursEs ? <p class="mx-auto mt-3 max-w-2xl font-body text-base font-semibold text-spice">{pending.breakfast.hoursEs}</p> : <Confirm label="Días y horario del desayuno (debajo de Amanecer). Pendiente de Matthew." />)}
+          {cat.id === 'tacos-y-mas' && !pending.birriaPizza.confirmed && <Confirm label="Pizza de birria: confirmar si está en el menú, precio, descripción y foto." />}
+          {cat.id === 'bebidas' && !pending.bar.confirmed && <Confirm label="Subsección Cerveza, Vino y Cócteles: pendiente de confirmar con Matthew." />}
         </div>
 
         {cat.isPriceList ? (

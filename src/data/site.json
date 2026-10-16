@@ -4,17 +4,10 @@
   "domain": "https://laesquinaguatemalteca.com",
   "phone": "561-768-9137",
   "phoneTel": "+15617689137",
+  "phoneSchema": "+1-561-768-9137",
   "email": "hola@laesquinaguatemalteca.com",
-  "address": { "street": "200 Hibiscus St", "city": "Jupiter", "region": "FL", "postalCode": "33458", "country": "US", "lat": 26.9335, "lng": -80.1284 },
-  "hours": {
-    "regular": "11:00 AM – 9:00 PM, Monday through Sunday",
-    "notes": [
-      { "label": "Mother's Day", "value": "Special hours — please call ahead" },
-      { "label": "4th of July", "value": "Extended hours" },
-      { "label": "Christmas Eve", "value": "Shortened hours" }
-    ],
-    "schemaOpens": "11:00", "schemaCloses": "21:00"
-  },
+  "address": { "street": "200 Hibiscus St", "city": "Jupiter", "region": "FL", "postalCode": "33458", "country": "US", "lat": 26.9348, "lng": -80.0961 },
+  "_hours": "Hours live in src/data/hours.ts (single source).",
   "social": {
     "instagram": "https://www.instagram.com/laesquinaguatemalteca",
     "instagramHandle": "@laesquinaguatemalteca",
@@ -28,6 +21,7 @@
     "uberEats": "https://www.ubereats.com/store/la-esquina-guatemalteca/MabsQk0kSZ6ZCwsL2Jmgag"
   },
   "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2931.752986424579!2d-80.09881272555803!3d26.934949359136375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88df2927bf704ccf%3A0x75f4a306cb1fbb78!2sLa%20Esquina%20Guatemalteca!5e1!3m2!1sen!2sus!4v1774118542657!5m2!1sen!2sus",
+  "googleMapsUrl": "https://maps.google.com/?cid=8499597646327954296",
   "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=200+Hibiscus+St,+Jupiter,+FL+33458",
   "founded": "2018-12",
   "founder": "Silvia Cano",

@@ -3,11 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CateringForm from '../components/CateringForm.astro';
 import SmartImage from '../components/SmartImage.astro';
 import site from '../data/site.json';
+import { serviceSchema } from '../lib/schema';
 const description = "Guatemalan catering in Palm Beach County. Trusted by Frenchman's Reserve, Jupiter Hills Club, Avenir, Mirasol & Breakers West. Custom menus for weddings, corporate & private events. Request a quote.";
 const alternates = [ { hreflang: 'en', href: site.domain + '/catering' }, { hreflang: 'es', href: site.domain + '/es/catering' }, { hreflang: 'x-default', href: site.domain + '/catering' } ];
-const schema = { '@context': 'https://schema.org', '@type': 'FoodEstablishment', name: `${site.name} Catering`, servesCuisine: 'Guatemalan', url: site.domain + '/catering', telephone: site.phoneTel, address: { '@type': 'PostalAddress', streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.region, postalCode: site.address.postalCode, addressCountry: site.address.country }, areaServed: site.areaServed.map((a) => ({ '@type': 'City', name: a })) };
+const schema = serviceSchema({ name: `${site.name} Catering`, serviceType: 'Catering', description, url: site.domain + '/catering', image: '/LAEG/catering-hero.jpeg' });
 ---
-<BaseLayout title="Catering — Weddings, Corporate & Private Events" description={description} path="/catering" image="/LAEG/food-truck.jpeg" schema={schema} alternates={alternates}>
+<BaseLayout title="Catering in Jupiter, FL: Weddings, Corporate & Private Events" description={description} path="/catering" image="/LAEG/food-truck.jpeg" schema={schema} alternates={alternates}>
   <section class="relative isolate overflow-hidden">
     <div class="absolute inset-0 -z-10"><SmartImage src="/LAEG/food-truck.jpeg" alt="Guatamigos food truck catering a Palm Beach County event" class="h-full w-full object-cover" loading="eager" /><div class="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/50 to-navy/90"></div></div>
     <div class="container-x relative py-28 text-center text-cream lg:py-36"><p class="eyebrow text-marigold">Catering by La Esquina</p><h1 class="mx-auto mt-4 max-w-3xl text-balance font-display text-5xl font-bold leading-tight md:text-6xl">Flavors your guests will <span class="italic text-marigold">still be talking about.</span></h1><p class="mx-auto mt-6 max-w-2xl text-pretty font-body text-lg text-cream/85 md:text-xl">Authentic Guatemalan catering for weddings, corporate events, and private celebrations across Palm Beach County.</p><a href="#quote" class="btn-spice mt-9">Request your custom quote</a></div>

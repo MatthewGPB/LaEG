@@ -1,8 +1,9 @@
 ---
 import site from '../data/site.json';
+import { breadcrumbSchema } from '../lib/schema';
 interface Props {
   title: string; description: string; path: string; image?: string;
-  schema?: object; noindex?: boolean; lang?: string;
+  schema?: object | object[]; noindex?: boolean; lang?: string;
   alternates?: { hreflang: string; href: string }[];
 }
 const { title, description, path, image, schema, noindex = false, lang = 'en', alternates = [] } = Astro.props;
@@ -10,6 +11,8 @@ const canonical = new URL(path, site.domain).toString();
 const ogImage = image ? new URL(image, site.domain).toString() : new URL('/LAEG/og-default.jpeg', site.domain).toString();
 const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 const ogLocale = lang === 'es' ? 'es_US' : 'en_US';
+const crumb = noindex ? null : breadcrumbSchema(path);
+const schemas = [...(Array.isArray(schema) ? schema : schema ? [schema] : []), ...(crumb ? [crumb] : [])];
 ---
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
@@ -28,7 +31,7 @@ const ogLocale = lang === 'es' ? 'es_US' : 'en_US';
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
 <meta name="theme-color" content="#1e3a5f" />
-{schema && (<script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+{schemas.map((s) => (<script type="application/ld+json" set:html={JSON.stringify(s)} />))}
 {site.analytics?.gaId && (
   <>
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.analytics.gaId}`}></script>

@@ -1,0 +1,45 @@
+---
+// Hero strip "open today" line. The built HTML always contains the correct static
+// fallback ("Tue to Sun · Closed Mondays"), so it is right with JavaScript off.
+// With JS on, it is replaced by today's hours computed from src/data/hours.ts,
+// evaluated in the restaurant's time zone (America/New_York).
+import { SHORT, clientWeek, TIMEZONE } from '../data/hours';
+interface Props { lang?: 'en' | 'es'; }
+const { lang = 'en' } = Astro.props;
+const week = clientWeek();
+---
+<span class="today-hours" data-lang={lang}>{SHORT[lang]}</span>
+<script is:inline define:vars={{ week, TIMEZONE }}>
+  (function () {
+    var els = document.querySelectorAll('.today-hours');
+    if (!els.length) return;
+    function t(hhmm) { var p = hhmm.split(':'); var h = +p[0], m = +p[1]; var s = h >= 12 ? 'PM' : 'AM'; var h12 = h % 12 || 12; return m ? h12 + ':' + (m < 10 ? '0' : '') + m + ' ' + s : h12 + ' ' + s; }
+    function mins(hhmm) { var p = hhmm.split(':'); return +p[0] * 60 + +p[1]; }
+    var now;
+    try {
+      var parts = new Intl.DateTimeFormat('en-US', { timeZone: TIMEZONE, weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+      var get = function (k) { var f = parts.find(function (x) { return x.type === k; }); return f ? f.value : ''; };
+      var wd = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
+      now = { day: wd, min: (+get('hour') % 24) * 60 + +get('minute') };
+    } catch (e) { var d = new Date(); now = { day: d.getDay(), min: d.getHours() * 60 + d.getMinutes() }; }
+    if (now.day < 0) return;
+    els.forEach(function (el) {
+      var es = el.dataset.lang === 'es';
+      var today = week[now.day];
+      var msg;
+      if (today.open && now.min < mins(today.close)) {
+        msg = es ? 'Abierto hoy de ' + t(today.open) + ' a ' + t(today.close) : 'Open today ' + t(today.open) + ' to ' + t(today.close);
+      } else {
+        for (var i = 1; i <= 7; i++) {
+          var n = week[(now.day + i) % 7];
+          if (!n.open) continue;
+          var when = es ? 'el ' + n.es.toLowerCase() : n.en;
+          var lead = today.open ? (es ? 'Cerrado por hoy' : 'Closed for today') : (es ? 'Cerrado hoy' : 'Closed today');
+          msg = es ? lead + ', abrimos ' + when + ' a las ' + t(n.open) : lead + ', open ' + when + ' at ' + t(n.open);
+          break;
+        }
+      }
+      if (msg) el.textContent = msg;
+    });
+  })();
+</script>

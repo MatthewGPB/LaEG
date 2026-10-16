@@ -4,7 +4,7 @@
     "heroEyebrow": "Hecho fresco, todos los días",
     "heroTitle": "Nuestro Menú Completo",
     "heroSub": "Sabores guatemaltecos caseros, hechos frescos cada día — auténticos, abundantes y llenos de tradición familiar.",
-    "specialsTitle": "Especiales Semanales de $10",
+    "specialsTitle": "Especiales Semanales de $12",
     "specialsSub": "Frescos cada semana — ideales para estudiantes, familias con prisa, o cualquiera que antoje auténtico sabor guatemalteco.",
     "newsletterTitle": "¿Quieres más?",
     "newsletterSub": "¡Nuevos especiales cada semana — suscríbete para no perderte ninguno!",
@@ -30,10 +30,10 @@
     }
   },
   "weeklySpecials": {
-    "Taco Tuesday": { "name": "Martes de Tacos", "description": "4 tacos: carnitas, al pastor, pollo o chorizo. Repollo, cilantro y cebolla salteada." },
-    "Empanada Wednesday": { "name": "Miércoles de Empanadas", "description": "4 empanadas: pollo, brisket de res, o chorizo y papa. Queso fresco, lechuga, crema y salsa ranchera." },
-    "Taquito Thursday": { "name": "Jueves de Taquitos", "description": "4 taquitos crujientes: pollo o brisket de res. Lechuga, queso fresco, crema y salsa ranchera." },
-    "Garnacha Friday": { "name": "Viernes de Garnachas", "description": "4 tortillas hechas a mano estilo garnacha: carne molida, salsa ranchera, queso fresco, cilantro + crema aparte." }
+    "Taco Tuesday": { "name": "Martes de Tacos", "alt": "Especial Martes de Tacos, cuatro tacos callejeros", "description": "4 tacos: carnitas, al pastor, pollo o chorizo. Repollo, cilantro y cebolla salteada." },
+    "Empanada Wednesday": { "name": "Miércoles de Empanadas", "alt": "Especial Miércoles de Empanadas, cuatro empanadas", "description": "4 empanadas: pollo, brisket de res, o chorizo y papa. Queso fresco, lechuga, crema y salsa ranchera." },
+    "Taquito Thursday": { "name": "Jueves de Taquitos", "alt": "Especial Jueves de Taquitos, cuatro taquitos crujientes", "description": "4 taquitos crujientes: pollo o brisket de res. Lechuga, queso fresco, crema y salsa ranchera." },
+    "Garnacha Friday": { "name": "Viernes de Garnachas", "alt": "Especial Viernes de Garnachas, cuatro garnachas en tortillas hechas a mano", "description": "4 tortillas hechas a mano estilo garnacha: carne molida, salsa ranchera, queso fresco, cilantro + crema aparte." }
   },
   "categories": {
     "aperitivos": {

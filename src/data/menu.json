@@ -1,4 +1,6 @@
 {
+  "specialsPrice": "$12",
+  "specialsDays": { "en": "Tuesday to Friday · Closed Mondays", "es": "Martes a viernes · Cerrado los lunes" },
   "signatureCarousel": [
     { "name": "La Parrillada", "image": "/LAEG/la-parrillada.jpeg", "description": "Tender carne asada, savory longaniza, and juicy grilled shrimp — served with 2 sides, grilled jalapeño, and fresh tortillas. Homemade, hearty, and perfect for sharing." },
     { "name": "Pepián de Pollo", "image": "/LAEG/pepian-de-pollo.jpeg", "description": "Guatemala's national dish — tender chicken simmered in a rich, thick sauce of roasted seeds, spices, and vegetables. Pure homemade comfort in every bite." },
@@ -6,10 +8,10 @@
     { "name": "Shuco", "image": "/LAEG/shuco.jpeg", "description": "The iconic Guatemalan hot dog — loaded sausage, guacamole, cabbage, and our signature sauces in a soft bun. Street-food classic done right at home." }
   ],
   "weeklySpecials": [
-    { "name": "Taco Tuesday", "image": "/LAEG/taco-tuesday.jpeg", "description": "4 tacos: carnitas, al pastor, pollo, or chorizo. Cabbage, cilantro, sautéed onions.", "price": "$10" },
-    { "name": "Empanada Wednesday", "image": "/LAEG/empanada-wednesday.jpeg", "description": "4 empanadas: chicken, beef brisket, or chorizo & potato. Queso fresco, lettuce, sour cream, salsa ranchera.", "price": "$10" },
-    { "name": "Taquito Thursday", "image": "/LAEG/taquito-thursday.jpeg", "description": "4 crispy taquitos: chicken or beef brisket. Lettuce, queso fresco, sour cream, salsa ranchera.", "price": "$10" },
-    { "name": "Garnacha Friday", "image": "/LAEG/garnacha-friday.jpeg", "description": "4 homemade tortilla bowls: ground beef, ranchero sauce, queso fresco, cilantro + sour cream side.", "price": "$10" }
+    { "name": "Taco Tuesday", "alt": "Taco Tuesday special, four street tacos", "image": "/LAEG/taco-tuesday.jpeg", "description": "4 tacos: carnitas, al pastor, pollo, or chorizo. Cabbage, cilantro, sautéed onions.", "price": "$12" },
+    { "name": "Empanada Wednesday", "alt": "Empanada Wednesday special, four empanadas", "image": "/LAEG/empanada-wednesday.jpeg", "description": "4 empanadas: chicken, beef brisket, or chorizo & potato. Queso fresco, lettuce, sour cream, salsa ranchera.", "price": "$12" },
+    { "name": "Taquito Thursday", "alt": "Taquito Thursday special, four crispy taquitos", "image": "/LAEG/taquito-thursday.jpeg", "description": "4 crispy taquitos: chicken or beef brisket. Lettuce, queso fresco, sour cream, salsa ranchera.", "price": "$12" },
+    { "name": "Garnacha Friday", "alt": "Garnacha Friday special, four garnachas on homemade tortillas", "image": "/LAEG/garnacha-friday.jpeg", "description": "4 homemade tortilla bowls: ground beef, ranchero sauce, queso fresco, cilantro + sour cream side.", "price": "$12" }
   ],
   "categories": [
     {

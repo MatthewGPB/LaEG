@@ -1,0 +1,28 @@
+{
+  "_comment": "Items the brief marks CONFIRM. Nothing here is shown in production until confirmed is true and the copy is filled in by Matthew. On preview/local builds a clearly marked CONFIRM box renders in place (see src/components/Confirm.astro).",
+  "breakfast": {
+    "confirmed": false,
+    "hoursEn": null,
+    "hoursEs": null,
+    "homeLineEn": null,
+    "homeLineEs": null,
+    "evidence": "Weekend opening at 10 AM. Google Business Profile owner post (Oct 2026) announces a new Mini Breakfast Burrito, not yet on the site menu."
+  },
+  "bar": {
+    "confirmed": false,
+    "items": [],
+    "evidence": "Google review (Shannon, ~7 months ago): 'Nice little bar serving beer, wine and selection cocktails'."
+  },
+  "birriaPizza": {
+    "confirmed": false,
+    "price": null,
+    "description": null,
+    "image": null,
+    "evidence": "Google review (Hristu Chepa, ~8 months ago) with photo: 'I got the birria pizza ... about the size of a medium size pizza (12\")'."
+  },
+  "holidayHours": {
+    "confirmed": false,
+    "dates": []
+  },
+  "acceptsReservations": false
+}

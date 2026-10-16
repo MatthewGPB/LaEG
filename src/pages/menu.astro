@@ -5,8 +5,11 @@ import NewsletterForm from '../components/NewsletterForm.astro';
 import SmartImage from '../components/SmartImage.astro';
 import site from '../data/site.json';
 import menu from '../data/menu.json';
+import pending from '../data/pending.json';
+import Confirm from '../components/Confirm.astro';
+import { menuSchema } from '../lib/schema';
 
-const description = "Full menu of authentic Guatemalan food in Jupiter, FL. Tacos, La Parrillada, Pepián de Pollo, Birria, Caldos, weekly $10 specials, and homemade tortillas every day.";
+const description = "Full menu of authentic Guatemalan food in Jupiter, FL. Tacos, La Parrillada, Pepián de Pollo, Birria, Caldos, $12 weekly specials Tuesday to Friday, and homemade tortillas every day.";
 
 const alternates = [
   { hreflang: 'en', href: site.domain + '/menu' },
@@ -14,28 +17,11 @@ const alternates = [
   { hreflang: 'x-default', href: site.domain + '/menu' },
 ];
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'Menu',
-  name: `${site.name} Menu`,
-  hasMenuSection: menu.categories.map((cat) => ({
-    '@type': 'MenuSection',
-    name: cat.name,
-    description: cat.subtitle,
-    hasMenuItem: cat.items.map((item: any) => ({
-      '@type': 'MenuItem',
-      name: item.name,
-      description: item.description,
-      offers: item.price
-        ? { '@type': 'Offer', price: item.price.replace(/[^0-9.]/g, '') || undefined, priceCurrency: 'USD' }
-        : undefined,
-    })),
-  })),
-};
+const schema = menuSchema(menu);
 ---
 
 <BaseLayout
-  title="Full Menu — Authentic Guatemalan Food in Jupiter, FL"
+  title="Menu: Guatemalan Food, Tacos & Birria in Jupiter, FL | La Esquina Guatemalteca"
   description={description}
   path="/menu"
   image="/LAEG/la-parrillada.jpeg"
@@ -55,7 +41,8 @@ const schema = {
   <!-- WEEKLY SPECIALS -->
   <section class="container-x py-12 lg:py-16">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-balance font-display text-4xl font-bold text-navy md:text-5xl">$10 Weekly Specials</h2>
+      <h2 class="text-balance font-display text-4xl font-bold text-navy md:text-5xl">{menu.specialsPrice} Weekly Specials</h2>
+      <p class="mt-3 font-body text-sm font-semibold uppercase tracking-wider text-navy/70">{menu.specialsDays.en}</p>
       <p class="mt-4 text-pretty font-body text-lg leading-relaxed text-ink/75">
         Fresh every week — ideal for college students, families on the go, or anyone craving authentic Guatemalan flavors.
       </p>
@@ -63,7 +50,7 @@ const schema = {
     <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
       {menu.weeklySpecials.map((special) => (
         <article class="overflow-hidden rounded-3xl bg-white shadow-card transition-transform hover:-translate-y-1">
-          <SmartImage src={special.image} alt={special.name} class="h-48 w-full object-cover" />
+          <SmartImage src={special.image} alt={special.alt || special.name} class="h-48 w-full object-cover" />
           <div class="p-5">
             <h3 class="font-display text-lg font-bold text-navy">{special.name}</h3>
             <p class="mt-2 font-body text-sm leading-relaxed text-ink/70">{special.description}</p>
@@ -105,6 +92,9 @@ const schema = {
           <h2 class="text-balance font-display text-3xl font-bold text-navy md:text-4xl">{cat.name}</h2>
           <p class="mt-2 font-body italic text-ink/60">{cat.subtitle}</p>
           {cat.note && <p class="mx-auto mt-4 max-w-2xl font-body text-sm text-ink/70" set:html={cat.note} />}
+          {cat.id === 'amanecer' && (pending.breakfast.confirmed && pending.breakfast.hoursEn ? <p class="mx-auto mt-3 max-w-2xl font-body text-base font-semibold text-spice">{pending.breakfast.hoursEn}</p> : <Confirm label="Breakfast serving days and hours go here, under the Amanecer heading. Google profile also shows a new Mini Breakfast Burrito not on this menu." />)}
+          {cat.id === 'tacos-y-mas' && !pending.birriaPizza.confirmed && <Confirm label="Birria pizza (about 12 inch) is mentioned in a Google review with a photo but is not on this menu. Confirm item, price, description and photo." />}
+          {cat.id === 'bebidas' && !pending.bar.confirmed && <Confirm label="Beer, Wine & Cocktails subsection. A Google review mentions a bar with beer, wine and cocktails. Matthew to confirm and supply the list and prices." />}
         </div>
 
         {cat.isPriceList ? (

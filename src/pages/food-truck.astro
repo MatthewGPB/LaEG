@@ -3,12 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FoodTruckForm from '../components/FoodTruckForm.astro';
 import SmartImage from '../components/SmartImage.astro';
 import site from '../data/site.json';
+import { serviceSchema } from '../lib/schema';
 import eventsData from '../data/events.json';
 const description = "Book the Guatamigos food truck for your Palm Beach County event. Authentic Guatemalan street food — tacos, empanadas & more — rolled right up to your wedding, corporate event, or party.";
 const alternates = [ { hreflang: 'en', href: site.domain + '/food-truck' }, { hreflang: 'es', href: site.domain + '/es/food-truck' }, { hreflang: 'x-default', href: site.domain + '/food-truck' } ];
-const schema = { '@context': 'https://schema.org', '@type': 'FoodEstablishment', name: 'Guatamigos Food Truck', parentOrganization: { '@type': 'Restaurant', name: site.name }, servesCuisine: 'Guatemalan', url: site.domain + '/food-truck', telephone: site.phoneTel, areaServed: site.areaServed.map((a) => ({ '@type': 'City', name: a })) };
+const schema = serviceSchema({ name: 'Guatamigos Food Truck', serviceType: 'Food truck for private events', description, url: site.domain + '/food-truck', image: '/LAEG/food-truck.jpeg', sameAs: [site.social.guatamigosInstagram] });
 ---
-<BaseLayout title="Guatamigos Food Truck — Book for Your Event" description={description} path="/food-truck" image="/LAEG/food-truck.jpeg" schema={schema} alternates={alternates}>
+<BaseLayout title="Guatamigos: Food Truck for Events in Palm Beach County" description={description} path="/food-truck" image="/LAEG/food-truck.jpeg" schema={schema} alternates={alternates}>
   <section class="relative isolate overflow-hidden">
     <div class="absolute inset-0 -z-10"><SmartImage src="/LAEG/food-truck.jpeg" alt="Guatamigos Guatemalan food truck in Palm Beach County" class="h-full w-full object-cover" loading="eager" /><div class="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/50 to-navy/90"></div></div>
     <div class="container-x relative py-28 text-center text-cream lg:py-36"><p class="eyebrow text-marigold">Guatamigos — Our Food Truck</p><h1 class="mx-auto mt-4 max-w-3xl text-balance font-display text-5xl font-bold leading-tight md:text-6xl">The fiesta <span class="italic text-marigold">comes to you.</span></h1><p class="mx-auto mt-6 max-w-2xl text-pretty font-body text-lg text-cream/85 md:text-xl">Authentic Guatemalan street food, rolled right up to your wedding, office park, or backyard bash — anywhere in Palm Beach County.</p><div class="mt-9 flex flex-wrap justify-center gap-4"><a href="#book" class="btn-spice">Book the truck</a><a href={site.social.guatamigosInstagram} target="_blank" rel="noopener" class="rounded-full border-2 border-cream/40 bg-cream/10 px-7 py-3 font-body font-semibold text-cream backdrop-blur-sm transition-colors hover:bg-cream hover:text-navy">Follow {site.social.guatamigosHandle}</a></div></div>

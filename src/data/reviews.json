@@ -1,0 +1,16 @@
+{
+  "_comment": "Google rating snapshot and review excerpts. Excerpts are verbatim from real Google reviewers (trimmed only with '...'). Do not edit wording. Only items with approved: true render in production; preview builds show all with a 'Pending approval' tag. Do NOT add AggregateRating/Review schema for these.",
+  "rating": 4.7,
+  "count": 370,
+  "asOf": "2026-10-15",
+  "googleUrl": "https://maps.google.com/?cid=8499597646327954296",
+  "excerpts": [
+    { "author": "Cassidy Driskell", "when": "2026-06", "approved": false, "text": "Everyone was so kind and it was such a nice family atmosphere... We ordered the Guatemalan Tamales and they are our new favorite." },
+    { "author": "Shannon", "authorNote": "Local Guide", "when": "2026-03", "approved": false, "text": "It’s very warm and inviting and intimate... The staff was very friendly and the food was delicious. The pricing was also very reasonable." },
+    { "author": "Google reviewer", "when": null, "approved": false, "text": "Every thing we ordered was cooked perfectly and not salty or greasy." },
+    { "author": "Google reviewer", "when": null, "approved": false, "text": "I highly recommend their lamb ribs and the chicken tostada, really yummy 😋" }
+  ],
+  "alternates": [
+    { "author": "Hristu Chepa", "authorNote": "Local Guide", "when": "2026-02", "approved": false, "text": "This place was amazing. I got the birria pizza and it was perfectly done.", "note": "Use only if birria pizza is confirmed as a current menu item." }
+  ]
+}
